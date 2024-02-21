@@ -5,7 +5,7 @@ To run the app
 ```
 source release.sh
 
-pythnon manage.py runserver
+python manage.py runserver
 ```
 
 ### Tailwind
