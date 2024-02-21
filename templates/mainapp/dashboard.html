@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<script>
+  $(document).ready( function () {
+    $('#tweetTable').DataTable(
+      { 
+        layout: {
+          topStart: 'info',
+          bottom: 'paging',
+          bottomStart: null,
+          bottomEnd: null
+      },
+        info: false,
+        pagingType: 'simple_numbers',
+        order: [[2, 'desc']],
+        columnDefs: [ {
+          "targets"  : 'no-sort',
+          "orderable": false,
+          "order": []
+        }]
+      },
+    );
+} );
+</script>
+
+<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
+  <div class="grid grid-cols-1 lg:grid-cols-2 m-5">
+    <div class="m-3 border overflow-x-auto h-screen">
+      <div class="m-4">
+        <table id="tweetTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
+            <thead>
+                <tr class="border-b text-center items-center justify-center">                
+                  <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
+                    Text
+                  </th>
+                  <th class="px-4 py-2 no-sort">
+                    <br>
+                  </th>
+                  <th class="px-4 py-2">
+                    Score
+                  </th>
+                  <th class="px-4 py-2">
+                    Normalized Score
+                  </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for tweet in object_list|slice:100 %}
+                  <tr class="border-b items-center justify-center text-center">
+                      <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-center justify-center text-center">
+                        {{ tweet.text|truncatechars:30 }}
+                      </td>
+                      <td class="px-4 py-2">
+                        {% if tweet.norm_score > 70 %}
+                          🚀
+                        {% elif tweet.norm_score > 50 %}
+                          💥
+                        {% endif %}
+                      </td>
+                      <td class="px-4 py-2">
+                        {{ tweet.score }}
+                      </td>
+                      <td class="px-4 py-2">
+                        {{ tweet.norm_score }}
+                      </td>
+                  </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      </div>  
+    </div>
+    <div class="m-3 text-center border">
+      <div class="grid grid-cols-1 m-5">
+        <div class="m-3">
+          Max Score
+          <br>
+          {{ stats_score.score__max|floatformat:"1" }}
+        </div>
+        <div class="m-3">
+          Avg Score
+          <br>
+          {{ stats_score.score__avg|floatformat:"1" }}
+        </div>
+        <div class="m-3">
+          Min Score
+          <br>
+          {{ stats_score.score__min|floatformat:"1" }}
+        </div>
+      </div>
+    </div>
+    <div class="m-3 text-center border h-3/6">
+      topic widget
+      the best topics to talk about ordered somehow by socre and Normalized Score
+      we need to find out how to extract the topis (LLM?)
+      And once it's done we add the 
+    </div>
+    <div class="m-3 text-center border h-3/6">
+      widget
+    </div>
+    <div class="m-3 text-center border h-3/6">
+      widget
+    </div>
+  </div>    
+</div>
+{% endblock %}
