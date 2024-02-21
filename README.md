@@ -1,5 +1,13 @@
 # Twitter Optimizer
 
+To run the app
+
+```
+source release.sh
+
+pythnon manage.py runserver
+```
+
 ### Tailwind
 
 To use Tailwind in development
