@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from mainapp.models.tweet import Tweet
+from mainapp.models.keywords import Keywords
 from django.db.models import Avg, Min, Max
 
 
@@ -18,4 +19,8 @@ class DashboardView(ListView):
         data["stats_score"] = stats_score
         data["stats_normscore"] = stats_normscore
 
+        # get also the data about the keyword
+        keywords = Keywords.objects.order_by("-score")
+        data["keywords"] = keywords
+        
         return data

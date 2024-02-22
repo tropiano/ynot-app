@@ -21,6 +21,20 @@
         }]
       },
     );
+    $('#kwTable').DataTable(
+      { 
+        layout: {
+          topStart: 'info',
+          bottom: 'paging',
+          bottomStart: null,
+          bottomEnd: null
+      },
+        info: false,
+        pagingType: 'simple_numbers',
+        order: [[1, 'desc']],
+        pageLength: 20
+      },
+    );
 } );
 </script>
 
@@ -46,10 +60,10 @@
                 </tr>
             </thead>
             <tbody>
-              {% for tweet in object_list|slice:100 %}
+              {% for tweet in object_list %}
                   <tr class="border-b items-center justify-center text-center">
                       <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-center justify-center text-center">
-                        {{ tweet.text|truncatechars:30 }}
+                        {{ tweet.text }}
                       </td>
                       <td class="px-4 py-2">
                         {% if tweet.norm_score > 70 %}
@@ -89,11 +103,39 @@
         </div>
       </div>
     </div>
-    <div class="m-3 text-center border h-3/6">
-      topic widget
-      the best topics to talk about ordered somehow by socre and Normalized Score
-      we need to find out how to extract the topis (LLM?)
-      And once it's done we add the 
+    <div class="m-3 text-center border overflow-x-auto h-screen">
+      <div class="m-4">
+        <table id="kwTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
+            <thead>
+                <tr class="border-b text-center items-center justify-center">                
+                  <th scope="row" class="px-4 py-2 font-bold text-gray-900 items-center justify-center text-center whitespace-nowrap">
+                    Keyword
+                  </th>
+                  <th class="px-4 py-2">
+                    Score
+                  </th>
+                  <th class="px-4 py-2">
+                    Normalized Score
+                  </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for kw in keywords %}
+                  <tr class="border-b items-center justify-center text-center">
+                      <td scope="row" class="px-4 py-2 text-gray-600 font-semibold items-center justify-center text-center">
+                        {{ kw.word }}
+                      </td>
+                      <td class="px-4 py-2">
+                        {{ kw.score }}
+                      </td>
+                      <td class="px-4 py-2">
+                        {{ kw.norm_score }}
+                      </td>
+                  </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      </div>
     </div>
     <div class="m-3 text-center border h-3/6">
       widget
