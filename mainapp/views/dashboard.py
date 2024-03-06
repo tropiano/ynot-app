@@ -9,6 +9,19 @@ class DashboardView(ListView):
     model = Tweet
     template_name = "mainapp/dashboard.html"
 
+    def get_queryset(self):
+        comments = self.request.GET.get("comments")
+        # this reads query param
+        print(comments)
+
+        if comments is None or comments == "yes":
+            queryset = Tweet.objects.all()
+            # queryset = branch.objects.none()
+        elif comments == "no":
+            queryset = Tweet.objects.exclude(text__startswith="@")
+
+        return queryset
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         stats_score = Tweet.objects.aggregate(Avg("score"), Min("score"), Max("score"))
@@ -22,5 +35,5 @@ class DashboardView(ListView):
         # get also the data about the keyword
         keywords = Keywords.objects.order_by("-score")
         data["keywords"] = keywords
-        
+
         return data
