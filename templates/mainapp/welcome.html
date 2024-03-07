@@ -1,39 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
 {% block body %}
     <div
   class="flex fixed top-0 left-0 flex-col justify-center items-center p-6 w-screen h-screen leading-6 bg-white text-neutral-800"
-  style="z-index: 1400;"
->
-  <div class="inline-flex w-64 text-neutral-800" style="height: 310px;">
-    <div class="flex flex-col items-center">
-      <img
-        alt="SpeedPy.com"
-        decoding="async"
-        
-        src="{% static "mainapp/speedpy_logo.png" %}"
-        width="310"
-        height="310"
-        data-nimg="1"
-        loading="eager"
-        style="color:transparent;padding:0;margin:0"
-        class="p-0 m-0 text-transparent"
-      />
-    </div>
-  </div>
+  style="z-index: 1400;">
+  
   <h2
     class="m-0 font-sans text-3xl font-bold xl:text-5xl sm:text-4xl lg:text-5xl"
     style="line-height: 1.2;"
   >
-    SpeedPy.com
+    Twitter Optimizer
   </h2>
-  <h4
-    class="mx-0 mt-4 mb-0 font-sans text-2xl font-bold xl:text-4xl sm:text-2xl lg:text-3xl"
-    style="line-height: 1.2;"
-  >
-    That starter project you've been looking for
-  </h4>
   
+  <div class="m-5 text-center">  
+  {% if user.is_authenticated %}
+    <h2 class="text-xl">
+        Welcome {{ user.username }}
+    </h2>
+    <h2 class="text-2xl">
+      <a href="{% url 'dashboard' %}" class="btn btn-danger">
+        Visit the Dashboard
+      </a>
+    </h2>
+    <br>
+    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+      <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
+    </button>
+  {% else %}
+    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+      <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
+    </button>
+    <!-- Twitter button ends here -->
+  {% endif %}
+  </div>
+
   <div class="flex flex-row mt-6 text-neutral-800">
     <a
       class="inline-flex relative justify-center items-center py-2 px-3 m-0 font-sans text-sm font-semibold uppercase align-middle bg-transparent rounded-lg border-0 appearance-none cursor-pointer select-none text-sky-600 hover:bg-transparent"

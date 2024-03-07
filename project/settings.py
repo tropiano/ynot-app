@@ -29,6 +29,14 @@ INSTALLED_APPS = [
     "django_extensions",
     "usermodel.apps.UsermodelConfig",
     "mainapp.apps.MainappConfig",
+    "allauth_ui",
+    # 3rd party
+    "allauth",  # new
+    "allauth.account",  # new
+    "allauth.socialaccount",  # new
+    # social providers
+    "allauth.socialaccount.providers.twitter",  # new
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -40,6 +48,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -142,3 +151,13 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     ("flowbite", BASE_DIR / "node_modules" / "flowbite" / "dist"),
 ]
+
+AUTHENTICATION_BACKENDS = (
+    "allauth.account.auth_backends.AuthenticationBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = "none"
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_ON_GET = True

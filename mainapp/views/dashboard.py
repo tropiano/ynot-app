@@ -1,15 +1,19 @@
-from django.views.generic import TemplateView
 from django.views.generic import ListView
 from mainapp.models.tweet import Tweet
 from mainapp.models.keywords import Keywords
 from django.db.models import Avg, Min, Max
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class DashboardView(ListView):
+class DashboardView(LoginRequiredMixin, ListView):
     model = Tweet
     template_name = "mainapp/dashboard.html"
 
     def get_queryset(self):
+        # filter by the user first
+        username = self.request.user.username
+        print(username)
+        user_queryset = Tweet.objects.filter(user=username)
         comments = self.request.GET.get("comments")
         # this reads query param
         print(comments)

@@ -1336,17 +1336,8 @@ input:checked + .toggle-bg {
   margin: 1.25rem;
 }
 
-.mx-0 {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
 .my-0 {
   margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.mb-0 {
   margin-bottom: 0px;
 }
 
@@ -1372,10 +1363,6 @@ input:checked + .toggle-bg {
 
 .mt-2 {
   margin-top: 0.5rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
 }
 
 .mt-6 {
@@ -1710,10 +1697,6 @@ input:checked + .toggle-bg {
   background-color: rgb(255 255 255 / 0.5);
 }
 
-.p-0 {
-  padding: 0px;
-}
-
 .p-1 {
   padding: 0.25rem;
 }
@@ -1810,6 +1793,11 @@ input:checked + .toggle-bg {
   line-height: 2.25rem;
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1818,6 +1806,11 @@ input:checked + .toggle-bg {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -1886,10 +1879,6 @@ input:checked + .toggle-bg {
 .text-sky-600 {
   --tw-text-opacity: 1;
   color: rgb(2 132 199 / var(--tw-text-opacity));
-}
-
-.text-transparent {
-  color: transparent;
 }
 
 .text-white {
@@ -2135,14 +2124,14 @@ input:checked + .toggle-bg {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+:is(.dark .dark\:focus\:ring-blue-800:focus) {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(30 66 159 / var(--tw-ring-opacity));
+}
+
 @media (min-width: 640px) {
   .sm\:rounded-lg {
     border-radius: 0.5rem;
-  }
-
-  .sm\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 
   .sm\:text-4xl {
@@ -2156,11 +2145,6 @@ input:checked + .toggle-bg {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .lg\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
   .lg\:text-5xl {
     font-size: 3rem;
     line-height: 1;
@@ -2168,11 +2152,6 @@ input:checked + .toggle-bg {
 }
 
 @media (min-width: 1280px) {
-  .xl\:text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
   .xl\:text-5xl {
     font-size: 3rem;
     line-height: 1;

@@ -3,6 +3,7 @@ from django.utils import timezone
 
 
 class Tweet(models.Model):
+    user = models.CharField(default="", null=True, blank=True)
     url = models.CharField(default="https://twitter.com", null=True, blank=True)
     text = models.CharField(default="", null=True, blank=True)
     time = models.DateTimeField(default=timezone.now)
