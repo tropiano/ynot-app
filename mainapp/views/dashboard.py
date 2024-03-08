@@ -13,14 +13,15 @@ class DashboardView(LoginRequiredMixin, ListView):
         # filter by the user first
         username = self.request.user.username
         print(username)
-        user_queryset = Tweet.objects.filter(user=username)
+        user_queryset = Tweet.objects.filter(username=username)
+
         comments = self.request.GET.get("comments")
         # this reads query param
         print(comments)
 
         if comments is None or comments == "yes":
             queryset = Tweet.objects.all()
-            # queryset = branch.objects.none()
+        # queryset = branch.objects.none()
         elif comments == "no":
             queryset = Tweet.objects.exclude(text__startswith="@")
 
