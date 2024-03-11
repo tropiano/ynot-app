@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <h1 class="text-3xl text-center m-5">
+    Upload your files here
+  </h1>
+  <div class="text-center items-center justify-center">
+
+    <form method="post" enctype="multipart/form-data" class="max-w-lg mx-auto text-center items-center justify-center">
+      {% csrf_token %}
+      {{ form.non_field_errors}}
+      {% for field in form %}
+        {{ field.errors }}
+
+        <input class="block text-sm mx-auto text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+        aria-describedby="user_avatar_help" id="{{ field.auto_id }}" name="{{ field.html_name }}" type="file">
+        <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="document_help">Check here how to export your tweets</div>
+      {% endfor %}
+      <button class="text-gray-900 m-3 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" type="submit">Upload</button>
+    </form>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+</div>
+{% endblock %}
