@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", views.WelcomeToSpeedPyView.as_view(), name="home"),
-    path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
+    path("dashboard/<str:user>", views.DashboardView.as_view(), name="dashboard"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # accounts management
     path("upload/", upload.model_form_upload, name="upload"),  # upload form

@@ -6,7 +6,8 @@
     $('#tweetTable').DataTable(
       { 
         layout: {
-          topStart: 'info',
+          topStart: 'search',
+          topEnd: null,
           bottom: 'paging',
           bottomStart: null,
           bottomEnd: null
@@ -14,10 +15,14 @@
         info: false,
         pagingType: 'simple_numbers',
         order: [[2, 'desc']],
+        pageLength: 20,
         columnDefs: [ {
-          "targets"  : 'no-sort',
+          "targets" : 'no-sort',
           "orderable": false,
-          "order": []
+          "order": [],
+        },
+        {targets: 0,
+          render: DataTable.render.ellipsis( 40, true ),
         }]
       },
     );
@@ -86,134 +91,158 @@
 
 <div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
   <h1 class="text-center text-4xl">
-    Twitter Optimize
+    Twitter Optimize Dashboard
   </h1>
   <br>
   <h2 class="text-center text-2xl font-semibold">
     @{{ user.username }}
   </h2>
-  <br>
-  <div class="text-center items-center m-5">
-    <span class="{% if 'comments=no' in request.get_full_path %} bg-blue-400 {% else %} bg-blue-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
-      <a href="/dashboard/?comments=no" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
-          exclude comments
-      </a>
-    </span>
-    <span class="{% if 'comments=yes' in request.get_full_path %} bg-blue-400 {% else %} bg-blue-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
-      <a href="/dashboard/?comments=yes" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
-          include comments
-      </a>
-    </span>
+  {% if not user.is_paid %}
+  <div class="text-center m-4">
+    <button type="button" class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+      <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
+      </svg>
+      Buy full time access
+    </button>
   </div>
-  <div class="grid grid-cols-1 lg:grid-cols-2 m-5">
-    <div class="m-3 border overflow-x-auto h-screen">
-      <div class="m-4">
-        <table id="tweetTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
-            <thead>
-                <tr class="border-b text-center items-center justify-center">                
-                  <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
-                    Text
-                  </th>
-                  <th class="px-4 py-2 no-sort">
-                    <br>
-                  </th>
-                  <th class="px-4 py-2">
-                    Score
-                  </th>
-                  <th class="px-4 py-2">
-                    Normalized Score
-                  </th>
-                </tr>
-            </thead>
-            <tbody>
-              {% for tweet in object_list %}
-                  <tr class="border-b items-center justify-center text-center">
-                      <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-center justify-center text-center">
-                        {{ tweet.text }}
-                      </td>
-                      <td class="px-4 py-2">
-                        {% if tweet.norm_score > 70 %}
-                          🚀
-                        {% elif tweet.norm_score > 50 %}
-                          💥
-                        {% endif %}
-                      </td>
-                      <td class="px-4 py-2">
-                        {{ tweet.score }}
-                      </td>
-                      <td class="px-4 py-2">
-                        {{ tweet.norm_score }}
-                      </td>
-                  </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-      </div>  
-    </div>
-    <div class="m-3 text-center border">
-      <div class="grid grid-cols-1 m-5">
-        <div class="m-3">
-          Max Score
-          <br>
-          {{ stats_score.score__max|floatformat:"1" }}
-        </div>
-        <div class="m-3">
-          Avg Score
-          <br>
-          {{ stats_score.score__avg|floatformat:"1" }}
-        </div>
-        <div class="m-3">
-          Min Score
-          <br>
-          {{ stats_score.score__min|floatformat:"1" }}
-        </div>
+  {% endif %}
+  {% for tweet in object_list %}
+  {% empty %}
+  <h2 class="text-2xl font-semibold text-center">
+    <a href="{% url 'upload' %}" class="btn btn-danger">   
+      Upload your Twitter data first
+    </a>
+  </h2>
+  {% endfor %}
+  <br>
+  <div class="grid grid-cols-1 m-5 text-center">
+    <div class="grid grid-cols-1 md:grid-cols-3 m-5  text-2xl text-center">
+      <div class="m-2 border rounded-lg">
+        <p class="m-3">
+        Best tweet Score
+        <br>
+        <span class="font-bold"> {{ stats_score.score__max|floatformat:"1" }}</span>
+        </p>
       </div>
-    </div>
-    <div class="m-3 text-center border overflow-x-auto h-screen">
-      <div class="m-4">
-        <table id="kwTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
-            <thead>
-                <tr class="border-b text-center items-center justify-center">                
-                  <th scope="row" class="px-4 py-2 font-bold text-gray-900 items-center justify-center text-center whitespace-nowrap">
-                    Keyword
-                  </th>
-                  <th class="px-4 py-2">
-                    Score
-                  </th>
-                  <th class="px-4 py-2">
-                    Normalized Score
-                  </th>
-                </tr>
-            </thead>
-            <tbody>
-              {% for kw in keywords %}
-                  <tr class="border-b items-center justify-center text-center">
-                      <td scope="row" class="px-4 py-2 text-gray-600 font-semibold items-center justify-center text-center">
-                        {{ kw.word }}
-                      </td>
-                      <td class="px-4 py-2">
-                        {{ kw.score }}
-                      </td>
-                      <td class="px-4 py-2">
-                        {{ kw.norm_score }}
-                      </td>
-                  </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+      <div class="m-2 border rounded-lg">
+        <p class="m-3">
+          Avg tweet Score
+          <br>
+          <span class="font-bold"> {{ stats_score.score__avg|floatformat:"1" }}</span>
+          </p>
       </div>
-    </div>
-    <div class="m-3 text-center h-screen">
-      <br>
-      <br>
-      <p>
-        Score  
+      <div class="m-2 border rounded-lg">
+        <p class="m-3">
+          Min tweet Score
+          <br>
+          <span class="font-bold"> {{ stats_score.score__min|floatformat:"1" }}</span>
+        </p>
+      </div>
+    </div>    
+  </div>
+  <div class="grid grid-cols-1 m-5 text-center text-2xl">
+    <br>
+    <br>
+    <p>
+      Topic Score
+    </p>
+    <br>
+      <canvas height="300px" width="450px" id="myChart" class="m-2"></canvas>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 text-center border rounded-lg">
+    <div class="m-5">
+      
+      <p class="text-xl font-semibold m-3" id="alltweets">
+        All tweets
       </p>
-      <br>
-        <canvas height="300px" id="myChart" class="m-2"></canvas>
+      <div class="mb-3 text-left items-left">
+        <span class="{% if 'comments=no' in request.get_full_path %} bg-blue-400 {% else %} bg-blue-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
+          <a href="{{ request.path }}?comments=no#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
+              exclude comments
+          </a>
+        </span>
+        <span class="{% if 'comments=yes' in request.get_full_path %} bg-blue-400 {% else %} bg-blue-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
+          <a href="{{ request.path }}?comments=yes#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
+              include comments
+          </a>
+        </span>
+      </div>
+      <table id="tweetTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-5">
+          <thead>
+              <tr class="border-b text-center items-center justify-center">                
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
+                  Text
+                </th>
+                <th class="px-4 py-2 no-sort">
+                  <br>
+                </th>
+                <th class="px-4 py-2">
+                  Score
+                </th>
+                <th class="px-4 py-2">
+                  Normalized Score
+                </th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for tweet in object_list %}
+                <tr class="border-b items-center justify-center text-center">
+                    <td scope="row" class="px-4 py-2 font-bold text-gray-600 text-sm items-center justify-center text-center">
+                      {{ tweet.text }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {% if tweet.norm_score > 70 %}
+                        🚀
+                      {% elif tweet.norm_score > 50 %}
+                        💥
+                      {% endif %}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ tweet.score }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ tweet.norm_score }}
+                    </td>
+                </tr>
+          {% endfor %}
+          </tbody>
+      </table>
     </div>
-    <div class="m-3 text-center border h-3/6">
-      widget
+    <div class="m-5">
+      <p class="text-xl font-semibold m-3">
+        All Topics
+      </p>
+      <table id="kwTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
+          <thead>
+              <tr class="border-b text-center items-center justify-center">                
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900 items-center justify-center text-center whitespace-nowrap">
+                  Keyword
+                </th>
+                <th class="px-4 py-2">
+                  Score
+                </th>
+                <th class="px-4 py-2">
+                  Normalized Score
+                </th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for kw in keywords %}
+                <tr class="border-b items-center justify-center text-center">
+                    <td scope="row" class="px-4 py-2 text-gray-600 font-semibold items-center justify-center text-center">
+                      {{ kw.word }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ kw.score }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ kw.norm_score }}
+                    </td>
+                </tr>
+          {% endfor %}
+          </tbody>
+      </table>
     </div>
   </div>    
 </div>

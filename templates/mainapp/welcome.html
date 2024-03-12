@@ -2,77 +2,115 @@
 {% load static %}
 {% load socialaccount %}
 {% block body %}
-    <div
-  class="flex fixed top-0 left-0 flex-col justify-center items-center p-6 w-screen h-screen leading-6 bg-white text-neutral-800"
-  style="z-index: 1400;">
-  
-  <h2
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 bg-emerald-300/50">
+  <div class="text-center m-4">
+    <h2
     class="m-0 font-sans text-3xl font-bold xl:text-5xl sm:text-4xl lg:text-5xl"
-    style="line-height: 1.2;"
-  >
+    style="line-height: 1.2;">
     Twitter Optimizer
-  </h2>
-  
-  <div class="m-5 text-center">  
-  {% if user.is_authenticated %}
-    <h2 class="text-xl">
-        Welcome {{ user.username }}
     </h2>
-    <h2 class="text-2xl">
-      <a href="{% url 'dashboard' %}" class="btn btn-danger">
-        Visit the Dashboard
-      </a>
-    </h2>
+    <p>
+      Stop writing about things nobody cares about
+    </p>
+    <p>
+      Find your Twitter voice 
+    </p>
+    <p>
+      Go viral all the timelike Daniel, Pieter and Marc
+    </p>
     <br>
-    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-      <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
-    </button>
-  {% else %}
-    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-      <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
-    </button>
-    <!-- Twitter button ends here -->
-  {% endif %}
+
+    <ol class="relative border-s border-gray-200 dark:border-gray-700 text-left m-10">                  
+      <li class="mb-10 ms-4">
+          <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Step 1</time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">You upload your latest tweets</h3>
+          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">Learn more <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+    </svg></a>
+      </li>
+      <li class="mb-10 ms-4">
+          <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Step 2</time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">We process the data, calculate the scores and extract the best topics to write about</h3>
+      </li>
+      <li class="ms-4">
+          <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Step 3</time>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">You check all the metrics in your personal dashboard</h3>
+      </li>
+    </ol>
+
+    <p>
+      I don't store your personal data and have no access to your Tweets, I just need your Twitter username 
+    </p>
+    <br>
+    {% if user.is_authenticated %}
+      {% if user.username %}
+        <h2 class="text-2xl">
+          <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
+            Visit the Dashboard
+          </a>
+        </h2>
+      {% endif %}
+      <h2 class="text-2xl font-semibold">
+        <a href="{% url 'upload' %}" class="btn btn-danger">
+          Upload your Twitter data
+        </a>
+      </h2>
+      <br>
+      <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
+      </button>
+    {% else %}
+      <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
+      </button>
+      <!-- Twitter button ends here -->
+    {% endif %}
+  </div>
+  <div class="text-center items-center m-4">
+    <img src="{% static 'mainapp/half_banner.png' %}">
   </div>
 
-  <div class="flex flex-row mt-6 text-neutral-800">
-    <a
-      class="inline-flex relative justify-center items-center py-2 px-3 m-0 font-sans text-sm font-semibold uppercase align-middle bg-transparent rounded-lg border-0 appearance-none cursor-pointer select-none text-sky-600 hover:bg-transparent"
-      tabindex="0"
-      target="_blank"
-      rel="noopener"
-      href="https://twitter.com/tropianhs"
-      style="outline: 0px; text-decoration: none; line-height: 1.75; min-width: 64px; transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
-      >@speedpycom<span
-        class="overflow-hidden absolute z-0 leading-7 uppercase pointer-events-none"
-        style="inset: 0px;"
-      ></span></a
-    ><a
-      class="inline-flex relative justify-center items-center py-2 px-3 my-0 mr-0 ml-4 font-sans text-sm font-semibold uppercase align-middle bg-transparent rounded-lg border-0 appearance-none cursor-pointer select-none text-sky-600 hover:bg-transparent"
-      tabindex="0"
-      target="_blank"
-      rel="noopener"
-      href="https://appliku.com/discord"
-      style="outline: 0px; text-decoration: none; line-height: 1.75; min-width: 64px; transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
-      >Join Discord<span
-        class="overflow-hidden absolute z-0 leading-7 uppercase pointer-events-none"
-        style="inset: 0px;"
-      ></span
-    ></a>
+  <div class="m-4">
+
+    <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">All you need to find your Twitter voice</h2>
+    <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
+        <li>
+          Tweet Score (according to the Twitter open source algorithm)
+        </li>
+        <li>
+          Topic analysis (find the topics that attract more interest)
+        </li>
+        <li>
+          Best tweets an replies
+        </li>
+    </ol>
+    <br>
+    {% if user.is_authenticated %}
+      <h2 class="text-2xl font-semibold">
+        <a href="{% url 'upload' %}" class="btn btn-danger">
+          Upload your Twitter data
+        </a>
+      </h2>
+      <br>
+      <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
+      </button>
+    {% else %}
+      <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+        <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
+      </button>
+      <!-- Twitter button ends here -->
+    {% endif %}
   </div>
-  <div class="flex flex-row mt-6 text-neutral-800">
-    <a
-      class="inline-flex relative justify-center items-center py-2 px-5 m-0 font-sans text-sm font-semibold uppercase align-middle bg-transparent rounded-lg border border-blue-300 border-solid appearance-none cursor-pointer select-none text-sky-600 hover:border hover:border-solid hover:border-sky-600 hover:bg-transparent"
-      tabindex="0"
-      target="_blank"
-      rel="noopener"
-      href="https://appliku.com/"
-      style="outline: 0px; text-decoration: none; line-height: 1.75; min-width: 64px; transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
-      >Deploy With Appliku<span
-        class="overflow-hidden absolute z-0 leading-7 uppercase pointer-events-none"
-        style="inset: 0px;"
-      ></span
-    ></a>
+  <div class="text-center items-center m-10">
+    <video class="w-full rounded-lg" controls>
+      <source src="{% static 'mainapp/dashboard_demo.mov' %}">
+      Your browser does not support the video tag.
+    </video>
   </div>
 </div>
 

@@ -3,6 +3,7 @@ from mainapp.models.tweet import Tweet
 from mainapp.models.keywords import Keywords
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -13,24 +14,43 @@ class DashboardView(LoginRequiredMixin, ListView):
         # filter by the user first
         username = self.request.user.username
         print(username)
-        user_queryset = Tweet.objects.filter(username=username)
+        user_dashboard = self.kwargs["user"]
 
+        # check that the logged in user is seeing the right dashboard
+        if user_dashboard != username and not self.request.user.is_superuser:
+            raise PermissionDenied()
+
+        # get the dashboard user tweets
+        user_queryset = Tweet.objects.filter(username=user_dashboard)
         comments = self.request.GET.get("comments")
-        # this reads query param
-        print(comments)
 
         if comments is None or comments == "yes":
-            queryset = Tweet.objects.all()
+            queryset = user_queryset
         # queryset = branch.objects.none()
         elif comments == "no":
-            queryset = Tweet.objects.exclude(text__startswith="@")
+            queryset = user_queryset.exclude(text__startswith="@")
 
         return queryset
 
     def get_context_data(self, **kwargs):
+
+        # filter by the user first
+        username = self.request.user.username
+        print(username)
+        user_dashboard = self.kwargs["user"]
+
+        # check that the logged in user is seeing the right dashboard
+        if user_dashboard != username and not self.request.user.is_superuser:
+            raise PermissionDenied()
+
+        # get the dashboard user tweets
+        user_queryset = Tweet.objects.filter(username=user_dashboard)
+        # get the dashboard user keywords
+        user_queryset_kws = Keywords.objects.filter(username=user_dashboard)
+
         data = super().get_context_data(**kwargs)
-        stats_score = Tweet.objects.aggregate(Avg("score"), Min("score"), Max("score"))
-        stats_normscore = Tweet.objects.aggregate(
+        stats_score = user_queryset.aggregate(Avg("score"), Min("score"), Max("score"))
+        stats_normscore = user_queryset.aggregate(
             Avg("score"), Min("score"), Max("score")
         )
 
@@ -38,7 +58,7 @@ class DashboardView(LoginRequiredMixin, ListView):
         data["stats_normscore"] = stats_normscore
 
         # get also the data about the keyword
-        keywords = Keywords.objects.order_by("-score")
+        keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
 
         return data
