@@ -4,56 +4,88 @@
 {% block body %}
 
 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 bg-emerald-300/50">
-  <div class="text-center m-4">
+  <div class="text-center m-4 font-kanit">
     <h2
-    class="m-0 font-sans text-3xl font-bold xl:text-5xl sm:text-4xl lg:text-5xl"
-    style="line-height: 1.2;">
+    class="m-10 text-6xl font-indieflower font-bold text-gray-900">
     Twitter Optimizer
     </h2>
-    <p>
-      Stop writing about things nobody cares about
+    <p class="m-4 text-3xl text-gray-600">
+      Find your 
+      <span class="font-extrabold text-5xl text-purple-700  dark:text-blue-800 uppercase">
+        Twitter voice
+      </span>
     </p>
-    <p>
-      Find your Twitter voice 
-    </p>
-    <p>
-      Go viral all the timelike Daniel, Pieter and Marc
+    <p class="m-4 text-3xl text-gray-600">
+      Go 
+      <span class="rotate-30 text-5xl   font-extrabold text-purple-700 dark:text-blue-800 uppercase">
+      viral 
+      </span>
+      all the time like Daniel, Pieter and Marc
     </p>
     <br>
 
-    <ol class="relative border-s border-gray-200 dark:border-gray-700 text-left m-10">                  
+    <p class="m-4 text-3xl text-purple-700 font-bold">
+      How it works
+    </p>
+    <ol class="relative border-s border-gray-400 dark:border-gray-700 text-left m-10">                  
       <li class="mb-10 ms-4">
-          <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Step 1</time>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">You upload your latest tweets</h3>
-          <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700">Learn more <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-    </svg></a>
+          <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+          <time class="mb-1 font-normal leading-none text-gray-700 dark:text-gray-500">Step 1</time>
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white">You upload your 
+            <span class="underline" data-tooltip-target="tooltip-tweets">
+              latest tweets
+            </span>
+          </h3>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg></a>
+        <div id="tooltip-tweets" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          You can export your latest tweets on the Twitter Analytics page
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
       </li>
       <li class="mb-10 ms-4">
-          <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Step 2</time>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">We process the data, calculate the scores and extract the best topics to write about</h3>
+          <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+          <time class="mb-1 font-normal leading-none text-gray-700 dark:text-gray-500">Step 2</time>
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white">I load and analyze the data, 
+            <span class="underline" data-tooltip-target="tooltip-score">  
+              calculate the scores
+            </span> 
+            and extract the 
+            <span class="underline" data-tooltip-target="tooltip-topics"> 
+              best topics 
+            </span>
+            to write about</h3>
+            <div id="tooltip-score" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+              The score is calucated based on the open source Twitter algorithm
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+            <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+              The topics are extracted using an open-source Language Model
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
       </li>
       <li class="ms-4">
-          <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Step 3</time>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">You check all the metrics in your personal dashboard</h3>
+          <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+          <time class="mb-1 font-normal leading-none text-gray-700 dark:text-gray-500">Step 3</time>
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-white">You check all the metrics in your personal dashboard</h3>
       </li>
     </ol>
 
-    <p>
-      I don't store your personal data and have no access to your Tweets, I just need your Twitter username 
+    <p class=>
+      I don't store your personal data and have no access to your Twitter account. 
     </p>
-    <br>
+    <p>
+      I just save your Twitter username
+    </p>
+  <br>
     {% if not user.is_paid %}
       <div class="text-center m-4">
-        <button type="button" class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <button type="button" class="text-white text-xl bg-purple-700 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
           <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
           </svg>
             <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
-            Get full time access for $9.50
+            Get lifetime access
             </a>
         </button>
       </div>
@@ -76,39 +108,109 @@
     <img src="{% static 'mainapp/half_banner.png' %}">
   </div>
 
-  <div class="m-4">
+  <div class="m-4 font-kanit text-center">
 
-    <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">All you need to find your Twitter voice</h2>
-    <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
-        <li>
-          Tweet Score (according to the Twitter open source algorithm)
-        </li>
-        <li>
-          Topic analysis (find the topics that attract more interest)
-        </li>
-        <li>
-          Best tweets an replies
-        </li>
-    </ol>
+    <h2 class="m-5 text-4xl font-semibold text-center text-gray-800 dark:text-white">
+      All you need to find your Twitter voice
+    </h2>
+      <p class="m-4 text-2xl text-center text-gray-700 dark:text-white">
+        Twitter Algo Score
+      </p>
+      <p class="m-4 text-2xl  text-center text-gray-700 dark:text-white">
+        Most interesting Topics
+      </p>    
+      <p class="m-4 text-2xl  text-center text-gray-700 dark:text-white">
+        Best tweets and replies
+      </p>
     <br>
     {% if not user.is_paid %}
     <div class="text-center m-4">
-      <button type="button" class="text-white text-xl bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
-        <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
-        </svg>
+      <button type="button" class="text-white text-xl bg-purple-700 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
         <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
-        Get full time access for $9.50
+        Check the example Dashboard
         </a>
       </button>
     </div>
   {% endif %}
   </div>
   <div class="text-center items-center m-10">
-    <video class="w-full rounded-lg" controls>
+    <video class="w-full rounded-lg border-4 border-purple-700" controls loop autoplay>
       <source src="{% static 'mainapp/dashboard_demo.mov' %}">
       Your browser does not support the video tag.
     </video>
+  </div>
+
+  <div class="m-4 font-kanit text-center">
+    <div class="m-5 border rounded-lg border-4 border-purple-700 bg-purple-100">
+      <h2 class="m-5 text-4xl font-semibold text-center text-gray-800 dark:text-white">
+        Tweet better
+      </h2>
+      <ul class="space-y-4 text-left text-gray-500 dark:text-gray-400 m-5">
+        <li class="flex items-center space-x-3 rtl:space-x-reverse">
+            <svg class="flex-shrink-0 w-3.5 h-3.5 text-purple-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+            <span>Twitter Algo Score for all your tweets</span>
+        </li>
+        <li class="flex items-center space-x-3 rtl:space-x-reverse">
+            <svg class="flex-shrink-0 w-3.5 h-3.5 text-purple-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+            <span>Statistics on Tweet Score and Impressions</span>
+        </li>
+        <li class="flex items-center space-x-3 rtl:space-x-reverse">
+            <svg class="flex-shrink-0 w-3.5 h-3.5 text-purple-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+            <span>Topic extraction for all your tweets</span>
+        </li>
+        <li class="flex items-center space-x-3 rtl:space-x-reverse">
+            <svg class="flex-shrink-0 w-3.5 h-3.5 text-purple-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+            <span>Topic Score Analysis</span>
+        </li>
+        <li class="flex items-center space-x-3 rtl:space-x-reverse">
+            <svg class="flex-shrink-0 w-3.5 h-3.5 text-purple-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+            <span>Full Support and upgrades</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 text-center items-center">
+    <div class="flex justify-center items-center text-center items-center m-10 font-kanit">
+      <div class="w-full max-w-sm p-4 bg-white rounded-lg border-4 border-purple-700 bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="m-4 text-3xl text-gray-900 dark:text-gray-900">1 year access</h5>
+      <div class="text-center text-gray-900 dark:text-white">
+      <span class="text-5xl font-normal">$</span>
+      <span class="text-5xl font-semibold tracking-tight">9.50</span>
+      </div>
+      <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay one time, use for 1 year</h5>
+      <button type="button" class="m-4 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
+        <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
+          Start now
+        </a>
+      </button>
+  </div>
+  </div>
+    <div class="flex justify-center text-center items-center m-10 font-kanit">
+      <div class="w-full max-w-sm p-4 bg-white rounded-lg border-4 border-purple-700 bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="m-4 text-3xl text-gray-900 dark:text-gray-900">Lifetime access</h5>
+      <div class="text-center text-gray-900 dark:text-white">
+      <span class="text-5xl font-normal">$</span>
+      <span class="text-5xl font-semibold tracking-tight">15</span>
+      </div>
+      <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay one time, use forever</h5>
+      <button type="button" class="m-4 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
+        <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
+          Start now
+        </a>
+      </button>
+    </div>
   </div>
 </div>
 

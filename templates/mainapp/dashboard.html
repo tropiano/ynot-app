@@ -62,12 +62,16 @@
       datasets: [{
         label: 'Score',
         data: kw_score,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: '#34d399',
+        backgroundColor: '#34d399'
       },
       {
         label: '3x Norm Score',
         data: kw_norm_score,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: '#000000',
+        backgroundColor: '#000000'
       }]
     },
     options: {
@@ -147,12 +151,12 @@
         All tweets
       </p>
       <div class="mb-3 text-left items-left">
-        <span class="{% if 'comments=no' in request.get_full_path %} bg-blue-400 {% else %} bg-blue-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        <span class="{% if 'comments=no' in request.get_full_path %} bg-emerald-400 {% else %} bg-emerald-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
           <a href="{{ request.path }}?comments=no#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
               exclude comments
           </a>
         </span>
-        <span class="{% if 'comments=yes' in request.get_full_path %} bg-blue-400 {% else %} bg-blue-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        <span class="{% if 'comments=yes' in request.get_full_path %} bg-emerald-400 {% else %} bg-emerald-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
           <a href="{{ request.path }}?comments=yes#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
               include comments
           </a>
