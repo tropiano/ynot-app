@@ -32,7 +32,7 @@ def success(request):
 def init_db(request, file_path):
 
     print(os.env["MEDIA"])
-    tweet_file = f"{os.env["MEDIA"]}{file_path}"
+    tweet_file = f"{os.env['MEDIA']}{file_path}"
     # user_name = tweet_file.split("/")[-1].split("_")[3]
     user_name = request.user.username
     df_full = pd.read_csv(tweet_file)
