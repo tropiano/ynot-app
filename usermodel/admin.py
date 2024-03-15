@@ -17,6 +17,7 @@ class UserAdmin(DefaultUserAdmin):
                     "is_staff",
                     "is_superuser",
                     "is_paid",
+                    "is_processed",
                     "groups",
                     "user_permissions",
                 ),
@@ -42,6 +43,14 @@ class UserAdmin(DefaultUserAdmin):
             },
         ),
     )
-    list_display = ("username", "email", "first_name", "last_name", "is_staff")
+    list_display = (
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_paid",
+        "is_processed",
+    )
     search_fields = ("first_name", "last_name", "email")
     ordering = ("email",)

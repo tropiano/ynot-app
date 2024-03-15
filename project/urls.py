@@ -27,6 +27,9 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path("", views.WelcomeToSpeedPyView.as_view(), name="home"),
     path("dashboard/<str:user>", views.DashboardView.as_view(), name="dashboard"),
+    path(
+        "example_dashboard", views.DashboardViewTest.as_view(), name="example_dashboard"
+    ),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # accounts management
     # only allow twitter social login/signup

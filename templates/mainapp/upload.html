@@ -15,11 +15,14 @@
 
         <input class="block text-sm mx-auto text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
         aria-describedby="user_avatar_help" id="{{ field.auto_id }}" name="{{ field.html_name }}" type="file">
-        <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="document_help">Check here how to export your tweets</div>
+        <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="document_help">
+          <a href="https://analytics.twitter.com/user/{{user.username}}/tweets" class="underline">
+            Go here to export your tweets
+          </a>
+        </div>
       {% endfor %}
       <button class="text-gray-900 m-3 hover:text-white bg-purple-400 border border-gray-800 hover:bg-purple-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" type="submit">Upload</button>
     </form>
 
-  <p><a href="{% url 'home' %}">Return to home</a></p>
 </div>
 {% endblock %}

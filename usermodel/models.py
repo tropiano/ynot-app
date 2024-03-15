@@ -36,6 +36,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         help_text=_("Designates whether the user has paid his subscription"),
     )
+    is_processed = models.BooleanField(
+        _("Topics Processed"),
+        default=False,
+        help_text=_("Designates whether the topics for this user have been analyzed"),
+    )
     is_email_confirmed = models.BooleanField(_("Email Confirmed"), default=False)
     date_joined = models.DateTimeField(_("Date Joined"), default=timezone.now)
 
