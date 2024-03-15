@@ -146,6 +146,7 @@ STATIC_ROOT = env.str("STATIC_ROOT", default=BASE_DIR / "staticfiles")
 
 MEDIA_ROOT = env("MEDIA_ROOT", default=BASE_DIR / "media")
 MEDIA_URL = env("MEDIA_PATH", default="/media/")
+MEDIA = env("MEDIA", default=MEDIA_URL)
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
