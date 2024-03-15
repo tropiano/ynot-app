@@ -155,11 +155,15 @@ def mark_user(user_name):
 if __name__ == "__main__":
 
     all_users = read_users()
+    print("Read users")
     for user in all_users:
         user_name = user[0]
+        print(f"Processing {user_name}")
         # extract user tweets
         user_tweets = read_tweets(user_name)
+        print(f"Read {user_name} Tweets")
         # calculate keywords score
         user_kws_score, user_kws_normscore = calc_keywords(user_tweets)
+        print(f"Calculated {user_name} Topics scores")
         # write on the DB
         write_db(user_kws_score, user_kws_normscore, user_name)
