@@ -31,7 +31,7 @@ def success(request):
 
 def init_db(request, file_path):
 
-    print(os.env["MEDIA"])
+    print(os.environ["MEDIA"])
     tweet_file = f"{os.environ['MEDIA']}{file_path}"
     # user_name = tweet_file.split("/")[-1].split("_")[3]
     user_name = request.user.username
