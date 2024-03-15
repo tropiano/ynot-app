@@ -15,7 +15,7 @@ def model_form_upload(request):
             file_obj.save()
             #  print(file_obj.document.url)
             # execute task to populate DB
-            init_db(request, file_obj.document.url)
+            init_db(request, file_obj.document)
             return redirect("success")
 
     else:
