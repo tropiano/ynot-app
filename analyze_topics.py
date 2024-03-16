@@ -1,13 +1,37 @@
-import sys
 import os
-import pandas as pd
 import psycopg2
-from transformers import T5Tokenizer, T5ForConditionalGeneration
 from collections import defaultdict
+from huggingface_hub import get_inference_endpoint
+import requests
 
 
-model = T5ForConditionalGeneration.from_pretrained("Voicelab/vlt5-base-keywords")
-tokenizer = T5Tokenizer.from_pretrained("Voicelab/vlt5-base-keywords")
+API_URL = "https://y7ypc5d3xkyt8hcg.us-east-1.aws.endpoints.huggingface.cloud"
+headers = {
+    "Accept": "application/json",
+    "Authorization": f"Bearer {os.environ['HF_TOKEN']}",
+    "Content-Type": "application/json",
+}
+
+
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+
+
+def start_endpoint():
+    endpoint = get_inference_endpoint("vlt5-base-keywords-twitopt")
+    if endpoint.status != "running":
+        endpoint.resume()
+        endpoint.wait()
+
+
+def pause_endpoint():
+    endpoint = get_inference_endpoint("vlt5-base-keywords-twitopt")
+    endpoint.pause()
+
+
+# model = T5ForConditionalGeneration.from_pretrained("Voicelab/vlt5-base-keywords")
+# tokenizer = T5Tokenizer.from_pretrained("Voicelab/vlt5-base-keywords")
 
 
 def read_users():
@@ -63,12 +87,10 @@ def calc_keywords(result):
     result.sort(key=lambda x: x[1], reverse=True)
 
     for sample in result[:100]:
-        input_sequences = [task_prefix + sample[0]]
-        input_ids = tokenizer(
-            input_sequences, return_tensors="pt", truncation=True
-        ).input_ids
-        output = model.generate(input_ids, no_repeat_ngram_size=3, num_beams=4)
-        predicted = tokenizer.decode(output[0], skip_special_tokens=True)
+        input_sequences = task_prefix + sample[0]
+        predicted = query({"inputs": input_sequences, "parameters": {}})[0][
+            "generated_text"
+        ]
         # save it in a dictionary together with the tweet and the score
         tweet_info = {
             "text": sample[0],
@@ -156,6 +178,9 @@ if __name__ == "__main__":
 
     all_users = read_users()
     print("Read users")
+    # start endpoint if there are users
+    if all_users:
+        start_endpoint()
     for user in all_users:
         user_name = user[0]
         print(f"Processing {user_name}")
@@ -167,3 +192,6 @@ if __name__ == "__main__":
         print(f"Calculated {user_name} Topics scores")
         # write on the DB
         write_db(user_kws_score, user_kws_normscore, user_name)
+
+    # pause endpoint after processing (save costs)
+    pause_endpoint()
