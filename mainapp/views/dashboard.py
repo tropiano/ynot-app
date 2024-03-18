@@ -36,7 +36,7 @@ class DashboardView(LoginRequiredMixin, ListView):
 
         # filter by the user first
         username = self.request.user.username
-        print(username)
+        # print(username)
         user_dashboard = self.kwargs["user"]
 
         # check that the logged in user is seeing the right dashboard
@@ -49,13 +49,20 @@ class DashboardView(LoginRequiredMixin, ListView):
         user_queryset_kws = Keywords.objects.filter(username=user_dashboard)
 
         data = super().get_context_data(**kwargs)
-        stats_score = user_queryset.aggregate(Avg("score"), Min("score"), Max("score"))
+        stats_score = user_queryset.filter(score__gt=0).aggregate(
+            Avg("score"), Min("score"), Max("score")
+        )
         stats_normscore = user_queryset.aggregate(
             Avg("score"), Min("score"), Max("score")
         )
+        stats_dates = user_queryset.aggregate(Min("time"), Max("time"))
 
         data["stats_score"] = stats_score
         data["stats_normscore"] = stats_normscore
+        data["stats_dates"] = stats_dates
+
+        print(data["stats_dates"])
+        print(data["stats_score"])
 
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
@@ -94,10 +101,12 @@ class DashboardViewTest(ListView):
         stats_normscore = user_queryset.aggregate(
             Avg("score"), Min("score"), Max("score")
         )
+        stats_dates = user_queryset.aggregate(Min("time"), Max("time"))
 
         data["stats_score"] = stats_score
         data["stats_normscore"] = stats_normscore
-
+        data["stats_dates"] = stats_dates
+        
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords

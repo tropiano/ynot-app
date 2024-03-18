@@ -3,12 +3,39 @@
 {% load socialaccount %}
 {% block body %}
 
-<div class="grid grid-cols-1 gap-4 md:grid-cols-2 bg-emerald-300/50">
+
+
+<nav class="bg-emerald-300/20 border-gray-200 dark:bg-gray-900">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="https://twitteroptimize.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img class="w-20 h-20" src="{% static 'mainapp/icon_twitopt.png' %}">
+      <span class="self-center text-4xl font-madimi font-bold whitespace-nowrap dark:text-white">Twitter Optimize</span>
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto font-kanit text-xl" id="navbar-default">
+      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+          <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="#pricing" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+        </li>
+        <li>
+          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk about Twitter!" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 bg-emerald-300/20">
   <div class="text-center m-4 font-kanit">
-    <h2
-    class="m-10 text-6xl font-indieflower font-bold text-gray-900">
-    Twitter Optimizer
-    </h2>
     <p class="m-4 text-3xl text-gray-600">
       Find your 
       <span class="font-extrabold text-5xl text-purple-700  dark:text-blue-800 uppercase">
@@ -84,18 +111,19 @@
           <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
           <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
           </svg>
-            <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
+            <a href="https://buy.stripe.com/test_7sI9BzbUpg1M1Rm9AB">
             Get lifetime access
             </a>
         </button>
       </div>
     {% elif user.is_authenticated %}
       {% if user.username %}
-        <h2 class="text-2xl">
+      <button type="button" class="text-white text-xl bg-purple-700 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
           <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
-            Go to Dashboard
+            Go to your Dashboard
           </a>
-        </h2>
+        </button>
       {% endif %}
     {% else %}
       <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -181,15 +209,15 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 text-center items-center">
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 text-center items-center" id="pricing">
     <div class="flex justify-center items-center text-center items-center m-10 font-kanit">
-      <div class="w-full max-w-sm p-4 bg-white rounded-lg border-4 border-purple-700 bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div class="w-full max-w-sm p-4 bg-white border-2 border-purple-700 bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
       <h5 class="m-4 text-3xl text-gray-900 dark:text-gray-900">1 year access</h5>
       <div class="text-center text-gray-900 dark:text-white">
       <span class="text-5xl font-normal">$</span>
       <span class="text-5xl font-semibold tracking-tight">9.50</span>
       </div>
-      <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay one time, use for 1 year</h5>
+      <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay one time, use for 1 year (no auto-renew)</h5>
       <button type="button" class="m-4 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
         <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
           Start now
@@ -198,20 +226,33 @@
   </div>
   </div>
     <div class="flex justify-center text-center items-center m-10 font-kanit">
-      <div class="w-full max-w-sm p-4 bg-white rounded-lg border-4 border-purple-700 bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <h5 class="m-4 text-3xl text-gray-900 dark:text-gray-900">Lifetime access</h5>
-      <div class="text-center text-gray-900 dark:text-white">
+      <div class="w-full max-w-sm p-4 bg-white border-4 border-purple-700 bg-purple-200 rounded-2xl shadow-lg  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="m-4 text-3xl text-gray-800 dark:text-gray-900">Lifetime access</h5>
+      <div class="text-center text-gray-800 dark:text-white">
       <span class="text-5xl font-normal">$</span>
       <span class="text-5xl font-semibold tracking-tight">15</span>
       </div>
       <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay one time, use forever</h5>
       <button type="button" class="m-4 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
-        <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
+        <a href="https://buy.stripe.com/test_7sI9BzbUpg1M1Rm9AB">
           Start now
         </a>
       </button>
     </div>
   </div>
 </div>
+</div>
+
+<footer class="bg-emerald-300/20 rounded-lg shadow m-4 dark:bg-gray-800">
+  <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 TwitterOptimize. All Rights Reserved.
+  </span>
+  <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+      <li>
+          <a href="mailto:antoniotropiano@gmail.com?subject=Support request!" class="hover:underline">Support</a>
+      </li>
+  </ul>
+  </div>
+</footer>
 
 {% endblock %}

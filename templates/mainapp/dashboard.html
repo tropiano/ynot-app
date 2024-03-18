@@ -14,14 +14,14 @@
       },
         info: false,
         pagingType: 'simple_numbers',
-        order: [[2, 'desc']],
+        order: [[3, 'desc']],
         pageLength: 20,
         columnDefs: [ {
           "targets" : 'no-sort',
           "orderable": false,
           "order": [],
         },
-        {targets: 0,
+        {targets: 1,
           render: DataTable.render.ellipsis( 40, true ),
         }]
       },
@@ -93,8 +93,8 @@
   
 </script>
 
-<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
-  <h1 class="text-center text-4xl">
+<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center bg-emerald-300/20">
+  <h1 class="text-center text-4xl m-4">
     Twitter Optimize Dashboard
   </h1>
   <br>
@@ -108,12 +108,15 @@
       <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
       <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
       </svg>
-        <a href="https://buy.stripe.com/test_bIY8xv1fLaHs8fK144">
+        <a href="https://buy.stripe.com/test_7sI9BzbUpg1M1Rm9AB">
         Get lifetime access
         </a>
     </button>
   </div>
   {% endif %}
+  <div class="text-center m-3">
+    {{ stats_dates.time__min|date:"j M Y" }} - {{ stats_dates.time__max|date:"j M Y" }}
+  </div>
   {% for tweet in object_list %}
   {% empty %}
   <h2 class="text-2xl font-semibold text-center">
@@ -125,21 +128,21 @@
   <br>
   <div class="grid grid-cols-1 m-5 text-center">
     <div class="grid grid-cols-1 md:grid-cols-3 m-5  text-2xl text-center">
-      <div class="m-2 border rounded-lg">
+      <div class="m-2 border rounded-lg bg-emerald-700/40">
         <p class="m-3">
         Best tweet Score
         <br>
         <span class="font-bold"> {{ stats_score.score__max|floatformat:"1" }}</span>
         </p>
       </div>
-      <div class="m-2 border rounded-lg">
+      <div class="m-2 border rounded-lg bg-emerald-700/40">
         <p class="m-3">
           Avg tweet Score
           <br>
           <span class="font-bold"> {{ stats_score.score__avg|floatformat:"1" }}</span>
           </p>
       </div>
-      <div class="m-2 border rounded-lg">
+      <div class="m-2 border rounded-lg bg-emerald-700/40">
         <p class="m-3">
           Min tweet Score
           <br>
@@ -157,19 +160,19 @@
     <br>
       <canvas height="300px" width="450px" id="myChart" class="m-2"></canvas>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 text-center border rounded-lg">
+  <div class="grid grid-cols-1 md:grid-cols-2 text-center">
     <div class="m-5">
       
       <p class="text-xl font-semibold m-3" id="alltweets">
         All tweets
       </p>
       <div class="mb-3 text-center items-left">
-        <span class="{% if 'comments=no' in request.get_full_path %} bg-emerald-400 {% else %} bg-emerald-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        <span class="{% if 'comments=no' in request.get_full_path %} bg-emerald-700/40 {% else %} bg-emerald-400/40 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
           <a href="{{ request.path }}?comments=no#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
               exclude comments
           </a>
         </span>
-        <span class="{% if 'comments=yes' in request.get_full_path %} bg-emerald-400 {% else %} bg-emerald-100 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        <span class="{% if 'comments=yes' in request.get_full_path %} bg-emerald-700/40 {% else %} bg-emerald-400/40 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
           <a href="{{ request.path }}?comments=yes#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
               include comments
           </a>
@@ -178,6 +181,9 @@
       <table id="tweetTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-5">
           <thead>
               <tr class="border-b text-center items-center justify-center">                
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
+                  Date
+                </th>
                 <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
                   Text
                 </th>
@@ -195,6 +201,9 @@
           <tbody>
             {% for tweet in object_list %}
                 <tr class="border-b items-center justify-center text-center">
+                    <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-center justify-center text-center">
+                      {{ tweet.time }}
+                    </td>
                     <td scope="row" class="px-4 py-2 font-bold text-gray-600 text-sm items-center justify-center text-center">
                       {{ tweet.text }}
                     </td>
