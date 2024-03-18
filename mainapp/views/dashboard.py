@@ -97,7 +97,9 @@ class DashboardViewTest(ListView):
         user_queryset_kws = Keywords.objects.filter(username=self.username)
 
         data = super().get_context_data(**kwargs)
-        stats_score = user_queryset.aggregate(Avg("score"), Min("score"), Max("score"))
+        stats_score = user_queryset.filter(score__gt=0).aggregate(
+            Avg("score"), Min("score"), Max("score")
+        )
         stats_normscore = user_queryset.aggregate(
             Avg("score"), Min("score"), Max("score")
         )
@@ -106,7 +108,7 @@ class DashboardViewTest(ListView):
         data["stats_score"] = stats_score
         data["stats_normscore"] = stats_normscore
         data["stats_dates"] = stats_dates
-        
+
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords

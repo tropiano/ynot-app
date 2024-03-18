@@ -8,6 +8,11 @@ from django.conf import settings
 
 
 def model_form_upload(request):
+    user_name = request.user.username
+
+    if not user_name:
+        return redirect("login")
+
     if request.method == "POST":
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
