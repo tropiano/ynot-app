@@ -192,6 +192,7 @@ if __name__ == "__main__":
         print(f"Calculated {user_name} Topics scores")
         # write on the DB
         write_db(user_kws_score, user_kws_normscore, user_name)
+        mark_user(user_name)
 
     # pause endpoint after processing (save costs)
     pause_endpoint()
