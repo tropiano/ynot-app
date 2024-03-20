@@ -73,14 +73,14 @@ class DashboardView(LoginRequiredMixin, ListView):
 
 class DashboardViewTest(ListView):
     model = Tweet
-    template_name = "mainapp/dashboard.html"
+    template_name = "mainapp/example_dashboard.html"
     username = "tropianhs"
 
     def get_queryset(self):
         # get the dashboard user tweets
         user_queryset = Tweet.objects.filter(username=self.username)
         comments = self.request.GET.get("comments")
-
+        print(self.username)
         if comments is None or comments == "yes":
             queryset = user_queryset
         # queryset = branch.objects.none()

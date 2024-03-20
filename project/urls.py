@@ -38,10 +38,21 @@ urlpatterns = [
         RedirectView.as_view(url="/accounts/twitter/login/"),
         name="login",
     ),
-    path("accounts/signup/", RedirectView.as_view(url="/accounts/twitter/signup/")),
-    path("accounts/logout/", RedirectView.as_view(url="/accounts/twitter/logout/")),
+    path(
+        "accounts/signup/",
+        RedirectView.as_view(url="/accounts/twitter/signup/"),
+        name="signup",
+    ),
+    path(
+        "accounts/logout/",
+        RedirectView.as_view(url="/accounts/twitter/logout/"),
+        name="logout",
+    ),
     path("upload/", upload.model_form_upload, name="upload"),  # upload form
     path("success/", upload.success, name="success"),  # upload form success
+    path(
+        "payment_confirm/", views.PaymentConfirmView.as_view(), name="confirm"
+    ),  # upload form success
     path(
         "redirect/", redirect.CurrentUserProfileRedirectView.as_view(), name="redirect"
     ),  # redirect after login

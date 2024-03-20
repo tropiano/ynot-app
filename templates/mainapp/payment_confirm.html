@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="text-center font-kanit">
+
+  <h1 class="text-4xl text-center m-7 font-semibold">
+    Payment successful
+  </h1>
+  
+  <p class="text-xl text-center  m-7 hover:underline">
+    <a href="{% url 'upload' %}">
+      Upload your data to start
+    </a>
+  </p>
+
+  or
+
+  <p class="text-xl text-center  m-7 hover:underline">
+    <a href="{% url 'dashboard' user.username %}">
+      Check your Tweets score in the Dashboard
+    </a>
+  </p>
+  
+
+</div>
+{% endblock %}

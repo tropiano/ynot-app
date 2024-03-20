@@ -35,8 +35,8 @@ def write_db(df_full, user_name):
     cursor = conn.cursor()
 
     # wipe the table
-    sql = "DELETE FROM mainapp_tweet"
-    cursor.execute(sql)
+    sql = """DELETE FROM mainapp_tweet WHERE username = (%s)"""
+    cursor.execute(sql, (user_name,))
 
     # exec for each row
     for idx, row in df_full.iterrows():
