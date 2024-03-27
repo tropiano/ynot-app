@@ -22,6 +22,7 @@ def start_endpoint():
     endpoint = get_inference_endpoint("vlt5-base-keywords-twitopt")
     if endpoint.status != "running":
         endpoint.resume()
+        print("Starting endpoint")
         endpoint.wait()
 
 
