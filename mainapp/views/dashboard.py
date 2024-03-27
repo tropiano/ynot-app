@@ -13,7 +13,7 @@ class DashboardView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         # filter by the user first
         username = self.request.user.username
-        print(username)
+        # print(username)
         user_dashboard = self.kwargs["user"]
 
         # check that the logged in user is seeing the right dashboard
@@ -61,8 +61,8 @@ class DashboardView(LoginRequiredMixin, ListView):
         data["stats_normscore"] = stats_normscore
         data["stats_dates"] = stats_dates
 
-        print(data["stats_dates"])
-        print(data["stats_score"])
+        # print(data["stats_dates"])
+        # print(data["stats_score"])
 
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
@@ -80,7 +80,7 @@ class DashboardViewTest(ListView):
         # get the dashboard user tweets
         user_queryset = Tweet.objects.filter(username=self.username)
         comments = self.request.GET.get("comments")
-        print(self.username)
+        # print(self.username)
         if comments is None or comments == "yes":
             queryset = user_queryset
         # queryset = branch.objects.none()
