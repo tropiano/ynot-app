@@ -21,8 +21,18 @@
           </a>
         </div>
       {% endfor %}
-      <button class="text-gray-900 m-3 hover:text-white bg-purple-400 border border-gray-800 hover:bg-purple-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" type="submit">Upload</button>
+      <button class="font-kanit m-5 text-gray-900 hover:text-white bg-emerald-400 border border-gray-800 hover:bg-emerald-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" type="submit">
+        Upload
+      </button>
     </form>
-
-</div>
+  </div>
+  <h1 class="text-3xl text-center font-kanit m-5 text-gray-700">
+    Watch the video below to see how to export your tweets
+  </h1>
+  <div class="max-w-2xl mx-auto text-center items-center">
+    <video class="rounded-lg border border-4 border-emerald-800" controls autoplay>
+      <source src="{% static 'mainapp/export_tweets.mp4' %}">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 {% endblock %}
