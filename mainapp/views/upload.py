@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 import pandas as pd
 import os
 from django.conf import settings
+from usermodel.models import User
 
 
 def model_form_upload(request):
@@ -37,7 +38,7 @@ def success(request):
 def init_db(request, file_path):
 
     # print(os.environ["MEDIA_ROOT"])
-    print(file_path)
+    # print(file_path)
     tweet_file = f"{settings.MEDIA_ROOT}/{file_path}"
     # user_name = tweet_file.split("/")[-1].split("_")[3]
     user_name = request.user.username
@@ -47,3 +48,5 @@ def init_db(request, file_path):
     df_full["norm_score"] = df_full.apply(lambda x: score(x)[1], axis=1)
     # write results to the DB
     write_db(df_full, user_name)
+    # set user to *not processed* (for topics)
+    User.objects.filter(username=user_name).update(is_processed=0)
