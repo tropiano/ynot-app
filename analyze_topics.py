@@ -45,6 +45,8 @@ def read_users():
     conn = psycopg2.connect(conn_string)
     cursor = conn.cursor()
 
+    print("Running read users query")
+
     sql = f"""SELECT username, is_processed FROM usermodel_user 
             WHERE is_paid IS True 
             AND is_processed != True 
@@ -178,7 +180,7 @@ def mark_user(user_name):
 if __name__ == "__main__":
 
     all_users = read_users()
-    print("Read users")
+    print("Users read correctly")
     # start endpoint if there are users
     if all_users:
         start_endpoint()
