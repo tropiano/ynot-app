@@ -15,7 +15,14 @@ SECRET_KEY = env("SECRET_KEY", default="change_me")
 
 DEBUG = env("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["xtopics.co", "www.xtopics.co", "localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "xtopics.co",
+    "www.xtopics.co",
+    "localhost",
+    "0.0.0.0",
+    "127.0.0.1",
+    "twitteroptimizer.applikuapp.com",
+]
 
 # Application definition
 
