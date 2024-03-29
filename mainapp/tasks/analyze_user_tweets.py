@@ -2,6 +2,7 @@ import sys
 import os
 import pandas as pd
 import psycopg2
+from usermodel.models import User
 
 
 # define a function
@@ -56,6 +57,9 @@ def write_db(df_full, user_name):
                 user_name,
             ),
         )
+
+    # set user to *not processed* (for topics)
+    User.objects.filter(username=user_name).update(is_processed=0)
 
     conn.commit()
     conn.close()

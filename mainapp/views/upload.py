@@ -3,7 +3,6 @@ from mainapp.tasks.analyze_user_tweets import score, write_db
 from django.shortcuts import render
 from django.shortcuts import redirect
 import pandas as pd
-import os
 from django.conf import settings
 from usermodel.models import User
 
@@ -48,5 +47,3 @@ def init_db(request, file_path):
     df_full["norm_score"] = df_full.apply(lambda x: score(x)[1], axis=1)
     # write results to the DB
     write_db(df_full, user_name)
-    # set user to *not processed* (for topics)
-    User.objects.filter(username=user_name).update(is_processed=0)
