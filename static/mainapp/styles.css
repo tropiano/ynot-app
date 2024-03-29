@@ -1336,6 +1336,10 @@ input:checked + .toggle-bg {
   margin: 0.5rem;
 }
 
+.m-20 {
+  margin: 5rem;
+}
+
 .m-3 {
   margin: 0.75rem;
 }
@@ -1352,9 +1356,19 @@ input:checked + .toggle-bg {
   margin: 1.75rem;
 }
 
+.mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .mb-1 {
@@ -2004,6 +2018,11 @@ input:checked + .toggle-bg {
   line-height: 1;
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -2584,6 +2603,10 @@ input:checked + .toggle-bg {
 }
 
 @media (min-width: 1024px) {
+  .lg\:m-1 {
+    margin: 0.25rem;
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
