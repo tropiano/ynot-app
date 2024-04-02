@@ -20,7 +20,8 @@ def query(payload):
 
 def start_endpoint():
     endpoint = get_inference_endpoint("vlt5-base-keywords-twitopt")
-    if endpoint.status != "running":
+    if endpoint.status != "running" and endpoint.status != "initializing":
+        print(endpoint.status)
         endpoint.resume()
         print("Starting endpoint")
         endpoint.wait()
@@ -90,6 +91,9 @@ def calc_keywords(result):
     result.sort(key=lambda x: x[1], reverse=True)
 
     for sample in result[:100]:
+        # skip if the tweet is a reply and starts with @
+        if sample[0].startswith("@"):
+            continue
         input_sequences = task_prefix + sample[0]
         predicted = query({"inputs": input_sequences, "parameters": {}})[0][
             "generated_text"
@@ -182,20 +186,20 @@ if __name__ == "__main__":
     all_users = read_users()
     print("Users read correctly")
     # start endpoint if there are users
+    print(all_users)
     if all_users:
         start_endpoint()
-    for user in all_users:
-        user_name = user[0]
-        print(f"Processing {user_name}")
-        # extract user tweets
-        user_tweets = read_tweets(user_name)
-        print(f"Read {user_name} Tweets")
-        # calculate keywords score
-        user_kws_score, user_kws_normscore = calc_keywords(user_tweets)
-        print(f"Calculated {user_name} Topics scores")
-        # write on the DB
-        write_db(user_kws_score, user_kws_normscore, user_name)
-        mark_user(user_name)
-
-    # pause endpoint after processing (save costs)
-    pause_endpoint()
+        for user in all_users:
+            user_name = user[0]
+            print(f"Processing {user_name}")
+            # extract user tweets
+            user_tweets = read_tweets(user_name)
+            print(f"Read {user_name} Tweets")
+            # calculate keywords score
+            user_kws_score, user_kws_normscore = calc_keywords(user_tweets)
+            print(f"Calculated {user_name} Topics scores")
+            # write on the DB
+            write_db(user_kws_score, user_kws_normscore, user_name)
+            mark_user(user_name)
+        # pause endpoint after processing (save costs)
+        pause_endpoint()
