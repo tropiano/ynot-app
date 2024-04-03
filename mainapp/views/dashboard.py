@@ -42,13 +42,13 @@ class DashboardView(LoginRequiredMixin, ListView):
         # check that the logged in user is seeing the right dashboard
         if user_dashboard != username and not self.request.user.is_superuser:
             raise PermissionDenied()
+        
+        # get the data to enrich
+        data = super().get_context_data(**kwargs)
 
         # get the dashboard user tweets
         user_queryset = Tweet.objects.filter(username=user_dashboard)
-        # get the dashboard user keywords
-        user_queryset_kws = Keywords.objects.filter(username=user_dashboard)
 
-        data = super().get_context_data(**kwargs)
         stats_score = user_queryset.filter(score__gt=0).aggregate(
             Avg("score"), Min("score"), Max("score")
         )
@@ -64,6 +64,8 @@ class DashboardView(LoginRequiredMixin, ListView):
         # print(data["stats_dates"])
         # print(data["stats_score"])
 
+        # get the dashboard user keywords
+        user_queryset_kws = Keywords.objects.filter(username=user_dashboard)
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
