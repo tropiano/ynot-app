@@ -26,7 +26,9 @@ def score(row):
         + 27 * replies
     )
 
-    return score, score / impressions
+    # fix the division by 0 when tweet has 0 impressions
+    # make it at least 1 impression
+    return score, score / max(impressions, 1)
 
 
 def write_db(df_full, user_name):
