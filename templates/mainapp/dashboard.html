@@ -164,9 +164,20 @@
     <br>
     <br>
     {% if user.is_processed or user.username == '' %}
-      <p data-tooltip-target="tooltip-topics">
+    <div>
+      <p data-tooltip-target="tooltip-topics ">
         Topic Score
       </p>
+      <a class="m-4 bg-gray-100 text-gray-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-300 fill-emerald-600 shadow"
+      href="{{ request.get_full_path }}">
+      <svg class="w-3 h-3 me-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+        <path d="M21 12C21 16.9706 16.9706 21 12 21C9.69494 21 7.59227 20.1334 6 18.7083L3 16M3 12C3 7.02944 7.02944 3 12 3C14.3051 3 16.4077 3.86656 18 5.29168L21 8M3 21V16M3 16H8M21 3V8M21 8H16" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        </path> 
+      </g>
+      </svg>
+        Refresh
+    </a>
+    </div>
       <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
         <p>
         The topic Score is calculated summing up all tweets score about that topic. 
@@ -195,7 +206,7 @@
         </h2>
     {% endif %}
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 text-center">
+  <div class="grid grid-cols-1 lg:grid-cols-2 text-center">
     <div class="m-5">
       
       <p class="text-xl font-semibold m-3" id="alltweets">
