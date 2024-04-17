@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import psycopg2
 from usermodel.models import User
+from mainapp.models.tweet import Tweet
 
 
 # define a function
@@ -32,39 +33,29 @@ def score(row):
 
 
 def write_db(df_full, user_name):
-    conn_string = os.environ["DATABASE_URL"]
-    # "postgresql://postgres:postgres@localhost:5432/twitter_opt"
-    conn = psycopg2.connect(conn_string)
-    cursor = conn.cursor()
 
-    # wipe the table
-    sql = """DELETE FROM mainapp_tweet WHERE username = (%s)"""
-    cursor.execute(sql, (user_name,))
+    # rewritten to use Django ORM
+    # first of all delete all tweets
+    # from the user
+    Tweet.objects.filter(username=user_name).delete()
 
-    # exec for each row
+    # loop and save all tweets
     for idx, row in df_full.iterrows():
 
-        sql = f"""INSERT INTO mainapp_tweet (text, time, impressions, score, norm_score, engagements, username) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s)"""
-
-        cursor.execute(
-            sql,
-            (
-                row["Tweet text"],
-                row["time"],
-                row["impressions"],
-                row["score"],
-                100 * row["norm_score"],
-                row["engagements"],
-                user_name,
-            ),
+        tweet = Tweet(
+            text=row["Tweet text"],
+            time=row["time"],
+            impressions=row["impressions"],
+            score=row["score"],
+            norm_score=100 * row["norm_score"],
+            engagements=row["engagements"],
+            username=user_name,
         )
+
+        tweet.save()
 
     # set user to *not processed* (for topics)
     User.objects.filter(username=user_name).update(is_processed=0)
-
-    conn.commit()
-    conn.close()
 
 
 if __name__ == "__main__":
