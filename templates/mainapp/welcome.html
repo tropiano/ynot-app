@@ -4,7 +4,7 @@
 {% block body %}
 
 
-<nav class="bg-gray-100 border-gray-400 dark:bg-gray-900">
+<nav class="bg-gray-100 border-gray-400 dark:bg-gray-900 mx-20">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-10">
     <a href="https://xtopics.co/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img class="w-20 h-20" src="{% static 'mainapp/icon_twitopt.png' %}">
@@ -45,32 +45,32 @@
 
 
 <div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
-  <div class="text-left my-20 mx-20 font-kanit ">
-    <p class="lg:m-1 text-5xl text-gray-800">
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 font-kanit ">
+    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold">
       Go viral on X with only
     </p>
     <p> 
-    <p class="lg:m-1 text-5xl text-gray-800">
-      <span class="font-extrabold text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-800 uppercase">
+      <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold">
+      <span class="font-extrabold text-8xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-800 uppercase">
         one tweet 
       </span>
     /day
     </p>
     </p> 
-    <p class="mt-5 text-2xl text-gray-600 text-left">
-    Xtopics custom AI analyzes your tweets and shows you the topics that your audience is interested in.
+    <p class="mt-5 lg:text-2xl text-5xl text-gray-600">
+    The AI that analyzes your tweets and shows you the topics your audience is interested in.
     </p>
-    <p class="mt-5 text-2xl text-gray-600">
+    <p class="mt-5 lg:text-2xl text-5xl text-gray-600">
     So you can stop guessing and start writing what people want to read. 
     </p>
-    <p class="mt-5 text-2xl text-gray-600">
-    So what? Spend less time on X and grow faster at the same time.
+    <p class="mt-5 lg:text-2xl text-5xl text-gray-600">
+    Spend less time on X and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
-    <div class="text-center m-4 mt-20">
-      <button type="button" class="text-gray-100 text-3xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <div class="text-center content-center justify-center m-4 mt-20">
+      <button type="button" class="px-20 py-8  lg:px-10 lg:py-4 btn content-center justify-center text-gray-100 text-4xl lg:text-2xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <a href="{% url 'login' %}" target="_blank" rel="noopener noreferrer">
-            Sign in now
+            Go viral now!
           </a>
       </button>
     </div>
