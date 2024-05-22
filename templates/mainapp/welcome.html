@@ -21,22 +21,19 @@
     <div class="hidden w-full md:block md:w-auto font-kanit text-xl" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
-          <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-emerald-800 md:p-0 dark:text-white md:dark:text-emerald-800" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="#pricing" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+          <a href="#" class="text-4xl lg:text-2xl block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-emerald-800 md:p-0 dark:text-white md:dark:text-emerald-800" aria-current="page">Home</a>
         </li>
         {% if user.is_anonymous %}
         <li>
-          <a href="{% url 'login' %}" class="block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+          <a href="{% url 'login' %}" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
         </li>
         {% else %}
         <li>
-          <a href="{% url 'logout' %}" class="block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
+          <a href="{% url 'logout' %}" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
         </li>
         {% endif %}
         <li>
-          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk about X Topics!" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk about X Topics!" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
         </li>
       </ul>
     </div>
@@ -45,36 +42,34 @@
 
 
 <div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
-  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 font-kanit ">
-    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold">
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 font-kanit">
+    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3">
       Go viral on X with only
     </p>
     <p> 
-      <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold">
+      <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3">
       <span class="font-extrabold text-8xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-800 uppercase">
         one tweet 
       </span>
     /day
     </p>
     </p> 
-    <p class="mt-5 lg:text-2xl text-5xl text-gray-600">
-    The AI that analyzes your tweets and shows you the topics your audience is interested in.
-    </p>
-    <p class="mt-5 lg:text-2xl text-5xl text-gray-600">
-    So you can stop guessing and start writing what people want to read. 
-    </p>
-    <p class="mt-5 lg:text-2xl text-5xl text-gray-600">
-    Spend less time on X and grow your audience faster.
+    <p class="mt-5 lg:text-2xl text-5xl text-gray-600 p-3">
+    The AI that shows you the topics your audience is interested in.
+    So you can stop guessing and start writing things people want to read, spend less time on X
+    and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
     <div class="text-center content-center justify-center m-4 mt-20">
-      <button type="button" class="px-20 py-8  lg:px-10 lg:py-4 btn content-center justify-center text-gray-100 text-4xl lg:text-2xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <a href="{% url 'login' %}" target="_blank" rel="noopener noreferrer">
+      <button type="button" class="px-28 py-8 lg:px-10 lg:py-2 btn content-center justify-center text-gray-100 text-4xl lg:text-2xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-12 h-12 me-8" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Layer_4" data-name="Layer 4"> <path d="M44.5,22.1l-4.7-1.4a3.7,3.7,0,0,1-2.5-2.2,3.5,3.5,0,0,1,.2-3.3l2.4-4.4a2.1,2.1,0,0,0-.3-2.4,2.1,2.1,0,0,0-2.4-.3l-4.4,2.4a3.5,3.5,0,0,1-3.3.2,3.7,3.7,0,0,1-2.2-2.5L25.9,3.4a2,2,0,0,0-3.8,0L20.7,8.2a3.7,3.7,0,0,1-2.2,2.5,3.5,3.5,0,0,1-3.3-.2L10.8,8.1a2.1,2.1,0,0,0-2.4.3,2.1,2.1,0,0,0-.3,2.4l2.4,4.4a3.5,3.5,0,0,1,.2,3.3,3.7,3.7,0,0,1-2.5,2.2L3.5,22.1a2,2,0,0,0,0,3.8l4.7,1.4a3.7,3.7,0,0,1,2.5,2.2,3.5,3.5,0,0,1-.2,3.3L8.1,37.2a2.1,2.1,0,0,0,.3,2.4,2.1,2.1,0,0,0,2.4.3l4.4-2.4a3.5,3.5,0,0,1,3.3-.2,3.5,3.5,0,0,1,2.2,2.5l1.4,4.8a2,2,0,0,0,3.8,0l1.4-4.8a3.8,3.8,0,0,1,5.5-2.3l4.4,2.4a2,2,0,0,0,2.7-2.7l-2.4-4.4a3.5,3.5,0,0,1-.2-3.3,3.7,3.7,0,0,1,2.5-2.2l4.7-1.4a2,2,0,0,0,0-3.8ZM21,25a4,4,0,1,1,4-4A4,4,0,0,1,21,25Zm8,6a2,2,0,1,1,2-2A2,2,0,0,1,29,31Z"></path> </g> </g> </g>
+        </svg>
+        <a href="{% url 'login' %}" target="_blank" rel="noopener noreferrer">
             Go viral now!
           </a>
       </button>
     </div>
-  {% elif user.is_authenticated %}
+    {% elif user.is_authenticated %}
     {% if user.username %}
     <button type="button" class="text-gray-100 text-3xl bg-emerald-700 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
@@ -93,167 +88,88 @@
     <br>
     <br>
     <br>
-    <p class="my-5 text-5xl text-emerald-700 font-bold">
-      How it works
-    </p>
-    <ol class="relative border-s border-gray-400 dark:border-gray-700 text-left m-10">                  
-      <li class="mb-10 ms-4">
-          <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 font-normal leading-none text-gray-700 dark:text-gray-500">Step 1</time>
-          <h3 class="text-3xl font-semibold text-gray-700 dark:text-white">You upload your 
-            <span class="underline" data-tooltip-target="tooltip-tweets">
-              latest tweets
-            </span>
-          </h3>
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-        </svg></a>
-        <div id="tooltip-tweets" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-          You can export your latest tweets on the X Analytics page
-          <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
-      </li>
-      <li class="mb-10 ms-4">
-          <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 font-normal leading-none text-gray-700 dark:text-gray-500">Step 2</time>
-          <h3 class="text-3xl font-semibold text-gray-700 dark:text-white">I load and analyze the data, 
-            <span class="underline" data-tooltip-target="tooltip-score">  
-              calculate the scores
-            </span> 
-            and extract the 
-            <span class="underline" data-tooltip-target="tooltip-topics"> 
-              best topics 
-            </span>
-            to write about</h3>
-            <div id="tooltip-score" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-              The score is calucated based on the open source X algorithm
-              <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-            <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-              The topics are extracted using an open-source Language Model
-              <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-      </li>
-      <li class="ms-4">
-          <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-          <time class="mb-1 font-normal leading-none text-gray-700 dark:text-gray-500">Step 3</time>
-          <h3 class="text-3xl font-semibold text-gray-700 dark:text-white">You find out what are the best topics to talk about from your personal dashboard</h3>
-      </li>
-    </ol>
-
-    <p>
-      Privacy first. 
-    </p>
-    <p>
-      I don't store your personal data and have no access to your X account. 
-    </p>
-    <p>
-      I just save your X username
-    </p>
-  <br>
-    {% if user.is_anonymous %}
-      <div class="text-center m-4">
-        <button type="button" class="text-gray-100 text-xl bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Find your
-          <svg class="w-5 h-5 m-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-          </svg>
-            <a href="{% url 'signup' %}" target="_blank" rel="noopener noreferrer">
-             voice
-            </a>
-        </button>
-      </div>
-    {% elif user.is_authenticated %}
-      {% if user.username %}
-      <button type="button" class="text-gray-100 text-xl bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
-          <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
-            Go to your Dashboard
-          </a>
-        </button>
-      {% endif %}
-    {% else %}
-      <button type="button" class="text-gray-100 text-xl bg-emerald-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-        <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
-      </button>
-      <!-- Twitter button ends here -->
-    {% endif %}
-  </div>
-  <div class="text-center items-center justify-center m-4 mx-auto">
-    <img src="{% static 'mainapp/half_banner.png' %}">
-  </div>
-
-  <div class="m-4 font-kanit text-left">
-
-    <h2 class="m-10 text-5xl font-semibold text-left text-gray-800 dark:text-white">
-      All you need to find your X voice
-    </h2>
-      <p class="mx-10 text-3xl text-left text-gray-700 dark:text-white">
-        X Algo Score
+    <div>
+      <p class="my-5 text-7xl lg:text-5xl text-gray-800 font-bold p-3">
+        How it works
       </p>
-      <p class="mx-10 text-3xl  text-left text-gray-700 dark:text-white">
-        Most interesting Topics
-      </p>    
-      <p class="mx-10  text-3xl  text-left text-gray-700 dark:text-white">
-        Best tweets and replies
+      <ol class="relative border-s border-gray-400 dark:border-gray-700 text-left m-10">                  
+        <li class="mb-10 ms-4">
+            <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+            <time class="mb-1 text-3xl lg:text-normal font-normal leading-none text-gray-600 dark:text-gray-500">Step 1</time>
+            <h3 class="text-5xl lg:text-3xl font-semibold text-gray-600 dark:text-white">You upload your 
+              <span class="underline" data-tooltip-target="tooltip-tweets">
+                latest tweets
+              </span>
+            </h3>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          </svg></a>
+          <div id="tooltip-tweets" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            You can export your latest tweets on the X Analytics page
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+        </li>
+        <li class="mb-10 ms-4">
+            <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+            <time class="mb-1 text-3xl lg:text-normal font-normal leading-none text-gray-600 dark:text-gray-500">Step 2</time>
+            <h3 class="text-5xl lg:text-3xl font-semibold text-gray-600 dark:text-white">I load and analyze the data, 
+              <span class="underline" data-tooltip-target="tooltip-score">  
+                calculate the scores
+              </span> 
+              and extract the 
+              <span class="underline" data-tooltip-target="tooltip-topics"> 
+                best topics 
+              </span>
+              to write about</h3>
+              <div id="tooltip-score" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                The score is calucated based on the open source X algorithm
+                <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+              <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                The topics are extracted using an open-source Language Model
+                <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+        </li>
+        <li class="ms-4">
+            <div class="absolute w-3 h-3 bg-gray-600 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+            <time class="mb-1 text-3xl lg:text-normal font-normal leading-none text-gray-600 dark:text-gray-500">Step 3</time>
+            <h3 class="text-5xl lg:text-3xl font-semibold text-gray-600 dark:text-white">You find out what are the best topics to talk about from your personal dashboard</h3>
+        </li>
+      </ol>
+
+      <p class="text-3xl lg:text-xl p-3 text-gray-600">
+        Privacy first. 
+        I don't store your personal data and have no access to your X account. 
+        I just save your X username
       </p>
     <br>
-    {% if not user.is_paid %}
-    <div class="text-center m-4">
-      <button type="button" class="text-gray-100 text-xl bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
-        <a href="{% url 'example_dashboard' %}">
-        Check an example X analysis (@tropianhs)
-        </a>
-      </button>
+      {% if user.is_anonymous %}
+        <div class="text-center m-4">
+        </div>
+      {% elif user.is_authenticated %}
+        {% if user.username %}
+        <button type="button" class="text-gray-100 text-xl bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
+            <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
+              Go to your Dashboard
+            </a>
+          </button>
+        {% endif %}
+      {% else %}
+        <button type="button" class="text-gray-100 text-xl bg-emerald-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+          <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
+        </button>
+        <!-- Twitter button ends here -->
+      {% endif %}
     </div>
-  {% endif %}
+    </div>
+    <div class="text-center items-center py-10 my-20 mx-10">
+      <video class="w-full rounded-lg border-4 border-emerald-700" preload="metadata" controls muted>
+        <source src="{% static 'mainapp/xtopics_landing.mp4' %}#t=0.5">
+        Your browser does not support the video tag.
+      </video>
   </div>
-  <div class="text-center items-center m-10">
-    <video class="w-full rounded-lg border-4 border-emerald-700" preload="metadata" controls muted>
-      <source src="{% static 'mainapp/xtopics_landing.mp4' %}#t=0.5">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+</div>
 
-  <div class="m-4 font-kanit text-left">
-    <div class="m-5 border rounded-lg border-4 border-emerald-700 bg-emerald-100/20">
-      <h2 class="m-5 text-6xl font-semibold text-left text-gray-800 dark:text-white">
-        X times better
-      </h2>
-      <ul class="space-y-4 text-left text-gray-500 dark:text-gray-400 m-5 text-2xl">
-        <li class="flex items-left space-x-3 rtl:space-x-reverse">
-          <svg class="flex-shrink-0 w-3.5 h-3.5 text-emerald-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-          </svg>
-          <span>Topic extraction for all your tweets</span>
-      </li>
-      <li class="flex items-center space-x-3 rtl:space-x-reverse">
-          <svg class="flex-shrink-0 w-3.5 h-3.5 text-emerald-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-          </svg>
-          <span>Topic Score Analysis</span>
-      </li>
-        <li class="flex items-center space-x-3 rtl:space-x-reverse">
-            <svg class="flex-shrink-0 w-3.5 h-3.5 text-emerald-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-            </svg>
-            <span>X Algo Score for all your tweets</span>
-        </li>
-        <li class="flex items-center space-x-3 rtl:space-x-reverse">
-            <svg class="flex-shrink-0 w-3.5 h-3.5 text-emerald-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-            </svg>
-            <span>Statistics on Tweet Score and Impressions</span>
-        </li>
-        <li class="flex items-center space-x-3 rtl:space-x-reverse">
-            <svg class="flex-shrink-0 w-3.5 h-3.5 text-purple-700 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-            </svg>
-            <span>Full Support and upgrades</span>
-        </li>
-      </ul>
-    </div>
-  </div>
 
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2 text-center items-center" id="pricing">
     <div class="flex justify-center items-center text-center items-center m-10 font-kanit">
@@ -264,7 +180,7 @@
       <span class="text-5xl font-semibold tracking-tight">$9.50</span>
       </div>
       <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay once, use for 1 year (no auto-renew)</h5>
-      <button type="button" class="m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
+      <button type="button" class="px-24 py-3 lg:px-10 lg:py-2 text-8xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_YEAR }}" target="_blank" rel="noopener noreferrer">
           Start now
         </a>
@@ -279,7 +195,7 @@
       <span class="text-5xl font-semibold tracking-tight">$15</span>
       </div>
       <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay once, use forever</h5>
-      <button type="button" class="m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-xl px-5 py-2.5 inline-flex justify-center text-center">
+      <button type="button" class="px-24 py-3 lg:px-10 lg:py-2 text-8xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-xl px-5 py-2.5 inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
           Start now
         </a>
