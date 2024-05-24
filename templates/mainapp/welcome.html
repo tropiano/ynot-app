@@ -43,26 +43,23 @@
 
 <div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 font-kanit">
-    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3">
+    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3 leading-none">
       Go viral on X with only
-    </p>
-    <p> 
-      <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3">
+      <br>
       <span class="font-extrabold text-8xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-800 uppercase">
         one tweet 
       </span>
     /day
-    </p>
     </p> 
     <p class="mt-5 lg:text-2xl text-5xl text-gray-600 p-3">
-    The AI that shows you the topics your audience is interested in.
-    So you can stop guessing and start writing things people want to read, spend less time on X
+    The AI that shows you the right topics for your audience.
+    So you can start writing what people want to read, spend less time on X
     and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
     <div class="text-center content-center justify-center m-4 mt-20">
-      <button type="button" class="px-28 py-8 lg:px-10 lg:py-2 btn content-center justify-center text-gray-100 text-4xl lg:text-2xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-12 h-12 me-8" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Layer_4" data-name="Layer 4"> <path d="M44.5,22.1l-4.7-1.4a3.7,3.7,0,0,1-2.5-2.2,3.5,3.5,0,0,1,.2-3.3l2.4-4.4a2.1,2.1,0,0,0-.3-2.4,2.1,2.1,0,0,0-2.4-.3l-4.4,2.4a3.5,3.5,0,0,1-3.3.2,3.7,3.7,0,0,1-2.2-2.5L25.9,3.4a2,2,0,0,0-3.8,0L20.7,8.2a3.7,3.7,0,0,1-2.2,2.5,3.5,3.5,0,0,1-3.3-.2L10.8,8.1a2.1,2.1,0,0,0-2.4.3,2.1,2.1,0,0,0-.3,2.4l2.4,4.4a3.5,3.5,0,0,1,.2,3.3,3.7,3.7,0,0,1-2.5,2.2L3.5,22.1a2,2,0,0,0,0,3.8l4.7,1.4a3.7,3.7,0,0,1,2.5,2.2,3.5,3.5,0,0,1-.2,3.3L8.1,37.2a2.1,2.1,0,0,0,.3,2.4,2.1,2.1,0,0,0,2.4.3l4.4-2.4a3.5,3.5,0,0,1,3.3-.2,3.5,3.5,0,0,1,2.2,2.5l1.4,4.8a2,2,0,0,0,3.8,0l1.4-4.8a3.8,3.8,0,0,1,5.5-2.3l4.4,2.4a2,2,0,0,0,2.7-2.7l-2.4-4.4a3.5,3.5,0,0,1-.2-3.3,3.7,3.7,0,0,1,2.5-2.2l4.7-1.4a2,2,0,0,0,0-3.8ZM21,25a4,4,0,1,1,4-4A4,4,0,0,1,21,25Zm8,6a2,2,0,1,1,2-2A2,2,0,0,1,29,31Z"></path> </g> </g> </g>
+      <button type="button" class="px-40 py-8 lg:px-10 lg:py-2 btn content-center justify-center text-gray-100 text-5xl lg:text-2xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-16 h-16 me-8" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Layer_4" data-name="Layer 4"> <path d="M44.5,22.1l-4.7-1.4a3.7,3.7,0,0,1-2.5-2.2,3.5,3.5,0,0,1,.2-3.3l2.4-4.4a2.1,2.1,0,0,0-.3-2.4,2.1,2.1,0,0,0-2.4-.3l-4.4,2.4a3.5,3.5,0,0,1-3.3.2,3.7,3.7,0,0,1-2.2-2.5L25.9,3.4a2,2,0,0,0-3.8,0L20.7,8.2a3.7,3.7,0,0,1-2.2,2.5,3.5,3.5,0,0,1-3.3-.2L10.8,8.1a2.1,2.1,0,0,0-2.4.3,2.1,2.1,0,0,0-.3,2.4l2.4,4.4a3.5,3.5,0,0,1,.2,3.3,3.7,3.7,0,0,1-2.5,2.2L3.5,22.1a2,2,0,0,0,0,3.8l4.7,1.4a3.7,3.7,0,0,1,2.5,2.2,3.5,3.5,0,0,1-.2,3.3L8.1,37.2a2.1,2.1,0,0,0,.3,2.4,2.1,2.1,0,0,0,2.4.3l4.4-2.4a3.5,3.5,0,0,1,3.3-.2,3.5,3.5,0,0,1,2.2,2.5l1.4,4.8a2,2,0,0,0,3.8,0l1.4-4.8a3.8,3.8,0,0,1,5.5-2.3l4.4,2.4a2,2,0,0,0,2.7-2.7l-2.4-4.4a3.5,3.5,0,0,1-.2-3.3,3.7,3.7,0,0,1,2.5-2.2l4.7-1.4a2,2,0,0,0,0-3.8ZM21,25a4,4,0,1,1,4-4A4,4,0,0,1,21,25Zm8,6a2,2,0,1,1,2-2A2,2,0,0,1,29,31Z"></path> </g> </g> </g>
         </svg>
         <a href="{% url 'login' %}" target="_blank" rel="noopener noreferrer">
             Go viral now!
@@ -171,31 +168,28 @@
 </div>
 
 
-  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 text-center items-center" id="pricing">
-    <div class="flex justify-center items-center text-center items-center m-10 font-kanit">
-      <div class="w-full max-w-sm p-4 bg-white bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+  <div class="flex -space-x-4 font-kanit rtl:space-x-reverse text-center items-center justify-center m-4" id="pricing">
+    <div class="w-full max-w-sm p-4 bg-white bg-purple-200 rounded-2xl shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
       <h5 class="m-4 text-5xl text-gray-900 dark:text-gray-900">1 year access</h5>
       <div class="text-center text-gray-900 dark:text-white">
-      <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$20</span>
-      <span class="text-5xl font-semibold tracking-tight">$9.50</span>
+        <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$20</span>
+        <span class="text-5xl font-semibold tracking-tight">$9.50</span>
       </div>
-      <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay once, use for 1 year (no auto-renew)</h5>
-      <button type="button" class="px-24 py-3 lg:px-10 lg:py-2 text-8xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 inline-flex justify-center text-center">
+      <h5 class="m-4 text-gray-900 dark:text-gray-900 text-2xl lg:text-normal">Pay once, use for 1 year (no auto-renew)</h5>
+      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-3xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-2xl  inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_YEAR }}" target="_blank" rel="noopener noreferrer">
           Start now
         </a>
       </button>
-  </div>
-  </div>
-    <div class="flex justify-center text-center items-center m-10 font-kanit">
-      <div class="w-full max-w-sm p-4 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  shadow-2xl  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    </div>
+    <div class="w-full max-w-sm p-4 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  shadow-2xl  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
       <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime access</h5>
       <div class="text-center text-gray-800 dark:text-white">
-      <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$40</span>
-      <span class="text-5xl font-semibold tracking-tight">$15</span>
+        <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$40</span>
+        <span class="text-5xl font-semibold tracking-tight">$15</span>
       </div>
-      <h5 class="m-4 text-gray-900 dark:text-gray-900">Pay once, use forever</h5>
-      <button type="button" class="px-24 py-3 lg:px-10 lg:py-2 text-8xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-xl px-5 py-2.5 inline-flex justify-center text-center">
+      <h5 class="m-4 text-gray-900 dark:text-gray-900 text-2xl lg:text-normal">Pay once, use forever</h5>
+      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-4xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-2xl inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
           Start now
         </a>
@@ -205,11 +199,11 @@
 </div>
 </div>
 
-<footer class="bg-gray-100 rounded-lg shadow m-4 dark:bg-gray-800">
+<footer class="mt-20 bg-gray-100 rounded-lg shadow m-4 dark:bg-gray-800">
   <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 X Topics. All Rights Reserved.
+    <span class="lg:text-sm text-2xl text-gray-500 sm:text-center dark:text-gray-400">© 2024 X Topics.
   </span>
-  <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+  <ul class="flex flex-wrap items-center mt-3 lg:text-sm text-2xl font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
     <li>
       <a href="https://x.com/tropianhs" class="hover:underline m-10">Made in Italy 🇮🇹 by Antonio </a>
     </li>
