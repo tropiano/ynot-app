@@ -109,6 +109,12 @@
             Upload new tweets
           </a>
       </button>
+      <button type="button" class="text-white text-xl bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
+          <a href="https://threads.net/oauth/authorize?client_id={{ THREADS_APP_ID }}&redirect_uri={{ THREADS_REDIRECT_URI }}&scope={{ THREADS_SCOPE }}&response_type=code" 
+          target="_blank" rel="noopener noreferrer">
+            Connect to Threads
+          </a>
+      </button>
     </div>
   {% endif %}
   {% if not user.username or not user.is_paid %}
