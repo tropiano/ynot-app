@@ -57,6 +57,11 @@ urlpatterns = [
     path("upload/", upload.model_form_upload, name="upload"),  # upload form
     path("success/", upload.success, name="success"),  # upload form success
     path(
+        "start_oauth_flow/threads/",
+        threads_auth.start_oauth_flow,
+        name="threads_start_oauth_flow",
+    ),  # authentication threads oauth start
+    path(
         "authorize/threads/", threads_auth.authorize, name="threads_auth"
     ),  # authentication threads success
     path(

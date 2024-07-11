@@ -111,7 +111,7 @@
       </button>
       {% if not user.has_threads %}
       <button type="button" class="text-white text-xl bg-gray-700 focus:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
-          <a href="https://threads.net/oauth/authorize?client_id={{ THREADS_APP_ID }}&redirect_uri={{ THREADS_REDIRECT_URI }}&scope={{ THREADS_SCOPE }}&response_type=code" 
+          <a href="{% url 'threads_start_oauth_flow' %}" 
           target="_blank" rel="noopener noreferrer">
             Connect to Threads
           </a>

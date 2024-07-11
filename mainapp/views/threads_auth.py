@@ -8,6 +8,27 @@ from usermodel.models import User
 from mainapp.models.threads_profile import ThreadsProfile
 import requests as r
 import os
+import secrets
+from django.shortcuts import redirect
+
+
+threads_app_secret = os.getenv("THREADS_APP_SECRET")
+threads_app_id = os.getenv("THREADS_APP_ID")
+threads_scope = os.getenv("THREADS_SCOPE")
+threads_redirect_uri = os.getenv("THREADS_REDIRECT_URI")
+
+
+def generate_oauth_state():
+    return secrets.token_urlsafe(16)
+
+
+def start_oauth_flow(request):
+
+    authorization_url = f"https://threads.net/oauth/authorize?client_id={threads_app_id}&redirect_uri={threads_redirect_uri}&scope={threads_scope}&response_type=code"
+    state = generate_oauth_state()
+    request.session["oauth_state"] = state
+    # Construct authorization URL with state parameter and redirect user
+    return redirect(f"{authorization_url}&state={state}")
 
 
 def authorize(request):
@@ -15,15 +36,21 @@ def authorize(request):
     user_name = request.user.username
     print(user_name)
 
-    if not user_name:
+    # check the state
+    state = request.session.pop("oauth_state", None)
+    print(state)
+    print(request)
+    print(request.GET.get("state"))
+    wrong_state = state is None or state != request.GET.get("state")
+    print(wrong_state)
+
+    # if no user or wrong state go back to login
+    if not user_name or wrong_state:
         return redirect("login")
 
     # get the short access token
     # get the long access token and save
-    current_path = request.get_full_path()
-    print(current_path)
-    return_code = current_path.split("?code=")[1]
-    auth_code = return_code.split("#_")[0]
+    auth_code = request.GET.get("code")
     print(auth_code)
     save_long_token(auth_code, user_name)
     save_user_info(user_name)
@@ -35,9 +62,6 @@ def save_long_token(auth_code, user_name):
 
     # define the parameters
     get_token_url = "https://graph.threads.net/oauth/access_token"
-    threads_app_secret = os.getenv("THREADS_APP_SECRET")
-    threads_app_id = os.getenv("THREADS_APP_ID")
-    threads_redirect_uri = os.getenv("THREADS_REDIRECT_URI")
 
     data = {
         "client_id": threads_app_id,
