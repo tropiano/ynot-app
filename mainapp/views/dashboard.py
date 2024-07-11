@@ -1,5 +1,6 @@
 from django.views.generic import ListView
 from mainapp.models.tweet import Tweet
+from mainapp.models.threads_profile import ThreadsProfile
 from mainapp.models.keywords import Keywords
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -42,7 +43,7 @@ class DashboardView(LoginRequiredMixin, ListView):
         # check that the logged in user is seeing the right dashboard
         if user_dashboard != username and not self.request.user.is_superuser:
             raise PermissionDenied()
-        
+
         # get the data to enrich
         data = super().get_context_data(**kwargs)
 
@@ -71,6 +72,11 @@ class DashboardView(LoginRequiredMixin, ListView):
         data["keywords"] = keywords
 
         return data
+
+
+class DashboardViewThreads(DashboardView):
+    model = ThreadsProfile
+    template_name = "mainapp/dashboard_threads.html"
 
 
 class DashboardViewTest(ListView):

@@ -1,0 +1,10 @@
+from django.db import models
+import uuid
+
+
+class ThreadsProfile(models.Model):
+    threads_id = models.BigIntegerField(default=0, null=True, blank=True)
+    username = models.CharField(default="", null=True, blank=False, unique=True)
+    biography = models.CharField(default="", null=True, blank=True)
+    profile_pic_url = models.CharField(default="", null=True, blank=True)
+    followers = models.IntegerField(default=0, null=True, blank=True)

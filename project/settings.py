@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = env("SECRET_KEY", default="change_me")
+FIELD_ENCRYPTION_KEY = env("FIELD_ENCRYPTION_KEY", default="change_me")
 
 DEBUG = env("DEBUG", default=False)
 
@@ -44,6 +45,10 @@ INSTALLED_APPS = [
     # social providers
     "allauth.socialaccount.providers.twitter",  # new
     "widget_tweaks",
+    # for encryption of variables (user tokens for example)
+    "encrypted_model_fields",
+    # for local https
+    "sslserver",
 ]
 
 MIDDLEWARE = [

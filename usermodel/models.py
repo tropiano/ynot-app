@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
 from usermodel.managers import UserManager
+from encrypted_model_fields.fields import EncryptedCharField
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -40,6 +41,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("Topics Processed"),
         default=False,
         help_text=_("Designates whether the topics for this user have been analyzed"),
+    )
+    has_threads = models.BooleanField(
+        _("Threads Connected"),
+        default=False,
+        help_text=_("Connected to Threads profile"),
+    )
+    threads_token = EncryptedCharField(
+        max_length=128,
+        default="",
+    )
+    threads_username = models.CharField(
+        _("Threads Username"),
+        max_length=50,
+        default="",
     )
     is_email_confirmed = models.BooleanField(_("Email Confirmed"), default=False)
     date_joined = models.DateTimeField(_("Date Joined"), default=timezone.now)
