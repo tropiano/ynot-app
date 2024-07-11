@@ -133,36 +133,25 @@
   <div class="text-center m-3">
     {{ stats_dates.time__min|date:"j M Y" }} - {{ stats_dates.time__max|date:"j M Y" }}
   </div>
-  {% for tweet in object_list %}
-  {% empty %}
-  <h2 class="text-2xl font-semibold text-center">
-    <a href="{% url 'upload' %}" class="btn btn-danger">   
-      Upload your data to see your X insights
-    </a>
-  </h2>
-  {% endfor %}
-  <br>
   <div class="grid grid-cols-1 m-5 text-center">
-    <div class="grid grid-cols-1 md:grid-cols-3 m-5  text-2xl text-center">
-      <div class="m-2  rounded-lg bg-emerald-700/40 shadow">
+    <div class="grid grid-cols-1 lg:grid-cols-3 m-5 text-2xl text-center">
+      <div class="m-2 rounded-lg bg-emerald-700/40 shadow">
         <p class="m-3 text-gray-800">
-        Best tweet Score
+        Followers
         <br>
-        <span class="font-bold"> {{ stats_score.score__max|floatformat:"1" }}</span>
+        <span class="font-bold"> {{ followers }}</span>
         </p>
       </div>
       <div class="m-2  rounded-lg bg-emerald-700/40 shadow">
-        <p class="m-3 text-gray-800">
-          Avg tweet Score
-          <br>
-          <span class="font-bold"> {{ stats_score.score__avg|floatformat:"1" }}</span>
+        <p class="m-3 text-gray-600">
+          <span class="font-normal "> {{ bio }}</span>
           </p>
       </div>
       <div class="m-2  rounded-lg bg-emerald-700/40 shadow">
         <p class="m-3 text-gray-800">
-          Min tweet Score
+          Profile Views
           <br>
-          <span class="font-bold"> {{ stats_score.score__min|floatformat:"1" }}</span>
+          <span class="font-bold"> {{ followers }}</span>
         </p>
       </div>
     </div>    
