@@ -100,9 +100,13 @@ class DashboardViewThreads(DashboardView):
 
         followers = user_queryset.first().followers
         bio = user_queryset.first().biography
+        likes = user_queryset.first().likes
+        replies = user_queryset.first().replies
 
         data["followers"] = followers
         data["bio"] = bio
+        data["likes"] = likes
+        data["replies"] = replies
 
         return data
 

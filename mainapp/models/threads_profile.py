@@ -8,3 +8,5 @@ class ThreadsProfile(models.Model):
     biography = models.CharField(default="", null=True, blank=True)
     profile_pic_url = models.CharField(default="", null=True, blank=True)
     followers = models.IntegerField(default=0, null=True, blank=True)
+    likes = models.IntegerField(default=0, null=True, blank=True)
+    replies = models.IntegerField(default=0, null=True, blank=True)

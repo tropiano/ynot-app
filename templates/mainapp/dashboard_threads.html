@@ -94,9 +94,6 @@
 </script>
 
 <div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center bg-emerald-300/20">
-  <h1 class="text-center text-4xl m-4">
-    X Topics Threads Dashboard
-  </h1>
   <br>
   {% if user.username %}
     <h2 class="text-center text-2xl font-semibold">
@@ -135,23 +132,25 @@
   </div>
   <div class="grid grid-cols-1 m-5 text-center">
     <div class="grid grid-cols-1 lg:grid-cols-3 m-5 text-2xl text-center">
-      <div class="m-2 rounded-lg bg-emerald-700/40 shadow">
-        <p class="m-3 text-gray-800">
+      <div class="m-2 rounded-lg border-4 border-emerald-700 shadow-lg bg-white">
+        <p class="m-5 text-gray-600">
         Followers
         <br>
-        <span class="font-bold"> {{ followers }}</span>
+        <span class="font-bold text-7xl text-gray-800"> {{ followers }}</span>
         </p>
       </div>
-      <div class="m-2  rounded-lg bg-emerald-700/40 shadow">
-        <p class="m-3 text-gray-600">
-          <span class="font-normal "> {{ bio }}</span>
+      <div class="m-2 rounded-lg border-4 border-emerald-700 shadow-lg bg-white">
+          <p class="m-5 text-gray-600">
+            Likes
+            <br>
+          <span class="font-bold text-7xl text-gray-800"> {{ likes }}</span>
           </p>
       </div>
-      <div class="m-2  rounded-lg bg-emerald-700/40 shadow">
-        <p class="m-3 text-gray-800">
-          Profile Views
+      <div class="m-2 rounded-lg border-4 border-emerald-700 shadow-lg bg-white">
+        <p class="m-5 text-gray-600">
+          Replies
           <br>
-          <span class="font-bold"> {{ followers }}</span>
+          <span class="font-bold text-7xl text-gray-800"> {{ replies }}</span>
         </p>
       </div>
     </div>    

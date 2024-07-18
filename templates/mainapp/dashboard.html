@@ -109,7 +109,7 @@
             Upload new tweets
           </a>
       </button>
-      {% if not user.has_threads %}
+      {% if user.has_threads %}
       <button type="button" class="text-white text-xl bg-gray-700 focus:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
           <a href="{% url 'threads_start_oauth_flow' %}" 
           target="_blank" rel="noopener noreferrer">

@@ -34,15 +34,15 @@ def start_oauth_flow(request):
 def authorize(request):
 
     user_name = request.user.username
-    print(user_name)
+    # print(user_name)
 
     # check the state
     state = request.session.pop("oauth_state", None)
-    print(state)
-    print(request)
-    print(request.GET.get("state"))
+    # print(state)
+    # print(request)
+    # print(request.GET.get("state"))
     wrong_state = state is None or state != request.GET.get("state")
-    print(wrong_state)
+    # print(wrong_state)
 
     # if no user or wrong state go back to login
     if not user_name or wrong_state:
@@ -97,6 +97,7 @@ def save_user_info(user_name):
     # get the threads username and bio
     url_user_profile = f"https://graph.threads.net/v1.0/me?fields=id,username,threads_profile_picture_url,threads_biography&access_token={long_token}"
     response = r.get(url_user_profile)
+    print(response.json())
     threads_username = response.json()["username"]
     threads_bio = response.json()["threads_biography"]
     threads_profile_pic_url = response.json()["threads_profile_picture_url"]
@@ -122,12 +123,20 @@ def save_user_info(user_name):
     url_user_insights = f"https://graph.threads.net/v1.0/{threads_id}/threads_insights?since={since}&metric={metrics}&access_token={long_token}"
     user_data = r.get(url_user_insights).json()["data"]
 
-    # look for the followers
+    # look for the followers, likes, replies
     followers = 0
+
     for d in user_data:
         if d["name"] == "followers_count":
             followers = d["total_value"]["value"]
+        if d["name"] == "likes":
+            likes = d["total_value"]["value"]
+        if d["name"] == "replies":
+            replies = d["total_value"]["value"]
+
     # print(user_data)
     # update the followers in the model
     user_profile = ThreadsProfile.objects.filter(username=threads_username)
     user_profile.update(followers=followers)
+    user_profile.update(likes=likes)
+    user_profile.update(replies=replies)
