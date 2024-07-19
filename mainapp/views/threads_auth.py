@@ -6,6 +6,7 @@ import pandas as pd
 from django.conf import settings
 from usermodel.models import User
 from mainapp.models.threads_profile import ThreadsProfile
+from mainapp.models.thread import Thread
 import requests as r
 import os
 import secrets
@@ -54,6 +55,7 @@ def authorize(request):
     print(auth_code)
     save_long_token(auth_code, user_name)
     save_user_info(user_name)
+    get_user_threads(user_name)
 
     return redirect("dashboard_threads", user=user_name)
 
@@ -140,3 +142,48 @@ def save_user_info(user_name):
     user_profile.update(followers=followers)
     user_profile.update(likes=likes)
     user_profile.update(replies=replies)
+
+
+def get_user_threads(user_name):
+
+    long_token = User.objects.get(username=user_name).threads_token
+    # make the paginated request and get all threads
+    threads_data = []
+    url_user_threads = f"https://graph.threads.net/v1.0/me/threads?fields=id,media_product_type,media_type,media_url,permalink,owner,username,text,timestamp,shortcode,thumbnail_url,children,is_quote_post&limit=50&access_token={long_token}"
+    response = r.get(url_user_threads)
+    threads_data.extend(response.json()["data"])
+
+    if "next" in response.json()["paging"]:
+        next_url = response.json()["paging"]["next"]
+    else:
+        next_url = ""
+
+    while next_url:
+        response = r.get(next_url)
+        threads_data.extend(response.json()["data"])
+        if "next" in response.json()["paging"]:
+            next_url = response.json()["paging"]["next"]
+        else:
+            next_url = ""
+
+    # save all in the threads model
+    for thread in threads_data:
+        threadid = thread["id"]
+        url = thread["permalink"]
+        username = thread["username"]
+        text = thread["text"]
+        time = thread["timestamp"]
+        short_code = thread["shortcode"]
+        is_quote = thread["is_quote_post"]
+
+        # update DB
+        thread = Thread(
+            threadid=threadid,
+            url=url,
+            username=username,
+            text=text,
+            time=time,
+            short_code=short_code,
+            is_quote=is_quote,
+        )
+        thread.save()

@@ -105,14 +105,12 @@
             X Dashboard
           </a>
       </button>
-      {% if not user.has_threads %}
       <button type="button" class="text-white text-xl bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
           <a href="{% url 'threads_start_oauth_flow' %}" 
           target="_blank" rel="noopener noreferrer">
-            Connect to Threads
+            Refresh Threads connection
           </a>
       </button>
-      {% endif %}
     </div>
   {% endif %}
   {% if not user.username or not user.is_paid %}
@@ -216,7 +214,7 @@
     <div class="m-5">
       
       <p class="text-xl font-semibold m-3" id="alltweets">
-        All tweets
+        All posts
       </p>
       <div class="mb-3 text-center items-left">
         <span class="{% if 'comments=no' in request.get_full_path %} bg-emerald-700/40 {% else %} bg-emerald-400/40 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
@@ -251,16 +249,16 @@
               </tr>
           </thead>
           <tbody>
-            {% for tweet in object_list %}
+            {% for post in object_list %}
                 <tr class="border-b items-center justify-center text-center">
                     <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-center justify-center text-center">
-                      {{ tweet.time }}
+                      {{ post.time }}
                     </td>
                     <td scope="row" class="px-4 py-2 font-bold text-gray-600 text-sm items-center justify-center text-center">
-                      {{ tweet.text }}
+                      {{ post.text }}
                     </td>
                     <td class="px-4 py-2">
-                      {% if tweet.norm_score > 70 %}
+                      {% if post.norm_score > 70 %}
                         <p data-tooltip-target="tooltip-rocket">
                         🚀
                         </p>
@@ -268,7 +266,7 @@
                           This tweet is very popular among people who follow you   
                           <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-                      {% elif tweet.norm_score > 50 %}
+                      {% elif post.norm_score > 50 %}
                         <p data-tooltip-target="tooltip-banger">
                         💥
                         </p>
@@ -279,10 +277,10 @@
                       {% endif %}
                     </td>
                     <td class="px-4 py-2">
-                      {{ tweet.score }}
+                      {{ post.score }}
                     </td>
                     <td class="px-4 py-2">
-                      {{ tweet.norm_score }}
+                      {{ post.norm_score }}
                     </td>
                 </tr>
           {% endfor %}

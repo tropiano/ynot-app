@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from mainapp.models.tweet import Tweet
 from mainapp.models.threads_profile import ThreadsProfile
+from mainapp.models.thread import Thread
 from mainapp.models.keywords import Keywords
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -74,9 +75,33 @@ class DashboardView(LoginRequiredMixin, ListView):
         return data
 
 
-class DashboardViewThreads(DashboardView):
-    model = ThreadsProfile
+class DashboardViewThreads(LoginRequiredMixin, ListView):
+    model = Thread
     template_name = "mainapp/dashboard_threads.html"
+
+    def get_queryset(self):
+        # filter by the user first
+        username = self.request.user.username
+        # print(username)
+        user_dashboard = self.kwargs["user"]
+
+        # check that the logged in user is seeing the right dashboard
+        if user_dashboard != username and not self.request.user.is_superuser:
+            raise PermissionDenied()
+
+        # get the dashboard user posts
+        user_queryset = Thread.objects.filter(username=user_dashboard)
+        comments = self.request.GET.get("comments")
+
+        if comments is None or comments == "yes":
+            queryset = user_queryset
+        # queryset = branch.objects.none()
+        elif comments == "no":
+            queryset = user_queryset.exclude(text__startswith="@")
+
+        print(queryset)
+        
+        return queryset
 
     def get_context_data(self, **kwargs):
 
