@@ -3,6 +3,8 @@ from mainapp.models.tweet import Tweet
 from mainapp.models.threads_profile import ThreadsProfile
 from mainapp.models.thread import Thread
 from mainapp.models.keywords import Keywords
+from mainapp.models.keywords_threads import KeywordsThreads
+
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -99,8 +101,8 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         elif comments == "no":
             queryset = user_queryset.exclude(text__startswith="@")
 
-        print(queryset)
-        
+        # print(queryset)
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -132,6 +134,12 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         data["bio"] = bio
         data["likes"] = likes
         data["replies"] = replies
+
+        # get the dashboard user keywords
+        user_queryset_kws = KeywordsThreads.objects.filter(username=user_dashboard)
+        # get also the data about the keyword
+        keywords = user_queryset_kws.order_by("-score")
+        data["keywords"] = keywords
 
         return data
 

@@ -17,7 +17,7 @@ class Thread(models.Model):
     replies = models.IntegerField(default=0, null=True, blank=True)
     likes = models.IntegerField(default=0, null=True, blank=True)
     quotes = models.IntegerField(default=0, null=True, blank=True)
-    # scires (calculated)
+    # scores (calculated)
     norm_score = models.IntegerField(default=0, null=True, blank=True)
     score = models.IntegerField(default=0, null=True, blank=True)
 

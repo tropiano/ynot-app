@@ -51,7 +51,7 @@
 
   {% for kw in keywords|slice:":20" %}
     kw_score.push({{ kw.score }})
-    kw_norm_score.push(3 * {{ kw.norm_score }})
+    kw_norm_score.push( 10*{{ kw.norm_score }})
     kw_labels.push("{{ kw.word }}")
   {% endfor %}
 
@@ -67,7 +67,7 @@
         backgroundColor: '#34d399'
       },
       {
-        label: '3x Norm Score',
+        label: 'Norm Score (x1000)',
         data: kw_norm_score,
         borderWidth: 1,
         borderColor: '#000000',
@@ -125,8 +125,8 @@
     </button>
   </div>
   {% endif %}
-  <div class="text-center m-3">
-    {{ stats_dates.time__min|date:"j M Y" }} - {{ stats_dates.time__max|date:"j M Y" }}
+  <div class="text-center m-3 text-gray-600">
+    Last updated {{ user.threads_last_update|timesince }} ago
   </div>
   <div class="grid grid-cols-1 m-5 text-center">
     <div class="grid grid-cols-1 lg:grid-cols-3 m-5 text-2xl text-center">
@@ -244,7 +244,7 @@
                   Score
                 </th>
                 <th class="px-4 py-2">
-                  Normalized Score (x100)
+                  Normalized Score (x10000)
                 </th>
               </tr>
           </thead>
@@ -258,7 +258,7 @@
                       {{ post.text }}
                     </td>
                     <td class="px-4 py-2">
-                      {% if post.norm_score > 70 %}
+                      {% if post.norm_score > 0.7 %}
                         <p data-tooltip-target="tooltip-rocket">
                         🚀
                         </p>
@@ -266,7 +266,7 @@
                           This tweet is very popular among people who follow you   
                           <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-                      {% elif post.norm_score > 50 %}
+                      {% elif post.norm_score > 0.5 %}
                         <p data-tooltip-target="tooltip-banger">
                         💥
                         </p>
@@ -304,7 +304,7 @@
                   Score
                 </th>
                 <th class="px-4 py-2">
-                  Normalized Score (x100)
+                  Normalized Score (x10000)
                 </th>
               </tr>
           </thead>

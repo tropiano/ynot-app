@@ -52,7 +52,7 @@ def authorize(request):
     # get the short access token
     # get the long access token and save
     auth_code = request.GET.get("code")
-    print(auth_code)
+    # print(auth_code)
     save_long_token(auth_code, user_name)
     save_user_info(user_name)
     get_user_threads(user_name)

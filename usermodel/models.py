@@ -9,6 +9,8 @@ from django.utils import timezone
 from django.conf import settings
 from usermodel.managers import UserManager
 from encrypted_model_fields.fields import EncryptedCharField
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -56,6 +58,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=50,
         default="",
     )
+    threads_last_update = models.DateTimeField(
+        _("Last updated Threads Topics analysis"),
+        default=datetime.now() - relativedelta(years=1),
+    )
+
     is_email_confirmed = models.BooleanField(_("Email Confirmed"), default=False)
     date_joined = models.DateTimeField(_("Date Joined"), default=timezone.now)
 
