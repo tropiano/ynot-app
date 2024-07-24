@@ -62,6 +62,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("Last updated Threads Topics analysis"),
         default=datetime.now() - relativedelta(years=1),
     )
+    profile_last_update = models.DateTimeField(
+        _("Last updated Threads Profile stats"),
+        default=datetime.now() - relativedelta(years=1),
+    )
 
     is_email_confirmed = models.BooleanField(_("Email Confirmed"), default=False)
     date_joined = models.DateTimeField(_("Date Joined"), default=timezone.now)

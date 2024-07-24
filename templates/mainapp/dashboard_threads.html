@@ -14,7 +14,7 @@
       },
         info: false,
         pagingType: 'simple_numbers',
-        order: [[3, 'desc']],
+        order: [[2, 'desc']],
         pageLength: 20,
         columnDefs: [ {
           "targets" : 'no-sort',
@@ -22,7 +22,7 @@
           "order": [],
         },
         {targets: 1,
-          render: DataTable.render.ellipsis( 40, true ),
+          render: DataTable.render.ellipsis( 30, true ),
         }]
       },
     );
@@ -38,7 +38,7 @@
         info: false,
         pagingType: 'simple_numbers',
         order: [[1, 'desc']],
-        pageLength: 20
+        pageLength: 31
       },
     );
     
@@ -63,8 +63,8 @@
         label: 'Score',
         data: kw_score,
         borderWidth: 1,
-        borderColor: '#34d399',
-        backgroundColor: '#34d399'
+        borderColor: '#047857',
+        backgroundColor: '#047857'
       },
       {
         label: 'Norm Score (x1000)',
@@ -93,25 +93,29 @@
   
 </script>
 
-<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center bg-emerald-300/20">
-  <br>
-  {% if user.username %}
-    <h2 class="text-center text-2xl font-semibold">
+<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
+  <div class="inline-flex w-full justify-between">
+  <div class="text-center px-16 py-20 align-center justify-center">
+    {% if user.username %}
+    <h2 class="align-left text-left lg:text-2xl text-4xl font-semibold">
       @{{ user.username }}
     </h2>
-    <div class="text-center m-5">
-      <button type="button" class="text-white text-xl bg-emerald-700 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+  </div>
+    <div class="text-right px-16 py-16 align-right justify-right">
+      <button type="button" class="text-emerald-800 border border-4 border-emerald-800 lg:text-sm text-4xl bg-white 
+      font-semibold hover:text-emerald-700 hover:border-emerald-700 rounded-lg 
+      lg:px-5 lg:py-2.5 px-10 py-3 text-center inline-flex items-center me-2 shadow-lg">
           <a href="{% url 'dashboard' user=user.username %}">
-            X Dashboard
-          </a>
-      </button>
-      <button type="button" class="text-white text-xl bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
-          <a href="{% url 'threads_start_oauth_flow' %}" 
-          target="_blank" rel="noopener noreferrer">
-            Refresh Threads connection
+              <svg class="w-3.5 h-3.5 mb-1 inline" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+              </svg>
+            <span class="inline"> 
+              Dashboard
+            </span>
           </a>
       </button>
     </div>
+  </div>
   {% endif %}
   {% if not user.username or not user.is_paid %}
   <div class="text-center m-5">
@@ -125,30 +129,33 @@
     </button>
   </div>
   {% endif %}
-  <div class="text-center m-3 text-gray-600">
-    Last updated {{ user.threads_last_update|timesince }} ago
+  <p class="font-semibold lg:text-4xl text-6xl text-center ">
+    Profile Stats
+  </p>
+  <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+    Last updated {{ user.profile_last_update|timesince }} ago
   </div>
-  <div class="grid grid-cols-1 m-5 text-center">
-    <div class="grid grid-cols-1 lg:grid-cols-3 m-5 text-2xl text-center">
-      <div class="m-2 rounded-lg border-4 border-emerald-700 shadow-lg bg-white">
+  <div class="grid grid-cols-1 mb-5 -mt-5 text-center mx-48">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:text-2xl text-4xl text-center">
+      <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
         <p class="m-5 text-gray-600">
         Followers
         <br>
-        <span class="font-bold text-7xl text-gray-800"> {{ followers }}</span>
+        <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ followers }}</span>
         </p>
       </div>
-      <div class="m-2 rounded-lg border-4 border-emerald-700 shadow-lg bg-white">
+      <div class="m-12 rounded-lg border-4 border-emerald-700  bg-white">
           <p class="m-5 text-gray-600">
             Likes
             <br>
-          <span class="font-bold text-7xl text-gray-800"> {{ likes }}</span>
+          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ likes }}</span>
           </p>
       </div>
-      <div class="m-2 rounded-lg border-4 border-emerald-700 shadow-lg bg-white">
+      <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
         <p class="m-5 text-gray-600">
           Replies
           <br>
-          <span class="font-bold text-7xl text-gray-800"> {{ replies }}</span>
+          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
         </p>
       </div>
     </div>    
@@ -157,19 +164,13 @@
     <br>
     <br>
     {% if user.is_processed or user.username == '' %}
-    <div>
-      <p data-tooltip-target="tooltip-topics ">
-        Topic Score
+    <div class="mt-24">
+      <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
+        Topic Analysis
       </p>
-      <a class="m-4 bg-gray-100 text-gray-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-300 fill-emerald-600 shadow"
-      href="{{ request.get_full_path }}">
-      <svg class="w-3 h-3 me-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
-        <path d="M21 12C21 16.9706 16.9706 21 12 21C9.69494 21 7.59227 20.1334 6 18.7083L3 16M3 12C3 7.02944 7.02944 3 12 3C14.3051 3 16.4077 3.86656 18 5.29168L21 8M3 21V16M3 16H8M21 3V8M21 8H16" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        </path> 
-      </g>
-      </svg>
-        Refresh
-    </a>
+      <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+        Last updated {{ user.threads_last_update|timesince }} ago
+      </div>
     </div>
       <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
         <p>
@@ -204,41 +205,30 @@
         Analyzing your X Topics...
       {% else %}
         <h2 class="text-2xl font-semibold text-center">
-          <a href="{% url 'upload' %}" class="btn btn-danger">   
-            Upload your data to see your X Topics
-          </a>
+            Oops, something went wrong...
         </h2>
+        <button type="button" class="text-white text-xl bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
+          <a href="{% url 'threads_start_oauth_flow' %}" 
+          target="_blank" rel="noopener noreferrer">
+            Refresh Threads connection
+          </a>
+        </button>
     {% endif %}
   </div>
-  <div class="grid grid-cols-1 lg:grid-cols-2 text-center">
+  <div class="grid grid-cols-1 lg:grid-cols-2 text-center mt-24">
     <div class="m-5">
-      
-      <p class="text-xl font-semibold m-3" id="alltweets">
+      <p class="lg:text-2xl text-4xl font-semibold m-3" id="alltweets">
         All posts
       </p>
-      <div class="mb-3 text-center items-left">
-        <span class="{% if 'comments=no' in request.get_full_path %} bg-emerald-700/40 {% else %} bg-emerald-400/40 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
-          <a href="{{ request.path }}?comments=no#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
-              exclude comments
-          </a>
-        </span>
-        <span class="{% if 'comments=yes' in request.get_full_path %} bg-emerald-700/40 {% else %} bg-emerald-400/40 {% endif %} text-gray-800 text-sm font-medium me-2 px-1 py-1.5 rounded dark:bg-blue-900 dark:text-blue-300">
-          <a href="{{ request.path }}?comments=yes#alltweets" class="switch rounded-lg m-3 text-large font-bold" data-value="no">
-              include comments
-          </a>
-        </span>
-      </div>
-      <table id="tweetTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-5">
+      <br>
+      <table id="tweetTable" class="w-full row-border text-large text-left justify-left items-left text-gray-700 m-5">
           <thead>
-              <tr class="border-b text-center items-center justify-center">                
-                <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
+              <tr class="border-b text-center items-left justify-left">                
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-left whitespace-nowrap">
                   Date
                 </th>
                 <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
                   Text
-                </th>
-                <th class="px-4 py-2 no-sort">
-                  <br>
                 </th>
                 <th class="px-4 py-2">
                   Score
@@ -250,31 +240,12 @@
           </thead>
           <tbody>
             {% for post in object_list %}
-                <tr class="border-b items-center justify-center text-center">
-                    <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-center justify-center text-center">
+                <tr class="border-b items-left justify-left text-left">
+                    <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-left justify-left text-left">
                       {{ post.time }}
                     </td>
-                    <td scope="row" class="px-4 py-2 font-bold text-gray-600 text-sm items-center justify-center text-center">
+                    <td scope="row" class="px-4 py-2 font-bold text-gray-600 lg:text-sm text-xl items-left justify-left text-left">
                       {{ post.text }}
-                    </td>
-                    <td class="px-4 py-2">
-                      {% if post.norm_score > 0.7 %}
-                        <p data-tooltip-target="tooltip-rocket">
-                        🚀
-                        </p>
-                        <div id="tooltip-rocket" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                          This tweet is very popular among people who follow you   
-                          <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                      {% elif post.norm_score > 0.5 %}
-                        <p data-tooltip-target="tooltip-banger">
-                        💥
-                        </p>
-                        <div id="tooltip-banger" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                          This tweet is one of your best, do more like this!    
-                          <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                      {% endif %}
                     </td>
                     <td class="px-4 py-2">
                       {{ post.score }}
@@ -288,10 +259,9 @@
       </table>
     </div>
     <div class="m-5 mb-10">
-      <p class="text-xl font-semibold m-3">
+      <p class="lg:text-2xl text-4xl font-semibold m-3">
         All Topics
       </p>
-      <br>
       <br>
       {% if user.is_processed or user.username == '' %}
         <table id="kwTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
@@ -310,8 +280,9 @@
           </thead>
           <tbody>
             {% for kw in keywords %}
-                <tr class="border-b items-center justify-center text-center">
-                    <td scope="row" class="px-4 py-2 text-gray-600 font-semibold items-center justify-center text-center">
+                <tr class="border-b items-left justify-left text-left">
+                    <td scope="row" class="px-4 py-2 text-gray-600 font-semibold 
+                    items-left justify-left text-left lg:text-sm text-xl">
                       {{ kw.word }}
                     </td>
                     <td class="px-4 py-2">

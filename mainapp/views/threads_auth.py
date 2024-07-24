@@ -1,9 +1,4 @@
-from mainapp.forms.upload import DocumentForm, FileFieldForm
-from mainapp.tasks.analyze_user_tweets import score, write_db
-from django.shortcuts import render
 from django.shortcuts import redirect
-import pandas as pd
-from django.conf import settings
 from usermodel.models import User
 from mainapp.models.threads_profile import ThreadsProfile
 from mainapp.models.thread import Thread
