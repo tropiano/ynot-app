@@ -93,18 +93,42 @@
   
 </script>
 
-<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center bg-emerald-300/20">
+<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
+  <div class="inline-flex w-full justify-between">
+    <div class="text-center px-16 py-20 align-center justify-center">
+      {% if user.username %}
+      <h2 class="align-left text-left lg:text-2xl text-4xl font-semibold">
+        @{{ user.username }}
+      </h2>
+      {% endif %}
+    </div>
+    <div class="text-right px-16 py-16 align-right justify-right">
+      <button type="button" class="text-emerald-800 border border-4 border-emerald-800 lg:text-sm text-4xl bg-white 
+      font-semibold hover:text-emerald-700 hover:border-emerald-700 rounded-lg 
+      lg:px-5 lg:py-2.5 px-10 py-3 text-center inline-flex items-center me-2 shadow-lg">
+          <a href="{% url 'dashboard_threads' user=user.username %}">
+            <svg class="w-5.5 h-5.5 mb-1 inline" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-threads" viewBox="0 0 16 16">
+              <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161"/>
+            </svg>
+            <span class="inline"> 
+              Dashboard
+            </span>
+          </a>
+      </button>
+    </div>
+  </div>
   <h1 class="text-center text-4xl m-4">
     X Topics Dashboard
   </h1>
   <br>
   {% if user.username %}
-    <h2 class="text-center text-2xl font-semibold">
-      @{{ user.username }}
-    </h2>
     <div class="text-center m-5">
-      <button type="button" class="text-white text-xl bg-emerald-700 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-4 h-4 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f7f4ef"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="4.8"> <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 22.0002H16C18.8284 22.0002 20.2426 22.0002 21.1213 21.1215C22 20.2429 22 18.8286 22 16.0002V15.0002C22 12.1718 22 10.7576 21.1213 9.8789C20.3529 9.11051 19.175 9.01406 17 9.00195M7 9.00195C4.82497 9.01406 3.64706 9.11051 2.87868 9.87889C2 10.7576 2 12.1718 2 15.0002L2 16.0002C2 18.8286 2 20.2429 2.87868 21.1215C3.17848 21.4213 3.54062 21.6188 4 21.749" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> </g><g id="SVGRepo_iconCarrier"> <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 22.0002H16C18.8284 22.0002 20.2426 22.0002 21.1213 21.1215C22 20.2429 22 18.8286 22 16.0002V15.0002C22 12.1718 22 10.7576 21.1213 9.8789C20.3529 9.11051 19.175 9.01406 17 9.00195M7 9.00195C4.82497 9.01406 3.64706 9.11051 2.87868 9.87889C2 10.7576 2 12.1718 2 15.0002L2 16.0002C2 18.8286 2 20.2429 2.87868 21.1215C3.17848 21.4213 3.54062 21.6188 4 21.749" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"></path> </g></svg>
+      <button type="button" class="text-emerald-800 text-xl bg-white font-medium rounded-lg lg:text-sm text-4xl 
+      px-5 py-2.5 text-center inline-flex items-center me-2 border border-3 border-emerald-800 hover:text-emerald-700 hover:border-emerald-700">
+      <svg class="w-4 h-4 me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16" stroke-width="4.4">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+      </svg>
           <a href="{% url 'upload' %}" target="_blank" rel="noopener noreferrer">
             Upload new tweets
           </a>
@@ -116,12 +140,6 @@
             Connect to Threads
           </a>
       </button>
-      {% else %}
-      <button type="button" class="text-white text-xl bg-gray-700 hover:bg-gray-800 focus:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
-        <a href="{% url 'dashboard_threads' user=user.username%}">
-          Threads Dashboard
-        </a>
-    </button>
       {% endif %}
     </div>
   {% endif %}

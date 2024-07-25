@@ -3,13 +3,14 @@ from usermodel.models import User
 from mainapp.models.thread import Thread
 from mainapp.models.threads_profile import ThreadsProfile
 import requests as r
+from datetime import datetime
 
 
 # define a function
 def score(likes, replies, reposts, quotes, views):
 
-    # get a score and then normalize by the followers
-    score = 0.5 * likes + reposts + quotes + 27 * replies
+    # get score and then normalize by the followers
+    score = likes + reposts + quotes + replies
 
     # fix the division by 0 when tweet has 0 impressions
     # make it at least 1 impression
@@ -145,8 +146,15 @@ def update_threads_profile(user_name):
     user_profile.update(replies=replies)
 
 
-def run(*args):
+def run():
 
-    for arg in args:
-        update_threads(user_name=arg)
-        # update_threads_profile(user_name=arg)
+    # get all the users
+    users = User.objects.filter(has_threads=True)
+
+    for usr in users:
+        print(f"Analyzing {usr.username}")
+        update_threads(user_name=usr.username)
+        update_threads_profile(user_name=usr.username)
+        # update the timestamp
+        usr.profile_last_update = datetime.now()
+        usr.save()

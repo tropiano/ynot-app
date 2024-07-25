@@ -22,7 +22,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     first_name = models.CharField(_("First Name"), max_length=50, blank=True)
-    username = models.CharField(_("Twitter Username"), max_length=50)
+    username = models.CharField(_("Username"), max_length=50)
     last_name = models.CharField(_("Last Name"), max_length=50, blank=True)
     is_staff = models.BooleanField(
         _("Staff Status"),

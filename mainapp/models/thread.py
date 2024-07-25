@@ -18,7 +18,7 @@ class Thread(models.Model):
     likes = models.IntegerField(default=0, null=True, blank=True)
     quotes = models.IntegerField(default=0, null=True, blank=True)
     # scores (calculated)
-    norm_score = models.IntegerField(default=0, null=True, blank=True)
+    norm_score = models.FloatField(default=0, null=True, blank=True)
     score = models.IntegerField(default=0, null=True, blank=True)
 
     class Meta:

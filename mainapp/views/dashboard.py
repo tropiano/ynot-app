@@ -8,6 +8,7 @@ from mainapp.models.keywords_threads import KeywordsThreads
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from datetime import datetime
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -129,6 +130,7 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         bio = user_queryset.first().biography
         likes = user_queryset.first().likes
         replies = user_queryset.first().replies
+        # last_update = user_queryset.first().profile_last_update
 
         data["followers"] = followers
         data["bio"] = bio
@@ -140,6 +142,8 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
+
+        # print(data)
 
         return data
 

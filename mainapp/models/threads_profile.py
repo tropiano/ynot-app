@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class ThreadsProfile(models.Model):

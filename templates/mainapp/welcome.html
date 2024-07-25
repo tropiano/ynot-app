@@ -6,8 +6,8 @@
 
 <nav class="bg-gray-100 border-gray-400 dark:bg-gray-900 mx-20">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-10">
-    <a href="https://xtopics.co/" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img class="w-20 h-20" src="{% static 'mainapp/icon_twitopt.png' %}">
+    <a href="https://xtopics.co/" class="flex items-center space-x-5 rtl:space-x-reverse">
+      <img class="w-20 h-20 m-4" src="{% static 'mainapp/icon_twitopt.png' %}">
       <span class="self-center text-gray-800 text-4xl font-madimi font-extrabold whitespace-nowrap dark:text-white uppercase">
         X Topics
       </span>
@@ -25,7 +25,7 @@
         </li>
         {% if user.is_anonymous %}
         <li>
-          <a href="{% url 'login' %}" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+          <a href="{% url 'threads_start_oauth_flow' %}" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
         </li>
         {% else %}
         <li>
@@ -44,31 +44,38 @@
 <div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 font-kanit">
     <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3 leading-none">
-      Go viral on X with only
+      Grow on Threads writing only
       <br>
       <span class="font-extrabold text-8xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-800 uppercase">
-        one tweet 
+        one post 
       </span>
     /day
     </p> 
-    <p class="mt-5 lg:text-2xl text-5xl text-gray-600 p-3">
+    <p class="lg:m-1 lg:text-2xl text-5xl text-gray-600 p-3">
     The AI that shows you the right topics for your audience.
-    So you can start writing what people want to read, spend less time on X
+    So you can start writing what people want to read, spend less time on Threads
     and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
-    <div class="text-center content-center justify-center m-4 mt-20">
-      <button type="button" class="px-40 py-8 lg:px-10 lg:py-2 btn content-center justify-center text-gray-100 text-5xl lg:text-2xl bg-emerald-700 hover:bg-emerald-800 border-xl border-emerald-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-2xl px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg class="w-16 h-16 me-8" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Layer_4" data-name="Layer 4"> <path d="M44.5,22.1l-4.7-1.4a3.7,3.7,0,0,1-2.5-2.2,3.5,3.5,0,0,1,.2-3.3l2.4-4.4a2.1,2.1,0,0,0-.3-2.4,2.1,2.1,0,0,0-2.4-.3l-4.4,2.4a3.5,3.5,0,0,1-3.3.2,3.7,3.7,0,0,1-2.2-2.5L25.9,3.4a2,2,0,0,0-3.8,0L20.7,8.2a3.7,3.7,0,0,1-2.2,2.5,3.5,3.5,0,0,1-3.3-.2L10.8,8.1a2.1,2.1,0,0,0-2.4.3,2.1,2.1,0,0,0-.3,2.4l2.4,4.4a3.5,3.5,0,0,1,.2,3.3,3.7,3.7,0,0,1-2.5,2.2L3.5,22.1a2,2,0,0,0,0,3.8l4.7,1.4a3.7,3.7,0,0,1,2.5,2.2,3.5,3.5,0,0,1-.2,3.3L8.1,37.2a2.1,2.1,0,0,0,.3,2.4,2.1,2.1,0,0,0,2.4.3l4.4-2.4a3.5,3.5,0,0,1,3.3-.2,3.5,3.5,0,0,1,2.2,2.5l1.4,4.8a2,2,0,0,0,3.8,0l1.4-4.8a3.8,3.8,0,0,1,5.5-2.3l4.4,2.4a2,2,0,0,0,2.7-2.7l-2.4-4.4a3.5,3.5,0,0,1-.2-3.3,3.7,3.7,0,0,1,2.5-2.2l4.7-1.4a2,2,0,0,0,0-3.8ZM21,25a4,4,0,1,1,4-4A4,4,0,0,1,21,25Zm8,6a2,2,0,1,1,2-2A2,2,0,0,1,29,31Z"></path> </g> </g> </g>
-        </svg>
-        <a href="{% url 'login' %}" target="_blank" rel="noopener noreferrer">
+    <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-8">
+      <button type="button" class="px-20 py-4 lg:px-10 lg:py-2 btn content-center lg:align-left justify-left 
+      text-white text-5xl lg:text-2xl bg-emerald-800 border hover:bg-emerald-700 border-4 border-emerald-800 
+      focus:outline-none focus:ring-blue-300 font-medium rounded-2xl px-5 py-2.5 text-center inline-flex 
+      items-center">
+      <svg class="w-7 h-7 me-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rocket-takeoff-fill" viewBox="0 0 16 16">
+        <path d="M12.17 9.53c2.307-2.592 3.278-4.684 3.641-6.218.21-.887.214-1.58.16-2.065a3.6 3.6 0 0 0-.108-.563 2 2 0 0 0-.078-.23V.453c-.073-.164-.168-.234-.352-.295a2 2 0 0 0-.16-.045 4 4 0 0 0-.57-.093c-.49-.044-1.19-.03-2.08.188-1.536.374-3.618 1.343-6.161 3.604l-2.4.238h-.006a2.55 2.55 0 0 0-1.524.734L.15 7.17a.512.512 0 0 0 .433.868l1.896-.271c.28-.04.592.013.955.132.232.076.437.16.655.248l.203.083c.196.816.66 1.58 1.275 2.195.613.614 1.376 1.08 2.191 1.277l.082.202c.089.218.173.424.249.657.118.363.172.676.132.956l-.271 1.9a.512.512 0 0 0 .867.433l2.382-2.386c.41-.41.668-.949.732-1.526zm.11-3.699c-.797.8-1.93.961-2.528.362-.598-.6-.436-1.733.361-2.532.798-.799 1.93-.96 2.528-.361s.437 1.732-.36 2.531Z"/>
+        <path d="M5.205 10.787a7.6 7.6 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925"/>
+      </svg>
+        <a href="{% url 'threads_start_oauth_flow' %}" target="_blank" rel="noopener noreferrer">
             Go viral now!
           </a>
       </button>
     </div>
     {% elif user.is_authenticated %}
     {% if user.username %}
-    <button type="button" class="text-gray-100 text-3xl bg-emerald-700 hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <button type="button" class="text-gray-100 text-3xl bg-emerald-700 hover:bg-purple-600 focus:ring-4 
+    focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex 
+    items-center me-2">
       <svg class="w-5 h-5 me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
         <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
           Go to your Dashboard

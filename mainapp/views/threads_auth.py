@@ -6,7 +6,7 @@ import requests as r
 import os
 import secrets
 from django.shortcuts import redirect
-
+from django.contrib.auth import login
 
 threads_app_secret = os.getenv("THREADS_APP_SECRET")
 threads_app_id = os.getenv("THREADS_APP_ID")
@@ -29,7 +29,7 @@ def start_oauth_flow(request):
 
 def authorize(request):
 
-    user_name = request.user.username
+    # user_name = request.user.username
     # print(user_name)
 
     # check the state
@@ -41,21 +41,21 @@ def authorize(request):
     # print(wrong_state)
 
     # if no user or wrong state go back to login
-    if not user_name or wrong_state:
+    if wrong_state:  # not user_name or
         return redirect("login")
 
     # get the short access token
     # get the long access token and save
     auth_code = request.GET.get("code")
     # print(auth_code)
-    save_long_token(auth_code, user_name)
+    user_name = save_long_token(request, auth_code)
     save_user_info(user_name)
     get_user_threads(user_name)
 
     return redirect("dashboard_threads", user=user_name)
 
 
-def save_long_token(auth_code, user_name):
+def save_long_token(request, auth_code):
 
     # define the parameters
     get_token_url = "https://graph.threads.net/oauth/access_token"
@@ -72,6 +72,8 @@ def save_long_token(auth_code, user_name):
 
     # get the short token and user id
     short_token = response.json()["access_token"]
+    # get the user_id
+    user_id = response.json()["user_id"]
 
     # get long lived token
     long_token_url = f"https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret={threads_app_secret}&access_token={short_token}"
@@ -79,11 +81,30 @@ def save_long_token(auth_code, user_name):
     long_token = response.json()["access_token"]
 
     # save the long lived token in the User model
-    # field is encrypted
-    User.objects.filter(username=user_name).update(threads_token=long_token)
+    # need to get the username from the API
+    url_user_profile = f"https://graph.threads.net/v1.0/{user_id}?fields=id,username&access_token={long_token}"
+    response = r.get(url_user_profile)
+    print(response.json())
+    threads_username = response.json()["username"]
 
-    # mark the user as threads user
-    User.objects.filter(username=user_name).update(has_threads=True)
+    # check if the user exists already
+    user = User.objects.get(username=threads_username)
+    if not user:
+        # create a new user with threads login
+        user = User(
+            username=threads_username, has_threads=True, threads_token=long_token
+        )
+        user.save()
+    else:
+        # update the user
+        user.has_threads = True
+        user.threads_token = long_token
+        user.save()
+
+    # log the user in
+    login(request, user)
+
+    return threads_username
 
 
 def save_user_info(user_name):
@@ -94,7 +115,7 @@ def save_user_info(user_name):
     # get the threads username and bio
     url_user_profile = f"https://graph.threads.net/v1.0/me?fields=id,username,threads_profile_picture_url,threads_biography&access_token={long_token}"
     response = r.get(url_user_profile)
-    print(response.json())
+    # print(response.json())
     threads_username = response.json()["username"]
     threads_bio = response.json()["threads_biography"]
     threads_profile_pic_url = response.json()["threads_profile_picture_url"]
