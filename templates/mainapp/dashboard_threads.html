@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<script>
+  $(document).ready( function () {
+    $('#tweetTable').DataTable(
+      { 
+        layout: {
+          topStart: 'search',
+          topEnd: null,
+          bottom: 'paging',
+          bottomStart: null,
+          bottomEnd: null
+      },
+        info: false,
+        pagingType: 'simple_numbers',
+        order: [[2, 'desc']],
+        pageLength: 20,
+        columnDefs: [ {
+          "targets" : 'no-sort',
+          "orderable": false,
+          "order": [],
+        },
+        {targets: 1,
+          render: DataTable.render.ellipsis( 30, true ),
+        }]
+      },
+    );
+
+    $('#kwTable').DataTable(
+      { 
+        layout: {
+          topStart: 'info',
+          bottom: 'paging',
+          bottomStart: null,
+          bottomEnd: null
+      },
+        info: false,
+        pagingType: 'simple_numbers',
+        order: [[1, 'desc']],
+        pageLength: 31
+      },
+    );
+    
+  Chart.defaults.font.size = 14;  
+  
+  const ctx = document.getElementById('myChart');
+  var kw_labels = []
+  var kw_score = [] 
+  var kw_norm_score = []
+
+  {% for kw in keywords|slice:":20" %}
+    kw_score.push({{ kw.score }})
+    kw_norm_score.push( 10*{{ kw.norm_score }})
+    kw_labels.push("{{ kw.word }}")
+  {% endfor %}
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: kw_labels,
+      datasets: [{
+        label: 'Score',
+        data: kw_score,
+        borderWidth: 1,
+        borderColor: '#047857',
+        backgroundColor: '#047857'
+      },
+      {
+        label: 'Norm Score (x100)',
+        data: kw_norm_score,
+        borderWidth: 1,
+        borderColor: '#000000',
+        backgroundColor: '#000000'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      },
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: true,
+      borderRadius: 5
+    }
+  });
+
+
+} );
+
+  
+</script>
+
+<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
+  <div class="inline-flex w-full justify-between">
+    <div class="text-center px-16 py-20 align-center justify-center">
+      {% if user.username %}
+      <h2 class="align-left text-left lg:text-2xl text-4xl font-semibold">
+        @{{ user.username }}
+      </h2>
+      {% endif %}
+    </div>
+    {% if not user.username or not user.is_paid %}
+    <div class="text-center px-16 py-20 justify-right">
+      <button type="button" class="text-white text-xl bg-emerald-700 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+        <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z"/>
+        </svg>
+          <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
+          Get lifetime access
+          </a>
+      </button>
+    </div>
+    {% endif %}
+  </div>
+  <p class="font-semibold lg:text-4xl text-6xl text-center ">
+    Profile Stats
+  </p>
+  <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+    Last updated {{ user.profile_last_update|timesince }} ago
+  </div>
+  <div class="grid grid-cols-1 mb-5 -mt-5 text-center mx-48">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:text-2xl text-4xl text-center">
+      <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
+        <p class="m-5 text-gray-600">
+        Followers
+        <br>
+        <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ followers }}</span>
+        </p>
+      </div>
+      <div class="m-12 rounded-lg border-4 border-emerald-700  bg-white">
+          <p class="m-5 text-gray-600">
+            Likes
+            <br>
+          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ likes }}</span>
+          </p>
+      </div>
+      <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
+        <p class="m-5 text-gray-600">
+          Replies
+          <br>
+          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
+        </p>
+      </div>
+    </div>    
+  </div>
+  <div class="grid grid-cols-1 m-5 text-center text-2xl text-gray-800 ">
+    <br>
+    <br>
+    {% if user.is_processed or user.username == '' %}
+    <div class="mt-24">
+      <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
+        Topic Analysis
+      </p>
+      <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+        Last updated {{ user.threads_last_update|timesince }} ago
+      </div>
+    </div>
+      <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        <p>
+        The topic Score is calculated summing up all tweets score about that topic. 
+        </p>
+        <p>
+          The Norm Score is the Score divided by the number of impressions. 
+        </p>
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+      <br>
+      <canvas height="300px" width="450px" id="myChart" class="m-2">
+      </canvas>
+    {% elif object_list %}
+    <div role="status" class="m-10 flex text-center items-center justify-center">
+    <a class="m-4 bg-gray-100 text-gray-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-300 fill-emerald-600 shadow"
+        href="{{ request.get_full_path }}">
+        <svg class="w-3 h-3 me-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+          <path d="M21 12C21 16.9706 16.9706 21 12 21C9.69494 21 7.59227 20.1334 6 18.7083L3 16M3 12C3 7.02944 7.02944 3 12 3C14.3051 3 16.4077 3.86656 18 5.29168L21 8M3 21V16M3 16H8M21 3V8M21 8H16" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          </path> 
+        </g>
+        </svg>
+          Refresh
+      </a>
+    </div>
+      <div role="status" class="m-10 flex text-center items-center justify-center">
+        <svg aria-hidden="true" class="w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-emerald-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+        </svg>
+      </div>
+        Analyzing your Topics...
+      {% else %}
+        <h2 class="text-2xl font-semibold text-center">
+            Oops, something went wrong...
+        </h2>
+        <button type="button" class="text-white text-xl bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
+          <a href="{% url 'threads_start_oauth_flow' %}" 
+          target="_blank" rel="noopener noreferrer">
+            Refresh Threads connection
+          </a>
+        </button>
+    {% endif %}
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 text-center mt-24">
+    <div class="m-5">
+      <p class="lg:text-2xl text-4xl font-semibold m-3" id="alltweets">
+        All posts
+      </p>
+      <br>
+      <table id="tweetTable" class="w-full row-border text-large text-left justify-left items-left text-gray-700 m-5">
+          <thead>
+              <tr class="border-b text-center items-left justify-left">                
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-left whitespace-nowrap">
+                  Date
+                </th>
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900  text-center whitespace-nowrap">
+                  Text
+                </th>
+                <th class="px-4 py-2">
+                  Score
+                </th>
+                <th class="px-4 py-2">
+                  Normalized Score (x100)
+                </th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for post in object_list %}
+                <tr class="border-b items-left justify-left text-left">
+                    <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-left justify-left text-left">
+                      {{ post.time }}
+                    </td>
+                    <td scope="row" class="px-4 py-2 font-bold text-gray-600 lg:text-sm text-xl items-left justify-left text-left">
+                      {{ post.text }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ post.score }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ post.norm_score|floatformat:2 }}
+                    </td>
+                </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+    </div>
+    <div class="m-5 mb-10">
+      <p class="lg:text-2xl text-4xl font-semibold m-3">
+        All Topics
+      </p>
+      <br>
+      {% if user.is_processed or user.username == '' %}
+        <table id="kwTable" class="w-full row-border text-large text-center justify-center items-center text-gray-700 m-3">
+          <thead>
+              <tr class="border-b text-center items-center justify-center">                
+                <th scope="row" class="px-4 py-2 font-bold text-gray-900 items-center justify-center text-center whitespace-nowrap">
+                  Keyword
+                </th>
+                <th class="px-4 py-2">
+                  Score
+                </th>
+                <th class="px-4 py-2">
+                  Normalized Score (x100)
+                </th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for kw in keywords %}
+                <tr class="border-b items-left justify-left text-left">
+                    <td scope="row" class="px-4 py-2 text-gray-600 font-semibold 
+                    items-left justify-left text-left lg:text-sm text-xl">
+                      {{ kw.word }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ kw.score }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ kw.norm_score }}
+                    </td>
+                </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% elif object_list %}
+        <div role="status" class="m-10 flex text-center items-center justify-center">
+          <svg aria-hidden="true" class="w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-emerald-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+          </svg>
+        </div>
+        Analyzing your Topics...
+      {% endif %}
+    </div>
+  </div>    
+</div>
+{% endblock %}

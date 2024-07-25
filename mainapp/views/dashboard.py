@@ -1,9 +1,14 @@
 from django.views.generic import ListView
 from mainapp.models.tweet import Tweet
+from mainapp.models.threads_profile import ThreadsProfile
+from mainapp.models.thread import Thread
 from mainapp.models.keywords import Keywords
+from mainapp.models.keywords_threads import KeywordsThreads
+
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from datetime import datetime
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -42,7 +47,7 @@ class DashboardView(LoginRequiredMixin, ListView):
         # check that the logged in user is seeing the right dashboard
         if user_dashboard != username and not self.request.user.is_superuser:
             raise PermissionDenied()
-        
+
         # get the data to enrich
         data = super().get_context_data(**kwargs)
 
@@ -69,6 +74,76 @@ class DashboardView(LoginRequiredMixin, ListView):
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
+
+        return data
+
+
+class DashboardViewThreads(LoginRequiredMixin, ListView):
+    model = Thread
+    template_name = "mainapp/dashboard_threads.html"
+
+    def get_queryset(self):
+        # filter by the user first
+        username = self.request.user.username
+        # print(username)
+        user_dashboard = self.kwargs["user"]
+
+        # check that the logged in user is seeing the right dashboard
+        if user_dashboard != username and not self.request.user.is_superuser:
+            raise PermissionDenied()
+
+        # get the dashboard user posts
+        user_queryset = Thread.objects.filter(username=user_dashboard)
+        comments = self.request.GET.get("comments")
+
+        if comments is None or comments == "yes":
+            queryset = user_queryset
+        # queryset = branch.objects.none()
+        elif comments == "no":
+            queryset = user_queryset.exclude(text__startswith="@")
+
+        # print(queryset)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+
+        # filter by the user first
+        username = self.request.user.username
+        # print(username)
+        user_dashboard = self.kwargs["user"]
+
+        # check that the logged in user is seeing the right dashboard
+        if user_dashboard != username and not self.request.user.is_superuser:
+            raise PermissionDenied()
+
+        # get the data to enrich
+        data = super().get_context_data(**kwargs)
+
+        # get the threads username
+        threads_username = self.request.user.threads_username
+
+        # get the user threads profile
+        user_queryset = ThreadsProfile.objects.filter(username=threads_username)
+
+        followers = user_queryset.first().followers
+        bio = user_queryset.first().biography
+        likes = user_queryset.first().likes
+        replies = user_queryset.first().replies
+        # last_update = user_queryset.first().profile_last_update
+
+        data["followers"] = followers
+        data["bio"] = bio
+        data["likes"] = likes
+        data["replies"] = replies
+
+        # get the dashboard user keywords
+        user_queryset_kws = KeywordsThreads.objects.filter(username=user_dashboard)
+        # get also the data about the keyword
+        keywords = user_queryset_kws.order_by("-score")
+        data["keywords"] = keywords
+
+        # print(data)
 
         return data
 

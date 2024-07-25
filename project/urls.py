@@ -19,6 +19,7 @@ from django.urls import path, include
 from mainapp import views
 from mainapp.views import upload
 from mainapp.views import redirect
+from mainapp.views import threads_auth
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
@@ -27,6 +28,11 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path("", views.WelcomeToSpeedPyView.as_view(), name="home"),
     path("dashboard/<str:user>", views.DashboardView.as_view(), name="dashboard"),
+    path(
+        "dashboard_threads/<str:user>",
+        views.DashboardViewThreads.as_view(),
+        name="dashboard_threads",
+    ),
     path(
         "example_dashboard", views.DashboardViewTest.as_view(), name="example_dashboard"
     ),
@@ -50,6 +56,14 @@ urlpatterns = [
     ),
     path("upload/", upload.model_form_upload, name="upload"),  # upload form
     path("success/", upload.success, name="success"),  # upload form success
+    path(
+        "start_oauth_flow/threads/",
+        threads_auth.start_oauth_flow,
+        name="threads_start_oauth_flow",
+    ),  # authentication threads oauth start
+    path(
+        "authorize/threads/", threads_auth.authorize, name="threads_auth"
+    ),  # authentication threads success
     path(
         "payment_confirm/", views.PaymentConfirmView.as_view(), name="confirm"
     ),  # upload form success

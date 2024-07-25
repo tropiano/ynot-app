@@ -1,5 +1,5 @@
 from mainapp.forms.upload import DocumentForm, FileFieldForm
-from mainapp.tasks.analyze_user_tweets import score, write_db
+from mainapp.scripts.analyze_user_tweets import score, write_db
 from django.shortcuts import render
 from django.shortcuts import redirect
 import pandas as pd
