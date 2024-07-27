@@ -149,27 +149,29 @@
   <div class="grid grid-cols-1 m-5 text-center text-2xl text-gray-800 ">
     <br>
     <br>
-    {% if (user.is_processed or user.username == '') and keywords %}
-    <div class="mt-24">
-      <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
-        Topic Analysis
-      </p>
-      <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
-        Last updated {{ user.threads_last_update|timesince }} ago
-      </div>
-    </div>
-      <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-        <p>
-        The topic Score is calculated summing up all tweets score about that topic. 
-        </p>
-        <p>
-          The Norm Score is the Score divided by the number of impressions. 
-        </p>
-        <div class="tooltip-arrow" data-popper-arrow></div>
-      </div>
-      <br>
-      <canvas height="300px" width="450px" id="myChart" class="m-2">
-      </canvas>
+    {% if user.is_processed or user.username == '' %}
+      {% if keywords %}
+        <div class="mt-24">
+          <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
+            Topic Analysis
+          </p>
+          <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+            Last updated {{ user.threads_last_update|timesince }} ago
+          </div>
+        </div>
+          <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            <p>
+            The topic Score is calculated summing up all tweets score about that topic. 
+            </p>
+            <p>
+              The Norm Score is the Score divided by the number of impressions. 
+            </p>
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+          <br>
+          <canvas height="300px" width="450px" id="myChart" class="m-2">
+          </canvas>
+      {% endif %}
     {% elif object_list %}
     <div role="status" class="m-10 flex text-center items-center justify-center">
     <a class="m-4 bg-gray-100 text-gray-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-gray-300 fill-emerald-600 shadow"
