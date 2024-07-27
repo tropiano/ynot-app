@@ -140,8 +140,6 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
 
-        # print(data)
-
         return data
 
 

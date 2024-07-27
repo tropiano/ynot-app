@@ -51,8 +51,9 @@ def read_users():
 
     print("Running read users query")
 
+    # change it to select only paid users after the trial
     sql = f"""SELECT username, is_processed FROM usermodel_user 
-            WHERE is_paid IS True 
+            WHERE True 
             AND has_threads IS True
             AND threads_last_update < NOW() - INTERVAL '1 day'
             AND username NOT LIKE ''
