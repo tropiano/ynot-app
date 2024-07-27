@@ -109,22 +109,19 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
 
         # filter by the user first
-        username = self.request.user.username
-        # print(username)
+        # get the threads username
+        threads_username = self.request.user.threads_username
         user_dashboard = self.kwargs["user"]
 
         # check that the logged in user is seeing the right dashboard
-        if user_dashboard != username and not self.request.user.is_superuser:
+        if user_dashboard != threads_username and not self.request.user.is_superuser:
             raise PermissionDenied()
 
         # get the data to enrich
         data = super().get_context_data(**kwargs)
 
-        # get the threads username
-        threads_username = self.request.user.threads_username
-
         # get the user threads profile
-        user_queryset = ThreadsProfile.objects.filter(username=threads_username)
+        user_queryset = ThreadsProfile.objects.filter(username=user_dashboard)
 
         followers = user_queryset.first().followers
         bio = user_queryset.first().biography
@@ -143,7 +140,7 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
 
-        # print(data)
+        # print(data)
 
         return data
 
