@@ -149,7 +149,7 @@
   <div class="grid grid-cols-1 m-5 text-center text-2xl text-gray-800 ">
     <br>
     <br>
-    {% if user.is_processed or user.username == '' %}
+    {% if (user.is_processed or user.username == '') and keywords %}
     <div class="mt-24">
       <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
         Topic Analysis
