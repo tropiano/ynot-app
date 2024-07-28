@@ -141,16 +141,24 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
 
-        # get the days to end of trial (7 days)
+        # get the days to end of trial (7-10-14 days)
+        free_days = 10
         user_join_date = (
             User.objects.filter(threads_username=user_dashboard).first().date_joined
         )
-        data["trial_exp_date"] = user_join_date + timedelta(days=10)
+        data["trial_exp_date"] = user_join_date + timedelta(days=free_days)
 
-        if timezone.now() > (user_join_date + timedelta(days=10)):
+        if timezone.now() > (user_join_date + timedelta(days=free_days)):
             data["trial_expired"] = True
         else:
             data["trial_expired"] = False
+
+        # get the user last update
+        data["profile_last_update"] = (
+            User.objects.filter(threads_username=user_dashboard)
+            .first()
+            .profile_last_update
+        )
 
         return data
 
