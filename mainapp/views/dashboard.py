@@ -4,11 +4,12 @@ from mainapp.models.threads_profile import ThreadsProfile
 from mainapp.models.thread import Thread
 from mainapp.models.keywords import Keywords
 from mainapp.models.keywords_threads import KeywordsThreads
-
+from usermodel.models import User
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from datetime import datetime
+from datetime import timedelta
+from django.utils import timezone
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -139,6 +140,17 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         # get also the data about the keyword
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
+
+        # get the days to end of trial (7 days)
+        user_join_date = (
+            User.objects.filter(threads_username=user_dashboard).first().date_joined
+        )
+        data["trial_exp_date"] = user_join_date + timedelta(days=10)
+
+        if (timezone.now() - (user_join_date + timedelta(days=10))) > 0:
+            data["trial_expired"] = True
+        else:
+            data["trial_expired"] = False
 
         return data
 

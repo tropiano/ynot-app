@@ -110,7 +110,10 @@
         </svg>
           <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
           Get lifetime access
-          {{ user.date_joined|timesince }}
+          {{ trial_exp_date|timesince }}
+          {% if trial_expired %}
+            Trial expired
+          {% endif %}
           </a>
       </button>
     </div>
