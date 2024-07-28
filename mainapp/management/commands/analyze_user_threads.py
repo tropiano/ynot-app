@@ -101,7 +101,8 @@ def update_threads(user_name):
 
         # update all the metrics in the DBs
         if thread_id in user_threads_ids:
-            user_thread = user_threads.get(threadid=thread_id)
+            print("updating existing thread metrics")
+            user_thread = Thread.objects.get(threadid=thread_id)
             user_thread.views = views
             user_thread.reposts = reposts
             user_thread.replies = replies
@@ -111,6 +112,7 @@ def update_threads(user_name):
             user_thread.norm_score = post_norm_score
             user_thread.save()
         else:
+            print("saving new thread")
             # get additional data
             url = thread["permalink"]
             username = thread["username"]
