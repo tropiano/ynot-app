@@ -15,10 +15,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Your command logic here
         self.stdout.write(self.style.SUCCESS("Analyzing user threads"))
+
         # get all the users
         users = User.objects.filter(has_threads=True)
 
         for usr in users:
+            self.stdout.write(self.style.SUCCESS("New user found"))
             print(f"User {usr.username}")
             update_threads(user_name=usr.username)
             update_threads_profile(user_name=usr.username)
@@ -100,7 +102,7 @@ def update_threads(user_name):
         post_score, post_norm_score = score(likes, replies, reposts, quotes, views)
 
         # update all the metrics in the DBs
-        if thread_id in user_threads_ids:
+        if int(thread_id) in user_threads_ids:
             print("updating existing thread metrics")
             user_thread = Thread.objects.get(threadid=thread_id)
             user_thread.views = views
@@ -113,6 +115,9 @@ def update_threads(user_name):
             user_thread.save()
         else:
             print("saving new thread")
+            print(thread_id)
+            print(type(thread_id))
+
             # get additional data
             url = thread["permalink"]
             username = thread["username"]
