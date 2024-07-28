@@ -147,7 +147,7 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         )
         data["trial_exp_date"] = user_join_date + timedelta(days=10)
 
-        if (timezone.now() - (user_join_date + timedelta(days=10))) > 0:
+        if timezone.now() > (user_join_date + timedelta(days=10)):
             data["trial_expired"] = True
         else:
             data["trial_expired"] = False
