@@ -1,9 +1,8 @@
-import pandas as pd
 from usermodel.models import User
 from mainapp.models.thread import Thread
 from mainapp.models.threads_profile import ThreadsProfile
 import requests as r
-from datetime import datetime
+from django.utils import timezone
 
 
 # define a function
@@ -156,5 +155,5 @@ def run():
         update_threads(user_name=usr.username)
         update_threads_profile(user_name=usr.username)
         # update the timestamp
-        usr.profile_last_update = datetime.now()
+        usr.profile_last_update = timezone.now()
         usr.save()
