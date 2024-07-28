@@ -110,6 +110,7 @@
         </svg>
           <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
           Get lifetime access
+          {{ user.date_joined|timesince }}
           </a>
       </button>
     </div>

@@ -19,7 +19,7 @@ class Command(BaseCommand):
         users = User.objects.filter(has_threads=True)
 
         for usr in users:
-            print(f"Analyzing {usr.username}")
+            print(f"User {usr.username}")
             update_threads(user_name=usr.username)
             update_threads_profile(user_name=usr.username)
             # update the timestamp
