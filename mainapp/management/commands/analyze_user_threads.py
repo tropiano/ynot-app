@@ -14,7 +14,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Your command logic here
-        self.stdout.write(self.style.SUCCESS("Analyzing user threads"))
+        self.stdout.write(
+            self.style.SUCCESS(f"{timezone.now()} - Analyzing user threads")
+        )
 
         # get all the users
         users = User.objects.filter(has_threads=True)
