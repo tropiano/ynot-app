@@ -67,6 +67,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=datetime.now() - relativedelta(years=1),
     )
 
+    is_free_trial = models.BooleanField(_("Free Trial"), default=True)
+
     is_email_confirmed = models.BooleanField(_("Email Confirmed"), default=False)
     date_joined = models.DateTimeField(_("Date Joined"), default=timezone.now)
 

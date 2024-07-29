@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from datetime import timedelta
 from django.utils import timezone
+import os
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -141,17 +142,14 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         keywords = user_queryset_kws.order_by("-score")
         data["keywords"] = keywords
 
-        # get the days to end of trial (7-10-14 days)
-        free_days = 10
-        user_join_date = (
-            User.objects.filter(threads_username=user_dashboard).first().date_joined
-        )
-        data["trial_exp_date"] = user_join_date + timedelta(days=free_days)
-
-        if timezone.now() > (user_join_date + timedelta(days=free_days)):
-            data["trial_expired"] = True
-        else:
+        if User.objects.filter(threads_username=user_dashboard).first().is_free_trial:
             data["trial_expired"] = False
+        else:
+            data["trial_expired"] = True
+
+        data["trial_exp_date"] = (
+            User.objects.filter(threads_username=user_dashboard).first().date_joined
+        ) + timedelta(days=int(os.environ["FREE_TRIAL_DAYS"]))
 
         # get the user last update
         data["profile_last_update"] = (
@@ -159,6 +157,7 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
             .first()
             .profile_last_update
         )
+
         threads_update_date = (
             User.objects.filter(threads_username=user_dashboard)
             .first()
