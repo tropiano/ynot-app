@@ -162,14 +162,18 @@
         <div class="mt-24">
           <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
             Topic Analysis
+            {% if old_update %}
+            <span class="font-normal lg:text-2xl text-3xl" > (partial results)</span>
+          {% endif %}
           </p>
+          {{ threads_last_update|timesince }}
           <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
             Last updated {{ user.threads_last_update|timesince }} ago
           </div>
         </div>
           <div id="tooltip-topics" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
             <p>
-            The topic Score is calculated summing up all tweets score about that topic. 
+            The topic Score is calculated summing up all posts score about that topic. 
             </p>
             <p>
               The Norm Score is the Score divided by the number of impressions. 

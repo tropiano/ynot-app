@@ -159,6 +159,14 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
             .first()
             .profile_last_update
         )
+        threads_update_date = (
+            User.objects.filter(threads_username=user_dashboard)
+            .first()
+            .threads_last_update
+        )
+
+        if timezone.now() > threads_update_date + timedelta(days=1):
+            data["old_update"] = True
 
         return data
 
