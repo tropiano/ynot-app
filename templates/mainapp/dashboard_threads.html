@@ -4,7 +4,7 @@
 <script>
   $(document).ready( function () {
 
-    DataTable.datetime('LLL');
+    DataTable.datetime('YYYY-MMM-DD');
     
     $('#tweetTable').DataTable(
       { 
@@ -242,7 +242,7 @@
             {% for post in object_list %}
                 <tr class="border-b items-left justify-left text-left">
                     <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-left justify-left text-left">
-                      {{ post.time }}
+                      {{ post.time|date:'Y-M-d' }}
                     </td>
                     <td scope="row" class="px-4 py-2 font-bold text-gray-600 lg:text-sm text-xl items-left justify-left text-left">
                       {{ post.text }}
