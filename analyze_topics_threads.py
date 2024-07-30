@@ -84,7 +84,7 @@ def read_threads(user_name):
 
 
 def calc_keywords(result):
-
+    
     thread_kws = []
 
     task_prefix = "Keywords: "
