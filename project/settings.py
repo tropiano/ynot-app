@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "encrypted_model_fields",
     # for local https
     "sslserver",
+    # humanize numbers
+    "django.contrib.humanize",
 ]
 
 MIDDLEWARE = [

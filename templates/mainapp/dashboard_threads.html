@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block body %}
 <script>
   $(document).ready( function () {
@@ -123,43 +124,46 @@
     </div>
     {% else %}
   </div>
-  <p class="font-semibold lg:text-4xl text-6xl text-center ">
-    Profile Stats
-  </p>
-  <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
-    Last updated {{ profile_last_update|timesince }} ago
-  </div>
-  <div class="grid grid-cols-1 mb-5 -mt-5 text-center mx-48">
-    <div class="grid grid-cols-1 lg:grid-cols-3 lg:text-2xl text-4xl text-center">
-      <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
-        <p class="m-5 text-gray-600">
-        Followers
-        <br>
-        <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ followers }}</span>
-        </p>
-      </div>
-      <div class="m-12 rounded-lg border-4 border-emerald-700  bg-white">
+  <div class="mx-16 border border-1 rounded-lg border-emerald-700">
+    <p class="font-semibold lg:text-4xl text-6xl text-center pt-8">
+      Profile Stats
+    </p>
+    <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+      Last updated {{ profile_last_update|timesince }} ago
+    </div>
+    <div class="grid grid-cols-1 mb-5 -mt-5 text-center mx-32">
+      <div class="grid grid-cols-1 lg:grid-cols-3 lg:text-2xl text-4xl text-center">
+        <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
           <p class="m-5 text-gray-600">
-            Likes
-            <br>
-          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ likes }}</span>
-          </p>
-      </div>
-      <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
-        <p class="m-5 text-gray-600">
-          Replies
+          Followers
           <br>
-          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
-        </p>
-      </div>
-    </div>    
+          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ followers }}</span>
+          </p>
+        </div>
+        <div class="m-12 rounded-lg border-4 border-emerald-700  bg-white">
+            <p class="m-5 text-gray-600">
+              Likes
+              <br>
+            <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ likes }}</span>
+            </p>
+        </div>
+        <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
+          <p class="m-5 text-gray-600">
+            Replies
+            <br>
+            <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
+          </p>
+        </div>
+      </div>    
+    </div>
   </div>
-  <div class="grid grid-cols-1 m-5 text-center text-2xl text-gray-800 ">
+  <div class="grid grid-cols-1 mt-8 text-center text-2xl text-gray-800 border border-1 
+  rounded-lg border-emerald-700 mx-16">
     <br>
     <br>
     {% if user.is_processed or user.username == '' %}
       {% if keywords %}
-        <div class="mt-24">
+        <div class="pt-8">
           <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
             Topic Analysis
             {% if old_update %}
@@ -181,7 +185,7 @@
             <div class="tooltip-arrow" data-popper-arrow></div>
           </div>
           <br>
-          <canvas height="300px" width="450px" id="myChart" class="m-2">
+          <canvas height="300px" width="450px" id="myChart" class="mt-16 mb-8 mx-4">
           </canvas>
       {% endif %}
     {% elif object_list %}
@@ -215,7 +219,8 @@
         </button>
     {% endif %}
   </div>
-  <div class="grid grid-cols-1 lg:grid-cols-2 text-center mt-24">
+  <div class="grid grid-cols-1 lg:grid-cols-2 text-center border border-1 
+  rounded-lg border-emerald-700 mx-16 mt-8">
     <div class="m-5">
       <p class="lg:text-2xl text-4xl font-semibold m-3" id="alltweets">
         All posts
@@ -234,7 +239,10 @@
                   Score
                 </th>
                 <th class="px-4 py-2">
-                  Normalized Score (x100)
+                  Views
+                </th>
+                <th class="px-4 py-2">
+                  Normalized Score
                 </th>
               </tr>
           </thead>
@@ -251,7 +259,10 @@
                       {{ post.score }}
                     </td>
                     <td class="px-4 py-2">
-                      {{ post.norm_score|floatformat:2 }}
+                      {{ post.views|intcomma }}
+                    </td>
+                    <td class="px-4 py-2">
+                      {{ post.norm_score|floatformat:2 }}%
                     </td>
                 </tr>
           {% endfor %}
@@ -274,7 +285,7 @@
                   Score
                 </th>
                 <th class="px-4 py-2">
-                  Normalized Score (x100)
+                  Normalized Score
                 </th>
               </tr>
           </thead>
@@ -289,7 +300,7 @@
                       {{ kw.score }}
                     </td>
                     <td class="px-4 py-2">
-                      {{ kw.norm_score }}
+                      {{ kw.norm_score }}%
                     </td>
                 </tr>
           {% endfor %}
