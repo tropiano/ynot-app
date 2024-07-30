@@ -18,6 +18,7 @@ class UserAdmin(DefaultUserAdmin):
                     "is_superuser",
                     "is_paid",
                     "is_processed",
+                    "is_free_trial",
                     "groups",
                     "user_permissions",
                 ),
