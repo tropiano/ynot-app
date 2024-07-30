@@ -12,3 +12,5 @@ class ThreadsProfile(models.Model):
     followers = models.IntegerField(default=0, null=True, blank=True)
     likes = models.IntegerField(default=0, null=True, blank=True)
     replies = models.IntegerField(default=0, null=True, blank=True)
+    reposts = models.IntegerField(default=0, null=True, blank=True)
+    quotes = models.IntegerField(default=0, null=True, blank=True)

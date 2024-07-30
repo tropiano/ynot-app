@@ -129,12 +129,16 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         bio = user_queryset.first().biography
         likes = user_queryset.first().likes
         replies = user_queryset.first().replies
+        reposts = user_queryset.first().reposts
+        quotes = user_queryset.first().quotes
+
         # last_update = user_queryset.first().profile_last_update
 
         data["followers"] = followers
         data["bio"] = bio
         data["likes"] = likes
         data["replies"] = replies
+        data["reposts_quotes"] = reposts + quotes
 
         # get the dashboard user keywords
         user_queryset_kws = KeywordsThreads.objects.filter(username=user_dashboard)

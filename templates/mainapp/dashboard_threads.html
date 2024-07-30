@@ -132,7 +132,7 @@
       Last updated {{ profile_last_update|timesince }} ago
     </div>
     <div class="grid grid-cols-1 mb-5 -mt-5 text-center mx-32">
-      <div class="grid grid-cols-1 lg:grid-cols-3 lg:text-2xl text-4xl text-center">
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:text-2xl text-4xl text-center">
         <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
           <p class="m-5 text-gray-600">
           Followers
@@ -152,6 +152,13 @@
             Replies
             <br>
             <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
+          </p>
+        </div>
+        <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
+          <p class="m-5 text-gray-600">
+            Reposts/Quotes
+            <br>
+            <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ reposts_quotes }}</span>
           </p>
         </div>
       </div>    

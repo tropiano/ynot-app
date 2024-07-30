@@ -170,7 +170,13 @@ def update_threads_profile(user_name):
             likes = d["total_value"]["value"]
         if d["name"] == "replies":
             replies = d["total_value"]["value"]
+        if d["name"] == "reposts":
+            reposts = d["total_value"]["value"]
+        if d["name"] == "quotes":
+            quotes = d["total_value"]["value"]
 
     user_profile.update(followers=followers)
     user_profile.update(likes=likes)
     user_profile.update(replies=replies)
+    user_profile.update(reposts=reposts)
+    user_profile.update(quotes=quotes)
