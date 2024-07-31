@@ -122,7 +122,7 @@
           </a>
       </button>
     </div>
-    {% else %}
+    {% if not trial_expired %}
   </div>
   <div class="mx-16 border border-1 rounded-lg border-emerald-700">
     <p class="font-semibold lg:text-4xl text-6xl text-center pt-8">
@@ -215,12 +215,11 @@
       </div>
         Analyzing your Topics...
       {% else %}
-        <h2 class="text-2xl font-semibold text-center">
-            Oops, something went wrong...
+        <h2 class="text-2xl font-normal text-center mt-8 mb-4">
+            Either you have not written a post yet or something went wrong...
         </h2>
-        <button type="button" class="text-white text-xl bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
           <a href="{% url 'threads_start_oauth_flow' %}" 
-          target="_blank" rel="noopener noreferrer">
+          target="_blank" rel="noopener noreferrer" class="underline mb-8">
             Refresh Threads connection
           </a>
         </button>
@@ -325,5 +324,6 @@
     </div>
     {% endif %}
   </div>    
+  {% endif %}
 </div>
 {% endblock %}
