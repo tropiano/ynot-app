@@ -1,8 +1,9 @@
 from mainapp.forms.upload import DocumentForm, FileFieldForm
-from mainapp.scripts.analyze_user_tweets import score, write_db
+
+# from mainapp.scripts.analyze_user_tweets import score, write_db
+# import pandas as pd
 from django.shortcuts import render
 from django.shortcuts import redirect
-import pandas as pd
 from django.conf import settings
 from usermodel.models import User
 from mainapp.models.upload import Document
@@ -44,6 +45,8 @@ def success(request):
 
 def init_db(request, files):
 
+    # disable for now
+    return
     # print(os.environ["MEDIA_ROOT"])
     # print(file_path)
     df_list = []
