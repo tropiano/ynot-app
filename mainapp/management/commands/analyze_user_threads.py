@@ -43,7 +43,7 @@ def score(likes, replies, reposts, quotes, views):
     return score, (100.0 * score) / max(views, 1)
 
 
-def update_threads(user_name):
+def update_threads(user_name, on_login=False):
 
     # get the user long token
     long_token = User.objects.get(username=user_name).threads_token
@@ -82,6 +82,37 @@ def update_threads(user_name):
     for thread in threads_data:
         # define the API url to call
         thread_id = thread["id"]
+
+        # if on login just save the threads data and not the insight
+        if on_login:
+            # save only the new threads
+            if int(thread_id) not in user_threads_ids:
+                print("saving new thread")
+                print(thread_id)
+                print(type(thread_id))
+
+                # get additional data
+                url = thread["permalink"]
+                username = thread["username"]
+                text = thread["text"]
+                time = thread["timestamp"]
+                short_code = thread["shortcode"]
+                is_quote = thread["is_quote_post"]
+
+                new_thread = Thread(
+                    threadid=thread_id,
+                    url=url,
+                    username=username,
+                    text=text,
+                    time=time,
+                    short_code=short_code,
+                    is_quote=is_quote,
+                )
+                new_thread.save()
+
+            # if not a new thread continue to the next one
+            continue
+
         url_thread_insight = f"https://graph.threads.net/v1.0/{thread_id}/insights?metric={metrics}&access_token={long_token}"
         response = r.get(url_thread_insight)
         data = response.json()["data"]

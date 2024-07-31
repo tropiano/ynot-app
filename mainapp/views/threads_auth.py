@@ -51,7 +51,7 @@ def authorize(request):
     # print(auth_code)
     user_name = save_long_token(request, auth_code)
     save_user_info(user_name)
-    update_threads(user_name)
+    update_threads(user_name, on_login=True)
 
     return redirect("dashboard_threads", user=user_name)
 

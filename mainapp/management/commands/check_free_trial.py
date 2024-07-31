@@ -31,3 +31,7 @@ class Command(BaseCommand):
                 # udpate the user and set the free trial to expired
                 usr.is_free_trial = False
                 usr.save()
+            else:
+                # make sure that the free trial flag is True
+                usr.is_free_trial = True
+                usr.save()

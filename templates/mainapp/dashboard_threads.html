@@ -122,8 +122,9 @@
           </a>
       </button>
     </div>
-    {% if not trial_expired %}
+    {% endif %}
   </div>
+  {% if user.is_paid or not trial_expired %}
   <div class="mx-16 border border-1 rounded-lg border-emerald-700">
     <p class="font-semibold lg:text-4xl text-6xl text-center pt-8">
       Profile Stats
@@ -322,8 +323,7 @@
         Analyzing your Topics...
       {% endif %}
     </div>
-    {% endif %}
-  </div>    
-  {% endif %}
+  </div>
+  {% endif %}    
 </div>
 {% endblock %}
