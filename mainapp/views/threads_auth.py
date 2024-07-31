@@ -33,6 +33,11 @@ def authorize(request):
     # user_name = request.user.username
     # print(user_name)
 
+    # check if the user canceled the authorization
+    error = request.GET.get("error", None)
+    if error:
+        return redirect("home")
+
     # check the state
     state = request.session.pop("oauth_state", None)
     # print(state)
