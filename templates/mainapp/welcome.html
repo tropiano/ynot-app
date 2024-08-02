@@ -57,17 +57,17 @@
     and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
-    <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-8">
+    <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
       <button type="button" class="px-20 py-4 lg:px-10 lg:py-2 btn content-center lg:align-left justify-left 
-      text-white text-5xl lg:text-2xl bg-emerald-800 border hover:bg-emerald-700 border-4 border-emerald-800 
-      focus:outline-none focus:ring-blue-300 font-medium rounded-2xl px-5 py-2.5 text-center inline-flex 
-      items-center">
-      <svg class="w-7 h-7 me-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rocket-takeoff-fill" viewBox="0 0 16 16">
+      text-white text-7xl lg:text-2xl bg-emerald-800 border hover:bg-emerald-700 border-4 border-emerald-800 
+      focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-center inline-flex 
+      items-center mt-2 px-32 py-8">
+      <svg class="lg:w-6 lg:h-6 lg:me-2 w-16 h-16 me-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rocket-takeoff-fill" viewBox="0 0 16 16">
         <path d="M12.17 9.53c2.307-2.592 3.278-4.684 3.641-6.218.21-.887.214-1.58.16-2.065a3.6 3.6 0 0 0-.108-.563 2 2 0 0 0-.078-.23V.453c-.073-.164-.168-.234-.352-.295a2 2 0 0 0-.16-.045 4 4 0 0 0-.57-.093c-.49-.044-1.19-.03-2.08.188-1.536.374-3.618 1.343-6.161 3.604l-2.4.238h-.006a2.55 2.55 0 0 0-1.524.734L.15 7.17a.512.512 0 0 0 .433.868l1.896-.271c.28-.04.592.013.955.132.232.076.437.16.655.248l.203.083c.196.816.66 1.58 1.275 2.195.613.614 1.376 1.08 2.191 1.277l.082.202c.089.218.173.424.249.657.118.363.172.676.132.956l-.271 1.9a.512.512 0 0 0 .867.433l2.382-2.386c.41-.41.668-.949.732-1.526zm.11-3.699c-.797.8-1.93.961-2.528.362-.598-.6-.436-1.733.361-2.532.798-.799 1.93-.96 2.528-.361s.437 1.732-.36 2.531Z"/>
         <path d="M5.205 10.787a7.6 7.6 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925"/>
       </svg>
         <a href="{% url 'threads_start_oauth_flow' %}" target="_blank" rel="noopener noreferrer">
-            Go viral now!
+            Test it Free!
           </a>
       </button>
     </div>
@@ -166,8 +166,8 @@
     </div>
     </div>
     <div class="text-center items-center py-10 my-20 mx-10">
-      <video class="w-full rounded-lg border-4 border-emerald-700" preload="metadata" controls muted>
-        <source src="{% static 'mainapp/demo_threads_010824.mp4' %}#t=0.5">
+      <video class="w-full rounded-lg shadow shadow-lg border border-2 border-emerald-700" preload="metadata" controls muted>
+        <source src="{% static 'mainapp/demo_threads_010824.mp4' %}#t=1.5">
         Your browser does not support the video tag.
       </video>
 
@@ -184,6 +184,9 @@
               Start now
             </a>
           </button>
+          <div class="text-center text-gray-500 dark:text-white">
+            Only 6 spots left at this price 
+          </div>
         </div>
         <div class="w-full max-w-sm p-4 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  shadow-2xl  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
           <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime access</h5>
@@ -197,6 +200,9 @@
               Start now
             </a>
           </button>
+          <div class="text-center text-gray-500 dark:text-white">
+            Only 8 spots left at this price 
+          </div>
         </div>
       </div>
       
