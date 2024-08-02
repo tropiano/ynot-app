@@ -26,10 +26,14 @@
           "order": [],
         },
         {targets: 1,
-          render: DataTable.render.ellipsis( 30, true ),
+          render: DataTable.render.ellipsis( 80, true ),
         }]
       },
     );
+    
+    $('#tweetTable').on('click', 'tbody td', function() {
+      window.location.href = $(this).data('href');
+    });
 
     $('#kwTable').DataTable(
       { 
@@ -226,11 +230,17 @@
         </button>
     {% endif %}
   </div>
-  <div class="grid grid-cols-1 lg:grid-cols-2 text-center border border-1 
+  <div class="grid grid-cols-1 text-center border border-1 
   rounded-lg border-emerald-700 mx-16 mt-8">
     <div class="m-5">
       <p class="lg:text-2xl text-4xl font-semibold m-3" id="alltweets">
         All posts
+      </p>
+      <p class="lg:text-xl text-3xl font-normal text-gray-500" id="alltweets">
+        Total {{ total_views|intcomma }} views
+      </p>
+      <p class="lg:text-xl text-3xl font-normal text-gray-500" id="alltweets">
+        Average {{ avg_views }} views/day
       </p>
       <br>
       <table id="tweetTable" class="w-full row-border text-large text-left justify-left items-left text-gray-700 m-5">
@@ -259,8 +269,9 @@
                     <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-left justify-left text-left">
                       {{ post.time|date:'Y-M-d' }}
                     </td>
-                    <td scope="row" class="px-4 py-2 font-bold text-gray-600 lg:text-sm text-xl items-left justify-left text-left">
-                      {{ post.text }}
+                    <td data-href="{{ post.url }}" scope="row" 
+                    class="px-4 py-2 cursor-pointer font-bold text-gray-600 lg:text-sm text-xl items-left justify-left text-left">
+                       {{ post.text }}
                     </td>
                     <td class="px-4 py-2">
                       {{ post.score }}

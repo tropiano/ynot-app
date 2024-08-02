@@ -11,6 +11,9 @@ from django.core.exceptions import PermissionDenied
 from datetime import timedelta
 from django.utils import timezone
 import os
+from django.db.models import Sum
+from django.db.models import Avg, Count
+from django.db.models.functions import TruncDate
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -170,6 +173,21 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
 
         if timezone.now() > threads_update_date + timedelta(days=1):
             data["old_update"] = True
+
+        # calculate the total views
+        total_views = Thread.objects.aggregate(total=Sum("views"))["total"]
+        data["total_views"] = total_views
+
+        # calculate average views per day of posting
+        daily_counts = (
+            Thread.objects.annotate(day=TruncDate("time"))
+            .values("day")
+            .annotate(sum=Sum("views"))
+            .aggregate(average=Avg("sum"))
+        )
+
+        average_count = daily_counts["average"]
+        data["avg_views"] = int(average_count)
 
         return data
 
