@@ -50,7 +50,7 @@
       },
     );
     
-  Chart.defaults.font.size = 14;  
+  Chart.defaults.font.size = 18;  
   
   const ctx = document.getElementById('myChart');
   var kw_labels = []
@@ -233,17 +233,17 @@
   <div class="grid grid-cols-1 text-center border border-1 
   rounded-lg border-emerald-700 mx-16 mt-8">
     <div class="m-5">
-      <p class="lg:text-6xl text-8xl font-semibold m-3 align-left text-left font-kanit" id="alltweets">
+      <p class="lg:text-6xl text-8xl font-semibold m-3 lg:align-left lg:text-left font-kanit" id="alltweets">
         All posts
       </p>
-      <p class="lg:text-2xl text-4xl font-normal text-gray-500 ml-3 align-left text-left font-kanit" id="alltweets">
+      <p class="lg:text-2xl text-4xl font-normal text-gray-500 ml-3 lg:align-left lg:text-left font-kanit" id="alltweets">
         Total {{ total_views|intcomma }} views
       </p>
-      <p class="lg:text-2xl text-4xl font-normal text-gray-500 ml-3  align-left text-left font-kanit" id="alltweets">
+      <p class="lg:text-2xl text-4xl font-normal text-gray-500 ml-3  lg:align-left lg:text-left font-kanit" id="alltweets">
         Average {{ avg_views }} views/day
       </p>
       <br>
-      <table id="tweetTable" class="w-full row-border text-xl text-left justify-left items-left 
+      <table id="tweetTable" class="w-full row-border text-xl lg:text-left lg:justify-left items-left 
       text-gray-700 m-5 font-kanit">
           <thead>
               <tr class="border-b text-center items-left justify-left">                
