@@ -50,7 +50,7 @@
       },
     );
     
-  Chart.defaults.font.size = 18;  
+  Chart.defaults.font.size = 14;  
   
   const ctx = document.getElementById('myChart');
   var kw_labels = []
@@ -101,7 +101,7 @@
   
 </script>
 
-<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center">
+<div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center font-kanit">
   <div class="inline-flex w-full justify-between">
     <div class="text-center px-16 py-20 align-center justify-center">
       {% if user.username %}
@@ -130,10 +130,10 @@
   </div>
   {% if user.is_paid or not trial_expired %}
   <div class="mx-16 border border-1 rounded-lg border-emerald-700">
-    <p class="font-semibold lg:text-4xl text-6xl text-center pt-8">
+    <p class="font-semibold lg:text-6xl text-6xl text-center pt-8">
       Profile Stats
     </p>
-    <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+    <div class="text-center lg:text-xl text-2xl m-3 text-gray-600">
       Last updated {{ profile_last_update|timesince }} ago
     </div>
     <div class="grid grid-cols-1 mb-5 -mt-5 text-center mx-32">
@@ -142,28 +142,28 @@
           <p class="m-5 text-gray-600">
           Followers
           <br>
-          <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ followers }}</span>
+          <span class="font-semibold lg:text-5xl text-7xl text-gray-800"> {{ followers }}</span>
           </p>
         </div>
         <div class="m-12 rounded-lg border-4 border-emerald-700  bg-white">
             <p class="m-5 text-gray-600">
               Likes
               <br>
-            <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ likes }}</span>
+            <span class="font-semibold lg:text-5xl text-7xl text-gray-800"> {{ likes }}</span>
             </p>
         </div>
         <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
           <p class="m-5 text-gray-600">
             Replies
             <br>
-            <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
+            <span class="font-semibold lg:text-5xl text-7xl text-gray-800"> {{ replies }}</span>
           </p>
         </div>
         <div class="m-12 rounded-lg border-4 border-emerald-700 bg-white">
           <p class="m-5 text-gray-600">
             Reposts/Quotes
             <br>
-            <span class="font-bold lg:text-5xl text-7xl text-gray-800"> {{ reposts_quotes }}</span>
+            <span class="font-semibold lg:text-5xl text-7xl text-gray-800"> {{ reposts_quotes }}</span>
           </p>
         </div>
       </div>    
@@ -175,15 +175,16 @@
     <br>
     {% if user.is_processed or user.username == '' %}
       {% if keywords %}
-        <div class="pt-8">
-          <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-4xl text-6xl">
+        <div class="pt-4">
+          <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-6xl 
+          lg:text-left lg:align-left text-6xl m-6">
             Topic Analysis
             {% if old_update %}
-            <span class="font-normal lg:text-2xl text-3xl" > (partial results)</span>
+            <span class="font-normal lg:text-3xl lg:text-left lg:align-left text-3xl " > (partial results)</span>
           {% endif %}
           </p>
           {{ threads_last_update|timesince }}
-          <div class="text-center lg:text-sm text-2xl m-3 text-gray-600">
+          <div class="text-center lg:text-xl text-2xl m-6 text-gray-600 lg:text-left lg:align-left">
             Last updated {{ user.threads_last_update|timesince }} ago
           </div>
         </div>
@@ -231,7 +232,7 @@
     {% endif %}
   </div>
   <div class="grid grid-cols-1 text-center border border-1 
-  rounded-lg border-emerald-700 mx-16 mt-8">
+  rounded-lg border-emerald-700 mx-16 mt-4">
     <div class="m-5">
       <p class="lg:text-6xl text-8xl font-semibold m-3 lg:align-left lg:text-left font-kanit" id="alltweets">
         All posts
@@ -271,7 +272,7 @@
                       {{ post.time|date:'Y-M-d' }}
                     </td>
                     <td data-href="{{ post.url }}" scope="row" 
-                    class="px-4 py-2 cursor-pointer font-bold text-gray-600 lg:text-sm text-xl items-left justify-left text-left">
+                    class="px-4 py-2 cursor-pointer text-gray-600 text-xl items-left justify-left text-left">
                        {{ post.text }}
                     </td>
                     <td class="px-4 py-2">
