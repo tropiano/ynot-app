@@ -31,7 +31,7 @@
     );
     
     $('#tweetTable').on('click', 'tbody td', function() {
-      window.location.href = $(this).data('href');
+      window.open($(this).data("href"), "_blank");
     });
 
     $('#kwTable').DataTable(
@@ -271,7 +271,7 @@
                     <td scope="row" class="px-4 py-2 text-gray-600 text-sm items-left justify-left text-left">
                       {{ post.time|date:'Y-M-d' }}
                     </td>
-                    <td data-href="{{ post.url }}" target="_blank" rel="noopener noreferrer" scope="row" 
+                    <td data-href="{{ post.url }}" scope="row" 
                     class="px-4 py-2 cursor-pointer text-gray-600 text-xl items-left justify-left text-left">
                        {{ post.text }}
                     </td>
