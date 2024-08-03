@@ -110,7 +110,7 @@
       </h2>
       {% endif %}
     </div>
-    {% if not user.is_paid %}
+    {% if not user.is_paid and not user.is_staff%}
     <div class="text-center px-16 py-20 justify-right">
       <button type="button" class="text-white text-xl bg-emerald-700 hover:bg-emerald-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
@@ -128,7 +128,7 @@
     </div>
     {% endif %}
   </div>
-  {% if user.is_paid or not trial_expired %}
+  {% if user.is_paid or not trial_expired or user.is_staff %}
   <div class="mx-16 border border-1 rounded-lg border-emerald-700">
     <p class="font-semibold lg:text-6xl text-8xl text-center pt-8">
       Profile Stats
