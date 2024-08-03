@@ -83,6 +83,10 @@ def update_threads(user_name, on_login=False):
         # define the API url to call
         thread_id = thread["id"]
 
+        # check if it's a repost (skip)
+        if "text" not in thread:
+            continue
+
         # if on login just save the threads data and not the insight
         if on_login:
             # save only the new threads
