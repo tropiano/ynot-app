@@ -10,15 +10,14 @@
     $('#tweetTable').DataTable(
       { 
         layout: {
-          topStart: 'search',
-          topEnd: null,
+          topStart: 'info',
           bottom: 'paging',
           bottomStart: null,
           bottomEnd: null
       },
         info: false,
         pagingType: 'simple_numbers',
-        order: [[2, 'desc']],
+        order: [[0, 'desc']],
         pageLength: 20,
         columnDefs: [ {
           "targets" : 'no-sort',
@@ -50,8 +49,9 @@
       },
     );
     
-  Chart.defaults.font.size = 14;  
-  
+  Chart.defaults.font.size = 20;  
+  Chart.defaults.font.family = 'Kanit';
+
   const ctx = document.getElementById('myChart');
   var kw_labels = []
   var kw_score = [] 
@@ -130,7 +130,7 @@
   </div>
   {% if user.is_paid or not trial_expired %}
   <div class="mx-16 border border-1 rounded-lg border-emerald-700">
-    <p class="font-semibold lg:text-6xl text-6xl text-center pt-8">
+    <p class="font-semibold lg:text-6xl text-8xl text-center pt-8">
       Profile Stats
     </p>
     <div class="text-center lg:text-xl text-2xl m-3 text-gray-600">
@@ -177,7 +177,7 @@
       {% if keywords %}
         <div class="pt-4">
           <p data-tooltip-target="tooltip-topics" class="font-semibold lg:text-6xl 
-          lg:text-left lg:align-left text-6xl m-6">
+          lg:text-left lg:align-left text-8xl m-6">
             Topic Analysis
             {% if old_update %}
             <span class="font-normal lg:text-3xl lg:text-left lg:align-left text-3xl " > (partial results)</span>
@@ -290,7 +290,7 @@
       </table>
     </div>
     <div class="m-5 mb-10">
-      <p class="lg:text-2xl text-4xl font-semibold m-3 font-kanit">
+      <p class="lg:text-6xl lg:text-left text-8xl font-semibold m-3 font-kanit">
         All Topics
       </p>
       <br>
@@ -312,14 +312,14 @@
           <tbody>
             {% for kw in keywords %}
                 <tr class="border-b items-left justify-left text-left">
-                    <td scope="row" class="px-4 py-2 text-gray-600 font-semibold 
-                    items-left justify-left text-left lg:text-sm text-xl">
+                    <td scope="row" class="px-4 py-2 text-gray-600 font-normal 
+                    items-left justify-left text-left text-xl">
                       {{ kw.word }}
                     </td>
-                    <td class="px-4 py-2">
+                    <td class="px-4 py-2 text-xl">
                       {{ kw.score }}
                     </td>
-                    <td class="px-4 py-2">
+                    <td class="px-4 py-2 text-xl">
                       {{ kw.norm_score }}%
                     </td>
                 </tr>
