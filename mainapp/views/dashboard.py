@@ -177,12 +177,15 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         data["threads_last_update"] = threads_update_date
 
         # calculate the total views
-        total_views = Thread.objects.aggregate(total=Sum("views"))["total"]
+        total_views = Thread.objects.filter(username=user_dashboard).aggregate(
+            total=Sum("views")
+        )["total"]
         data["total_views"] = total_views
 
         # calculate average views per day of posting
         daily_counts = (
-            Thread.objects.annotate(day=TruncDate("time"))
+            Thread.objects.filter(username=user_dashboard)
+            .annotate(day=TruncDate("time"))
             .values("day")
             .annotate(sum=Sum("views"))
             .aggregate(average=Avg("sum"))
