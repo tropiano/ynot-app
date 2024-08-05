@@ -174,6 +174,8 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         if timezone.now() > threads_update_date + timedelta(days=1):
             data["old_update"] = True
 
+        data["threads_last_update"] = threads_update_date
+
         # calculate the total views
         total_views = Thread.objects.aggregate(total=Sum("views"))["total"]
         data["total_views"] = total_views
