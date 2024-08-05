@@ -88,8 +88,11 @@ def read_threads_users():
     Only connected to Threads
     """
 
-    print("Selecting all paid thread users")
-    all_users_threads = User.objects.filter(has_threads=True, is_paid=True).all()
+    print("Selecting all paid or free trial thread users")
+    all_users_threads = (
+        User.objects.filter(has_threads=True, is_paid=True)
+        | User.objects.filter(has_threads=True, is_free_trial=True)
+    ).all()
 
     # loop and save username
     users_no_topics = [usr for usr in all_users_threads]
@@ -99,7 +102,7 @@ def read_threads_users():
 
 def read_threads(user_name):
 
-    # select latest 10 threads
+    # select latest 100 threads
     posts = Thread.objects.filter(username=user_name).all().order_by("-time")[:100]
 
     return posts
