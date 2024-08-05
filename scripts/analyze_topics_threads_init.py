@@ -6,6 +6,8 @@ from mainapp.models import ThreadsProfile
 from mainapp.models import KeywordsThreads
 from usermodel.models import User
 from mainapp.models import Thread
+from django.utils import timezone
+
 
 API_URL = "https://y7ypc5d3xkyt8hcg.us-east-1.aws.endpoints.huggingface.cloud"
 headers = {
@@ -59,7 +61,7 @@ def read_latest_users():
         topics = KeywordsThreads.objects.filter(username=user_name)
         if topics:
             continue
-        users_no_topics.append(user_name)
+        users_no_topics.append(usr)
 
     return users_no_topics
 
@@ -150,7 +152,8 @@ def run():
     print(all_users)
     if all_users:
         start_endpoint()
-        for user_name in all_users:
+        for user in all_users:
+            user_name = user.threads_username
             print(f"Init script - Processing {user_name}")
             # extract user posts
             user_posts = read_threads(user_name)
@@ -160,5 +163,11 @@ def run():
             print(f"Calculated {user_name} Topics scores")
             # write on the DB
             write_db(user_kws_score, user_kws_normscore, user_name)
+
+            # update the threads last update
+            user.threads_last_update = timezone.now()
+            # update user as processed
+            user.is_processed = True
+            user.save()
         # pause endpoint after processing (save costs)
         pause_endpoint()

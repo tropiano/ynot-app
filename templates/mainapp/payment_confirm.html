@@ -9,16 +9,8 @@
   </h1>
   
   <p class="text-xl text-center  m-7 hover:underline">
-    <a href="{% url 'upload' %}">
-      Upload your data to start
-    </a>
-  </p>
-
-  or
-
-  <p class="text-xl text-center  m-7 hover:underline">
-    <a href="{% url 'dashboard' user.username %}">
-      Check your Tweets score in the Dashboard
+    <a href="{% url 'dashboard_threads' user.threads_username %}">
+      Check your Topics in the Dashboard
     </a>
   </p>
   

@@ -53,6 +53,8 @@ class Command(BaseCommand):
                 write_db(user_kws_score, user_kws_normscore, user_name)
                 # update the threads last update
                 user.threads_last_update = timezone.now()
+                # update user as processed
+                user.is_processed = True
                 user.save()
 
             # pause endpoint after processing (save costs)
