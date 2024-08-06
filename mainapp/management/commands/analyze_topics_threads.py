@@ -102,10 +102,12 @@ def read_threads_users():
     return users_no_topics
 
 
-def read_threads(user_name):
+def read_threads(user_name, max_threads=100):
 
     # select latest 100 threads
-    posts = Thread.objects.filter(username=user_name).all().order_by("-time")[:100]
+    posts = (
+        Thread.objects.filter(username=user_name).all().order_by("-time")[:max_threads]
+    )
 
     return posts
 
