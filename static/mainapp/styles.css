@@ -1452,6 +1452,10 @@ input:checked + .toggle-bg {
   margin-left: 1rem;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -2787,6 +2791,14 @@ input:checked + .toggle-bg {
 }
 
 @media (min-width: 1024px) {
+  .lg\:-right-12 {
+    right: -3rem;
+  }
+
+  .lg\:-right-24 {
+    right: -6rem;
+  }
+
   .lg\:m-1 {
     margin: 0.25rem;
   }

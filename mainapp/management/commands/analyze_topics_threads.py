@@ -155,11 +155,12 @@ def calc_keywords(result):
     # aggregate the keywords score
     kws_normscore_agg = dict()
     kws_score_agg = dict()
+    # TODO: does it make sense to add and not divide by number of threads?
     for kw, scores in kws_normscore.items():
-        kws_normscore_agg[kw] = sum(scores)
+        kws_normscore_agg[kw] = sum(scores) / len(scores)
 
     for kw, scores in kws_score.items():
-        kws_score_agg[kw] = sum(scores)
+        kws_score_agg[kw] = sum(scores) / len(scores)
 
     return kws_score_agg, kws_normscore_agg
 
