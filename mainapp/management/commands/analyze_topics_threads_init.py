@@ -63,7 +63,7 @@ class Command(BaseCommand):
 
 def read_latest_users():
     """
-    Get all paid users
+    Get all users
     Only connected to Threads
     That have no analysis yet
     """
