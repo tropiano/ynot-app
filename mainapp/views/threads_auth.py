@@ -1,13 +1,13 @@
 from django.shortcuts import redirect
 from usermodel.models import User
 from mainapp.models.threads_profile import ThreadsProfile
-from mainapp.models.thread import Thread
 from mainapp.management.commands.analyze_user_threads import update_threads
 import requests as r
 import os
 import secrets
 from django.shortcuts import redirect
 from django.contrib.auth import login
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 threads_app_secret = os.getenv("THREADS_APP_SECRET")
 threads_app_id = os.getenv("THREADS_APP_ID")
@@ -30,9 +30,6 @@ def start_oauth_flow(request):
 
 def authorize(request):
 
-    # user_name = request.user.username
-    # print(user_name)
-
     # check if the user canceled the authorization
     error = request.GET.get("error", None)
     if error:
@@ -40,11 +37,7 @@ def authorize(request):
 
     # check the state
     state = request.session.pop("oauth_state", None)
-    # print(state)
-    # print(request)
-    # print(request.GET.get("state"))
     wrong_state = state is None or state != request.GET.get("state")
-    # print(wrong_state)
 
     # if no user or wrong state go back to login
     if wrong_state:  # not user_name or
@@ -53,10 +46,11 @@ def authorize(request):
     # get the short access token
     # get the long access token and save
     auth_code = request.GET.get("code")
-    # print(auth_code)
-    user_name = save_long_token(request, auth_code)
+
+    # save the user long token and user info
+    user_name, email = save_long_token(request, auth_code)
     save_user_info(user_name)
-    update_threads(user_name, on_login=True)
+    update_threads(user_name, email, on_login=True)
 
     return redirect("dashboard_threads", user=user_name)
 
@@ -90,34 +84,52 @@ def save_long_token(request, auth_code):
     # need to get the username from the API
     url_user_profile = f"https://graph.threads.net/v1.0/{user_id}?fields=id,username&access_token={long_token}"
     response = r.get(url_user_profile)
-    print(response.json())
+    # print(response.json())
     threads_username = response.json()["username"]
 
     # check if the user exists already
     # with the same username
+    # get the user email from the session
+    email = request.session.pop("email", None)
+    # print(email)
+    # print(request.session)
+
+    # try to get the user by the email first
+    # if not found, create a new one
+    # the threads username will be rewritten
     try:
-        user = User.objects.get(username=threads_username)
-        # update the user
+        # update the user if it already exists
+        user = User.objects.get(email=email)
         user.has_threads = True
         user.threads_token = long_token
+        user.threads_username = threads_username
         user.save()
-    except:
+    except ObjectDoesNotExist:
+        # if user does not exist
         # create a new user with threads login
         user = User(
-            username=threads_username, has_threads=True, threads_token=long_token
+            threads_username=threads_username,
+            has_threads=True,
+            threads_token=long_token,
+            email=email,
         )
         user.save()
+    except MultipleObjectsReturned:
+        # stop doing anything and return to login
+        # log/print an error because there are multiple users with this email
+        print("Multiple users detected-not logging in")
+        return redirect("home")
 
     # log the user in
     login(request, user)
 
-    return threads_username
+    return threads_username, email
 
 
 def save_user_info(user_name):
 
     # get the token to make all requests
-    long_token = User.objects.filter(username=user_name).first().threads_token
+    long_token = User.objects.filter(threads_username=user_name).first().threads_token
 
     # get the threads username and bio
     url_user_profile = f"https://graph.threads.net/v1.0/me?fields=id,username,threads_profile_picture_url,threads_biography&access_token={long_token}"

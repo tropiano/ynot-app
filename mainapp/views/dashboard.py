@@ -89,7 +89,7 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # filter by the user first
-        username = self.request.user.username
+        username = self.request.user.threads_username
         # print(username)
         user_dashboard = self.kwargs["user"]
 

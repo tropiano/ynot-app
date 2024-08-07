@@ -57,38 +57,44 @@
     and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
+    
     <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
-      <button type="button" class="px-20 py-4 lg:px-10 lg:py-2 btn content-center lg:align-left justify-left 
-      text-white text-7xl lg:text-2xl bg-emerald-800 border hover:bg-emerald-700 border-4 border-emerald-800 
-      focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-center inline-flex 
-      items-center mt-2 px-32 py-8">
-      <svg class="lg:w-6 lg:h-6 lg:me-2 w-16 h-16 me-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rocket-takeoff-fill" viewBox="0 0 16 16">
-        <path d="M12.17 9.53c2.307-2.592 3.278-4.684 3.641-6.218.21-.887.214-1.58.16-2.065a3.6 3.6 0 0 0-.108-.563 2 2 0 0 0-.078-.23V.453c-.073-.164-.168-.234-.352-.295a2 2 0 0 0-.16-.045 4 4 0 0 0-.57-.093c-.49-.044-1.19-.03-2.08.188-1.536.374-3.618 1.343-6.161 3.604l-2.4.238h-.006a2.55 2.55 0 0 0-1.524.734L.15 7.17a.512.512 0 0 0 .433.868l1.896-.271c.28-.04.592.013.955.132.232.076.437.16.655.248l.203.083c.196.816.66 1.58 1.275 2.195.613.614 1.376 1.08 2.191 1.277l.082.202c.089.218.173.424.249.657.118.363.172.676.132.956l-.271 1.9a.512.512 0 0 0 .867.433l2.382-2.386c.41-.41.668-.949.732-1.526zm.11-3.699c-.797.8-1.93.961-2.528.362-.598-.6-.436-1.733.361-2.532.798-.799 1.93-.96 2.528-.361s.437 1.732-.36 2.531Z"/>
-        <path d="M5.205 10.787a7.6 7.6 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925"/>
-      </svg>
-        <a href="{% url 'threads_start_oauth_flow' %}" target="_blank" rel="noopener noreferrer">
-            Test it Free!
-          </a>
-      </button>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-6">
+          <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 
+          text-xl rounded-2xl w-auto" placeholder="Your Email here" required />
+        </div> 
+        <button type="sumbit" class="px-20 py-4 lg:px-10 lg:py-2 btn content-center lg:align-left justify-left 
+        text-white text-7xl lg:text-2xl bg-emerald-800 border hover:bg-emerald-700 border-4 border-emerald-800 
+        focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-center inline-flex 
+        items-center mt-2 px-32 py-8">
+        <svg class="lg:w-6 lg:h-6 lg:me-2 w-16 h-16 me-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rocket-takeoff-fill" viewBox="0 0 16 16">
+          <path d="M12.17 9.53c2.307-2.592 3.278-4.684 3.641-6.218.21-.887.214-1.58.16-2.065a3.6 3.6 0 0 0-.108-.563 2 2 0 0 0-.078-.23V.453c-.073-.164-.168-.234-.352-.295a2 2 0 0 0-.16-.045 4 4 0 0 0-.57-.093c-.49-.044-1.19-.03-2.08.188-1.536.374-3.618 1.343-6.161 3.604l-2.4.238h-.006a2.55 2.55 0 0 0-1.524.734L.15 7.17a.512.512 0 0 0 .433.868l1.896-.271c.28-.04.592.013.955.132.232.076.437.16.655.248l.203.083c.196.816.66 1.58 1.275 2.195.613.614 1.376 1.08 2.191 1.277l.082.202c.089.218.173.424.249.657.118.363.172.676.132.956l-.271 1.9a.512.512 0 0 0 .867.433l2.382-2.386c.41-.41.668-.949.732-1.526zm.11-3.699c-.797.8-1.93.961-2.528.362-.598-.6-.436-1.733.361-2.532.798-.799 1.93-.96 2.528-.361s.437 1.732-.36 2.531Z"/>
+          <path d="M5.205 10.787a7.6 7.6 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925"/>
+        </svg>
+          Test it for Free!
+        </button>
+      </form>
     </div>
     {% elif user.is_authenticated %}
-    {% if user.username %}
-    <button type="button" class="text-gray-100 lg:text-3xl text-5xl bg-emerald-800 hover:bg-emerald-600 focus:ring-4 
-    focus:outline-none focus:ring-blue-300 font-medium rounded-lg lg:px-10 lg:py-4 text-center inline-flex 
-    items-center lg:m-4 mt-24 px-32 py-8">
-      <svg class="lg:w-9 lg:h-9 lg:me-2 w-12 h-12 me-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
-        <a href="{% url 'dashboard_threads' user.username %}" class="btn btn-danger">
-          Go to the Dashboard
-        </a>
-      </button>
-    {% endif %}
-  {% else %}
+      {% if user.username %}
+      <button type="button" class="text-gray-100 lg:text-3xl text-5xl bg-emerald-800 hover:bg-emerald-600 focus:ring-4 
+      focus:outline-none focus:ring-blue-300 font-medium rounded-lg lg:px-10 lg:py-4 text-center inline-flex 
+      items-center lg:m-4 mt-24 px-32 py-8">
+        <svg class="lg:w-9 lg:h-9 lg:me-2 w-12 h-12 me-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
+          <a href="{% url 'dashboard_threads' user.username %}" class="btn btn-danger">
+            Go to the Dashboard
+          </a>
+        </button>
+      {% endif %}
+    {% else %}
     <button type="button" class="text-gray-100 text-3xl bg-emerald-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
       <a href="{% url 'account_login' %}" class="btn btn-danger">Login</a>
     </button>
     <!-- Twitter button ends here -->
-  {% endif %}
+    {% endif %}
     <br>
     <br>
     <br>
@@ -173,7 +179,7 @@
 
       <div class="flex -space-x-12 font-kanit rtl:space-x-reverse text-center items-center justify-center mt-48" id="pricing">
         <div class="w-full max-w-sm p-4 bg-white rounded-2xl shadow sm:p-8">
-          <h5 class="m-4 text-4xl text-gray-700 ">1 year access</h5>
+          <h5 class="m-4 text-4xl text-gray-700 ">1 year deal</h5>
           <div class="text-center text-gray-700">
             <span class="text-2xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$20</span>
             <span class="text-4xl font-semibold tracking-tight">$9.50</span>
@@ -189,7 +195,7 @@
           </div>
         </div>
         <div class="w-full max-w-sm p-4 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  shadow-2xl  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-          <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime access</h5>
+          <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime deal</h5>
           <div class="text-center text-gray-800 dark:text-white">
             <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$40</span>
             <span class="text-5xl font-semibold tracking-tight">$15</span>
