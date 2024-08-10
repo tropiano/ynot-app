@@ -77,13 +77,13 @@
       </form>
     </div>
     {% elif user.is_authenticated %}
-      {% if user.username %}
+      {% if user.threads_username %}
       <button type="button" class="text-gray-100 lg:text-3xl text-5xl bg-emerald-800 hover:bg-emerald-600 focus:ring-4 
       focus:outline-none focus:ring-blue-300 font-medium rounded-lg lg:px-10 lg:py-4 text-center inline-flex 
       items-center lg:m-4 mt-24 px-32 py-8">
         <svg class="lg:w-9 lg:h-9 lg:me-2 w-12 h-12 me-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
-          <a href="{% url 'dashboard_threads' user.username %}" class="btn btn-danger">
+          <a href="{% url 'dashboard_threads' user.threads_username %}" class="btn btn-danger">
             Go to the Dashboard
           </a>
         </button>
