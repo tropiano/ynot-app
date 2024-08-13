@@ -23,9 +23,9 @@ class Command(BaseCommand):
 
         for usr in users:
             self.stdout.write(self.style.SUCCESS("New user found"))
-            print(f"User {usr.username}")
-            update_threads(user_name=usr.username, email=usr.email)
-            update_threads_profile(user_name=usr.username)
+            print(f"User {usr.threads_username}")
+            update_threads(user_name=usr.threads_username, email=usr.email)
+            update_threads_profile(user_name=usr.username, email=usr.email)
             # update the timestamp
             usr.profile_last_update = timezone.now()
             usr.save()
@@ -182,10 +182,10 @@ def update_threads(user_name, email, on_login=False):
             new_thread.save()
 
 
-def update_threads_profile(user_name):
+def update_threads_profile(user_name, email):
 
     # get the user long token
-    long_token = User.objects.get(username=user_name).threads_token
+    long_token = User.objects.get(username=user_name, email=email).threads_token
 
     # get the user profile
     user_profile = ThreadsProfile.objects.filter(username=user_name)
