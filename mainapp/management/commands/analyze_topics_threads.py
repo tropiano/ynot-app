@@ -150,6 +150,11 @@ def calc_keywords(result):
             # skip the empty kw
             if kw == "" or kw.startswith("@"):
                 continue
+
+            # check the keyword for stopwords and non-topics
+            if not filter_word(kw):
+                continue
+
             # use lowercase
             kws_score[kw.lower()].append(thread["score"])
             kws_normscore[kw.lower()].append(thread["norm_score"])
@@ -184,3 +189,17 @@ def write_db(kws_score_agg, kws_normscore_agg, user_name):
         KeywordsThreads(
             word=word, score=score, norm_score=norm_score, username=user_name
         ).save()
+
+
+def filter_word(word):
+    """
+    Filter out the words according to several criterias
+
+    Args:
+        word (str): the word to check
+    """
+
+    if len(word.split(" ")) > 3:
+        return False
+
+    return True
