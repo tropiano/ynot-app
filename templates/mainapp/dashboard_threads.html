@@ -102,28 +102,28 @@
 </script>
 
 <div class="relative overflow-x-auto sm:rounded-lg m-4 justify-center font-kanit">
+  <div class="text-right px-16 py-12 justify-right">
+    <button type="button" class="text-gray-900 text-xl bg-gray-300 hover:bg-gray-400 rounded-lg px-5 py-2.5 
+    text-center inline-flex items-center me-2 border border-1 border-gray-800">
+      <svg class="w-6 h-6 me-2 " xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+      fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+      <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+      </svg>
+      <a href="https://insigh.to/b/xtopics" target="_blank" rel="noopener noreferrer" 
+      class="text-4xl lg:text-2xl block text-gray-800 rounded">
+        Feedback?
+      </a>
+    </button>
+  </div>
   <div class="inline-flex w-full justify-between">
-    <div class="text-center px-16 py-20 align-center justify-left">
+    <div class="text-center px-16 py-8 align-center justify-left">
       {% if user.threads_username %}
       <h2 class="align-left text-center lg:text-2xl text-4xl font-semibold">
         @{{ user.threads_username }}
       </h2>
       {% endif %}
     </div>
-    <div class="text-center px-16 py-20 justify-right">
-      <button type="button" class="text-gray-900 text-xl bg-gray-300 hover:bg-gray-400 rounded-lg px-5 py-2.5 
-      text-center inline-flex items-center me-2 border border-1 border-gray-800">
-        <svg class="w-6 h-6 me-2 " xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
-        fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
-        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
-        </svg>
-        <a href="https://insigh.to/b/xtopics" target="_blank" rel="noopener noreferrer" 
-        class="text-4xl lg:text-2xl block text-gray-800 rounded">
-          Feedback?
-        </a>
-      </button>
-    </div>
-    <div class="text-center px-16 py-20 justify-right">
+    <div class="text-center px-16 py-8 justify-right">
       <a href="{% url 'logout' %}" class="text-4xl lg:text-2xl block text-gray-800 rounded hover:text-gray-600">
         Logout
       </a>
