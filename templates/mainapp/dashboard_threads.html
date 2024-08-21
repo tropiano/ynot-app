@@ -360,10 +360,10 @@
                       {{ kw.word }}
                     </td>
                     <td class="px-4 py-2 text-xl">
-                      {{ kw.score }}
+                      {{ kw.score|floatformat:2 }}
                     </td>
                     <td class="px-4 py-2 text-xl">
-                      {{ kw.norm_score }}%
+                      {{ kw.norm_score|floatformat:2 }}%
                     </td>
                 </tr>
           {% endfor %}
