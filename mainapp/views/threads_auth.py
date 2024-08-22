@@ -132,10 +132,12 @@ def save_user_info(user_name):
     long_token = User.objects.filter(threads_username=user_name).first().threads_token
 
     # get the threads username and bio
-    url_user_profile = f"https://graph.threads.net/v1.0/me?fields=id,username,threads_profile_picture_url,threads_biography&access_token={long_token}"
+    url_user_profile = f"https://graph.threads.net/v1.0/me?fields=id,username,name,threads_profile_picture_url,threads_biography&access_token={long_token}"
     response = r.get(url_user_profile)
     # print(response.json())
     threads_username = response.json()["username"]
+    threads_name = response.json()["name"]
+    print(threads_name)
     threads_id = response.json()["id"]
     if "threads_biography" in response.json():
         threads_bio = response.json()["threads_biography"]
@@ -153,6 +155,7 @@ def save_user_info(user_name):
     if not ThreadsProfile.objects.filter(username=threads_username):
         user_threads_profile = ThreadsProfile(
             username=threads_username,
+            name=threads_name,
             biography=threads_bio,
             profile_pic_url=threads_profile_pic_url,
             threads_id=threads_id,
@@ -183,3 +186,5 @@ def save_user_info(user_name):
     user_profile.update(followers=followers)
     user_profile.update(likes=likes)
     user_profile.update(replies=replies)
+    # update also the user display name (might have changed)
+    user_profile.update(name=threads_name)

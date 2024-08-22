@@ -134,10 +134,12 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         replies = user_queryset.first().replies
         reposts = user_queryset.first().reposts
         quotes = user_queryset.first().quotes
+        name = user_queryset.first().name
 
         # last_update = user_queryset.first().profile_last_update
 
         data["followers"] = followers
+        data["name"] = name
         data["bio"] = bio
         data["likes"] = likes
         data["replies"] = replies
@@ -193,6 +195,13 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
 
         average_count = daily_counts["average"]
         data["avg_views"] = int(average_count)
+
+        # get the user name
+        data["profile_last_update"] = (
+            User.objects.filter(threads_username=user_dashboard)
+            .first()
+            .profile_last_update
+        )
 
         return data
 

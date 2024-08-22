@@ -38,8 +38,6 @@
     </div>
   </div>
 </nav>
-
-
 <div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-20 font-kanit">
     <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3 leading-none">
@@ -56,7 +54,6 @@
     and grow your audience faster.
     </p>
     {% if user.is_anonymous %}
-    
     <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
       <form method="post">
         {% csrf_token %}
