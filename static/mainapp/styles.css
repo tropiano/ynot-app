@@ -1352,11 +1352,6 @@ input:checked + .toggle-bg {
   margin: 1.75rem;
 }
 
-.mx-10 {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-}
-
 .mx-16 {
   margin-left: 4rem;
   margin-right: 4rem;
@@ -1416,6 +1411,10 @@ input:checked + .toggle-bg {
   margin-bottom: 1rem;
 }
 
+.mb-48 {
+  margin-bottom: 12rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -1442,6 +1441,10 @@ input:checked + .toggle-bg {
 
 .me-6 {
   margin-inline-end: 1.5rem;
+}
+
+.-ml-8 {
+  margin-left: -2rem;
 }
 
 .ml-3 {
@@ -2023,6 +2026,10 @@ input:checked + .toggle-bg {
   padding: 0.25rem;
 }
 
+.p-12 {
+  padding: 3rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -2037,6 +2044,10 @@ input:checked + .toggle-bg {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .px-1 {
@@ -2712,10 +2723,6 @@ input:checked + .toggle-bg {
     border-radius: 0.5rem;
   }
 
-  .sm\:p-8 {
-    padding: 2rem;
-  }
-
   .sm\:text-center {
     text-align: center;
   }
@@ -2831,8 +2838,38 @@ input:checked + .toggle-bg {
     margin: 1rem;
   }
 
+  .lg\:my-40 {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+  }
+
+  .lg\:my-8 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .lg\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
   .lg\:me-2 {
     margin-inline-end: 0.5rem;
+  }
+
+  .lg\:ml-1 {
+    margin-left: 0.25rem;
+  }
+
+  .lg\:ml-20 {
+    margin-left: 5rem;
+  }
+
+  .lg\:mr-20 {
+    margin-right: 5rem;
+  }
+
+  .lg\:mt-4 {
+    margin-top: 1rem;
   }
 
   .lg\:h-5 {

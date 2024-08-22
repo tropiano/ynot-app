@@ -41,7 +41,7 @@
 
 
 <div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
-  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 font-kanit">
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-20 font-kanit">
     <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3 leading-none">
       Grow on Threads writing only
       <br>
@@ -161,47 +161,52 @@
       {% endif %}
     </div>
     </div>
-    <div class="text-center items-center py-10 my-20 mx-10">
-      <video class="w-full rounded-lg shadow shadow-lg border border-2 border-emerald-700" preload="metadata" controls muted>
+    <div class="text-center items-center lg:mr-20 lg:ml-1 lg:my-8 mx-20">
+      <div class="text-center items-center my-20 mb-48 lg:mb-32">
+        <img class="ml--8" src="{% static 'mainapp/banner_xtopics.png' %}" alt="Xtopics banner">
+      </div>
+      <video class="w-full rounded-lg shadow shadow-lg border border-2 border-emerald-700 lg:my-40" preload="metadata" 
+      controls muted>
         <source src="{% static 'mainapp/demo_threads_010824.mp4' %}#t=1.5">
         Your browser does not support the video tag.
       </video>
-
-      <div class="flex -space-x-12 font-kanit rtl:space-x-reverse text-center items-center justify-center mt-48" id="pricing">
-        <div class="w-full max-w-sm p-4 bg-white rounded-2xl shadow sm:p-8">
-          <h5 class="m-4 text-4xl text-gray-700 ">1 year deal</h5>
-          <div class="text-center text-gray-700">
-            <span class="text-2xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$20</span>
-            <span class="text-4xl font-semibold tracking-tight">$9.50</span>
-          </div>
-          <h5 class="m-4 text-gray-900 dark:text-gray-900 text-xl lg:text-normal">Pay once, use for 1 year (no auto-renew)</h5>
-          <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-3xl lg:text-xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-2xl  inline-flex justify-center text-center">
-            <a href="{{ STRIPE_URL_YEAR }}" target="_blank" rel="noopener noreferrer">
-              Start now
-            </a>
-          </button>
-          <div class="text-center text-gray-500 dark:text-white">
-            Only 6 spots left at this price 
-          </div>
-        </div>
-        <div class="w-full max-w-sm p-4 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  shadow-2xl  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-          <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime deal</h5>
-          <div class="text-center text-gray-800 dark:text-white">
-            <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$40</span>
-            <span class="text-5xl font-semibold tracking-tight">$15</span>
-          </div>
-          <h5 class="m-4 text-gray-900 dark:text-gray-900 text-2xl lg:text-normal">Pay once, use forever</h5>
-          <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-4xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-2xl inline-flex justify-center text-center">
-            <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
-              Start now
-            </a>
-          </button>
-          <div class="text-center text-gray-500 dark:text-white">
-            Only 7 spots left at this price 
-          </div>
-        </div>
+  </div>
+</div>
+<div class="text-center mx-20">
+  <div class="flex -space-x-12 font-kanit rtl:space-x-reverse text-center items-center justify-center mt-48 lg:mt-4" id="pricing">
+    <div class="w-full max-w-sm p-8 bg-white rounded-2xl shadow">
+      <h5 class="m-4 text-4xl text-gray-700 ">1 year deal</h5>
+      <div class="text-center text-gray-700">
+        <span class="text-2xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$20</span>
+        <span class="text-4xl font-semibold tracking-tight">$9.50</span>
       </div>
-      
+      <h5 class="m-4 text-gray-900 dark:text-gray-900 text-xl lg:text-normal">Pay once, use for 1 year (no auto-renew)</h5>
+      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-3xl lg:text-xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-2xl  inline-flex justify-center text-center">
+        <a href="{{ STRIPE_URL_YEAR }}" target="_blank" rel="noopener noreferrer">
+          Start now
+        </a>
+      </button>
+      <div class="text-center text-gray-500 dark:text-white">
+        Only 6 spots left at this price 
+      </div>
+    </div>
+    <div class="w-full max-w-sm p-12 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  
+    shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime deal</h5>
+      <div class="text-center text-gray-800 dark:text-white">
+        <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$40</span>
+        <span class="text-5xl font-semibold tracking-tight">$15</span>
+      </div>
+      <h5 class="m-4 text-gray-900 dark:text-gray-900 text-2xl lg:text-normal">Pay once, use forever</h5>
+      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-4xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-2xl inline-flex justify-center text-center">
+        <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
+          Start now
+        </a>
+      </button>
+      <div class="text-center text-gray-500 dark:text-white">
+        Only 7 spots left at this price 
+      </div>
+    </div>
   </div>
 </div>
 </div>
