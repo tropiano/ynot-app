@@ -1619,10 +1619,6 @@ input:checked + .toggle-bg {
   width: 2rem;
 }
 
-.w-auto {
-  width: auto;
-}
-
 .w-full {
   width: 100%;
 }
@@ -2073,11 +2069,6 @@ input:checked + .toggle-bg {
 .px-2\.5 {
   padding-left: 0.625rem;
   padding-right: 0.625rem;
-}
-
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
 }
 
 .px-3 {
@@ -2840,6 +2831,10 @@ input:checked + .toggle-bg {
 
   .lg\:m-4 {
     margin: 1rem;
+  }
+
+  .lg\:m-7 {
+    margin: 1.75rem;
   }
 
   .lg\:my-40 {
