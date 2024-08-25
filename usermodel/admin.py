@@ -45,6 +45,7 @@ class UserAdmin(DefaultUserAdmin):
         ),
     )
     list_display = (
+        "email",
         "threads_username",
         "username",
         "first_name",
