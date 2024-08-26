@@ -126,7 +126,7 @@ def save_long_token(request, auth_code):
     return threads_username, email
 
 
-def save_user_info(user_name):
+def  save_user_info(user_name):
 
     # get the token to make all requests
     long_token = User.objects.filter(threads_username=user_name).first().threads_token

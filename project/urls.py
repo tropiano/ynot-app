@@ -20,6 +20,7 @@ from mainapp import views
 from mainapp.views import upload
 from mainapp.views import redirect
 from mainapp.views import threads_auth
+from mainapp.views import payment
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
@@ -71,6 +72,7 @@ urlpatterns = [
     path(
         "redirect/", redirect.CurrentUserProfileRedirectView.as_view(), name="redirect"
     ),  # redirect after login
+    path("webhook/", payment.stripe_webhook, name="stripe-webhook"),
 ]
 
 if settings.DEBUG:

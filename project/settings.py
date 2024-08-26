@@ -14,6 +14,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY", default="change_me")
 FIELD_ENCRYPTION_KEY = env("FIELD_ENCRYPTION_KEY", default="change_me")
 
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="")
+STRIPE_ENDPOINT_SECRET = env("STRIPE_ENDPOINT_SECRET", default="")
+
+
 DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
