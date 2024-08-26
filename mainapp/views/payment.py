@@ -19,9 +19,9 @@ def stripe_webhook(request):
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
-        return HttpResponse(status=400)  # Invalid payload
+        return HttpResponse("Invalid payload", status=400)  # Invalid payload
     except stripe.error.SignatureVerificationError as e:
-        return HttpResponse(status=400)  # Invalid signature
+        return HttpResponse("Invalid signature", status=400)  # Invalid signature
 
     # Handle the checkout.session.completed event
     # Handle the checkout.session.completed event
@@ -34,6 +34,8 @@ def stripe_webhook(request):
             # Update user and set it as paid
             User.objects.filter(email=email).update(is_paid=1)
         except Exception as e:
-            return HttpResponse(status=400)  # Invalid signature
+            return HttpResponse(
+                "Error in parsing event", status=400
+            )  # Invalid signature
 
     return HttpResponse(status=200)
