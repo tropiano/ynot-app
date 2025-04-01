@@ -1,12 +1,31 @@
 {
   "scripts": {
-    "build:css": "tailwindcss -i static/mainapp/input.css -o static/mainapp/styles.css",
-    "watch:css": "tailwindcss --watch -i static/mainapp/input.css -o static/mainapp/styles.css"
+    "build:css": "./tailwindcss -i static/mainapp/input.css -o static/mainapp/styles.css",
+    "watch:css": "./tailwindcss --watch -i static/mainapp/input.css -o static/mainapp/styles.css"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
-    "flowbite": "^2.2.1",
-    "tailwindcss": "^3.4.1"
-  }
+    "flowbite": "^2.2.1"
+  },
+  "name": "boiler_app",
+  "version": "1.0.0",
+  "description": "To run the app",
+  "main": "tailwind.config.js",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "daisyui": "^5.0.9",
+    "postcss": "^8.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
 }

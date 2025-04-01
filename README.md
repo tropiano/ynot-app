@@ -1,4 +1,4 @@
-# Twitter Optimizer
+# Run locally
 
 To run the app
 
@@ -6,6 +6,12 @@ To run the app
 source release.sh
 
 python manage.py runserver
+```
+
+If you need an HTTPS local server
+
+```
+python manage.py runsslserver
 ```
 
 ### Tailwind

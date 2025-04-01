@@ -2,14 +2,13 @@
 {% load static %}
 {% load socialaccount %}
 {% block body %}
-
-
-<nav class="bg-gray-100 border-gray-400 dark:bg-gray-900 mx-20">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-10">
-    <a href="https://xtopics.co/" class="flex items-center space-x-5 rtl:space-x-reverse">
-      <img class="w-20 h-20 m-4" src="{% static 'mainapp/icon_twitopt.png' %}">
-      <span class="self-center text-gray-800 text-4xl font-madimi font-extrabold whitespace-nowrap dark:text-white uppercase">
-        X Topics
+<nav class="border-gray-400 mx-4">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-16">
+    <a href="https://xtopics.co/" class="flex items-center rtl:space-x-reverse">
+      <img class="w-20 h-20 m-4" src="{% static 'mainapp/logo_boiler.png' %}">
+      <span class="self-center text-gray-100 text-4xl font-kanit font-extrabold whitespace-nowrap 
+      dark:text-white uppercase">
+        Django Boi
       </span>
     </a>
     <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -19,39 +18,35 @@
         </svg>
     </button>
     <div class="hidden w-full md:block md:w-auto font-kanit text-xl" id="navbar-default">
-      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
-          <a href="#" class="text-4xl lg:text-2xl block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-emerald-800 md:p-0 dark:text-white md:dark:text-emerald-800" aria-current="page">Home</a>
+          <a href="#" class="text-4xl lg:text-2xl block py-2 px-3 text-white bg-blue-700 rounded 
+          md:bg-transparent md:text-grey-100 md:p-0 dark:text-white md:dark:text-emerald-800" aria-current="page">Home</a>
         </li>
         {% if user.is_anonymous %}
         <li>
         </li>
         {% else %}
         <li>
-          <a href="{% url 'logout' %}" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
+          <a href="{% url 'logout' %}" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
         </li>
         {% endif %}
         <li>
-          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk about X Topics!" class="text-4xl lg:text-2xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-emerald-800 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk about X Topics!" 
+          class="text-4xl lg:text-2xl block py-2 px-3 text-white rounded hover:bg-gray-100 
+          md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<div class="grid cols-1 gap-4 lg:grid-cols-2 bg-gray-100 mx-auto"> 
-  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-20 font-kanit">
-    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-800 font-bold p-3 leading-none">
-      Grow on Threads writing only
-      <br>
-      <span class="font-extrabold text-8xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-800 uppercase">
-        one post 
-      </span>
-    /day
+<div class="grid cols-1 gap-4 lg:grid-cols-2 mx-auto">
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-32 lg:mr-4 font-kanit">
+    <p class="lg:m-1 text-8xl lg:text-6xl text-gray-100 font-bold p-3 uppercase leading-none">
+      Django Boi
     </p> 
-    <p class="lg:m-1 lg:text-2xl text-5xl text-gray-600 p-3">
-    The AI that shows you the right topics for your audience.
-    So you can start writing what people want to read, spend less time on Threads
-    and grow your audience faster.
+    <p class="lg:m-1 lg:text-2xl text-5xl text-gray-100 p-3">
+    The Python boilerplate made with Python for Pythonbois
     </p>
     {% if user.is_anonymous %}
     <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
@@ -61,16 +56,15 @@
           <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 
           lg:text-xl text-6xl rounded-2xl lg:w-auto w-full" placeholder="Your Email here" required />
         </div> 
-        <button type="sumbit" class="px-10 py-4 lg:px-10 lg:py-2 btn content-center lg:align-left justify-left 
-        text-white text-6xl lg:text-2xl bg-emerald-800 border hover:bg-emerald-700 border-4 border-emerald-800 
-        focus:outline-none focus:ring-blue-300 font-medium rounded-2xl text-center inline-flex 
-        items-center py-8">
-        <svg class="lg:w-6 lg:h-6 lg:me-2 w-16 h-16 me-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rocket-takeoff-fill" viewBox="0 0 16 16">
-          <path d="M12.17 9.53c2.307-2.592 3.278-4.684 3.641-6.218.21-.887.214-1.58.16-2.065a3.6 3.6 0 0 0-.108-.563 2 2 0 0 0-.078-.23V.453c-.073-.164-.168-.234-.352-.295a2 2 0 0 0-.16-.045 4 4 0 0 0-.57-.093c-.49-.044-1.19-.03-2.08.188-1.536.374-3.618 1.343-6.161 3.604l-2.4.238h-.006a2.55 2.55 0 0 0-1.524.734L.15 7.17a.512.512 0 0 0 .433.868l1.896-.271c.28-.04.592.013.955.132.232.076.437.16.655.248l.203.083c.196.816.66 1.58 1.275 2.195.613.614 1.376 1.08 2.191 1.277l.082.202c.089.218.173.424.249.657.118.363.172.676.132.956l-.271 1.9a.512.512 0 0 0 .867.433l2.382-2.386c.41-.41.668-.949.732-1.526zm.11-3.699c-.797.8-1.93.961-2.528.362-.598-.6-.436-1.733.361-2.532.798-.799 1.93-.96 2.528-.361s.437 1.732-.36 2.531Z"/>
-          <path d="M5.205 10.787a7.6 7.6 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925"/>
-        </svg>
-          Log in with Threads
-        </button>
+        <button type="button" class="text-gray-800 bg-white hover:bg-grey-100/70 focus:ring-4 
+        focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
+        inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black">
+          <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+          fill="currentColor" viewBox="0 0 18 19">
+          <path fill-rule="evenodd" d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z" clip-rule="evenodd"/>
+          </svg>
+          Sign up with Google
+          </button>
       </form>
     </div>
     {% elif user.is_authenticated %}
@@ -87,58 +81,55 @@
       {% endif %}
     <!-- Twitter button ends here -->
     {% endif %}
-    <br>
-    <br>
-    <br>
-    <br>
-    <div>
-      <p class="my-5 text-7xl lg:text-5xl text-gray-800 font-bold p-3">
+  </div>
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:mr-32 lg:ml-4 font-kanit">
+    <img class="w-128 h-auto" src="{% static 'mainapp/logo_boiler.png' %}" alt="Hero banner">
+  </div>
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-32 lg:mr-4 font-kanit">
+      <p class="my-5 text-7xl lg:text-5xl text-gray-100 font-bold p-3">
         What you get
       </p>
-      <ul class="max-w-auto space-y-1 text-gray-500 list-inside ml-3 lg:text-4xl text-5xl">
+      <ul class="max-w-auto space-y-1 text-gray-300 list-inside ml-3 lg:text-4xl text-5xl">
           <li class="flex items-center lg:text-2xl">
-              <svg class="w-6 h-6 me-1 text-emerald-800 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-6 h-6 me-1 text-grey-800 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
               </svg>
               Updated followers, likes, and replies
           </li>
           <li class="flex items-center lg:text-2xl">
-              <svg class="w-6 h-6 me-1 text-emerald-800 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-6 h-6 me-1 text-grey-800 dark:text-green-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
               </svg>
               Your best 20 topics  
           </li>
           <li class="flex items-center lg:text-2xl">
-              <svg class="w-6 h-6 me-1 text-emerald-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-6 h-6 me-1 text-emgreyerald-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
               </svg>
               Detailed analysis of all your posts
           </li>
           <li class="flex items-center lg:text-2xl">
-            <svg class="w-6 h-6 me-1 text-emerald-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-6 h-6 me-1 text-grey-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
             </svg>
             Detailed analysis of all topics
           </li>
           <li class="flex items-center lg:text-2xl">
-            <svg class="w-6 h-6 me-1 text-emerald-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-6 h-6 me-1 text-grey-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
             </svg>
             No monthly fee
           </li>
           <li class="flex items-center lg:text-2xl">
-            <svg class="w-6 h-6 me-1 text-emerald-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-6 h-6 me-1 text-grey-800 dark:text-gray-400 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
             </svg>
             10 days free trial
           </li>
-
       </ul>
-      <p class="text-3xl lg:text-xl p-3 text-gray-600">
+      <p class="text-3xl lg:text-xl p-3 text-gray-300">
         Privacy first. 
         I don't store your personal information.
-        <br>
-        Data access is managed via Threads API
       </p>
     <br>
       {% if user.is_anonymous %}
@@ -156,20 +147,17 @@
           </button>
         {% endif %}
       {% endif %}
-    </div>
-    </div>
-    <div class="text-center items-center lg:mr-20 lg:ml-1 lg:my-8 mx-20">
-      <div class="text-center items-center my-20 mb-48 lg:mb-32">
-        <img class="ml--8" src="{% static 'mainapp/banner_xtopics.png' %}" alt="Xtopics banner">
-      </div>
-      <video class="w-full rounded-lg shadow shadow-lg border border-2 border-emerald-700 lg:my-40" preload="metadata" 
+  </div>
+  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:mr-32 lg:ml-4 font-kanit">
+      <video class="h-full rounded-lg shadow shadow-lg border border-2 border-white h-full flex items-center justify-center
+      flex items-center justify-center" preload="metadata" 
       controls muted>
         <source src="{% static 'mainapp/demo_threads_010824.mp4' %}#t=1.5">
         Your browser does not support the video tag.
       </video>
   </div>
 </div>
-<div class="text-center mx-20">
+<div class="text-center mx-20 my-20">
   <div class="flex -space-x-12 font-kanit rtl:space-x-reverse text-center items-center justify-center mt-48 lg:mt-4" id="pricing">
     <div class="w-full max-w-sm p-8 bg-white rounded-2xl shadow">
       <h5 class="m-4 text-4xl text-gray-700 ">1 year deal</h5>
@@ -178,7 +166,9 @@
         <span class="text-4xl font-semibold tracking-tight">$9.50</span>
       </div>
       <h5 class="m-4 text-gray-900 dark:text-gray-900 text-xl lg:text-normal">Pay once, use for 1 year (no auto-renew)</h5>
-      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-3xl lg:text-xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-2xl  inline-flex justify-center text-center">
+      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-3xl lg:text-xl m-4 text-white bg-blue-800 
+      hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 
+      dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-2xl  inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_YEAR }}" target="_blank" rel="noopener noreferrer">
           Start now
         </a>
@@ -187,7 +177,7 @@
         Only 6 spots left at this price 
       </div>
     </div>
-    <div class="w-full max-w-sm p-12 bg-white border-4 border-emerald-700 bg-emerald-200/10 rounded-2xl  
+    <div class="w-full max-w-sm p-12 bg-white bg-emerald-200/10 rounded-2xl shadow-2xl
     shadow-2xl dark:bg-gray-800 dark:border-gray-700">
       <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime deal</h5>
       <div class="text-center text-gray-800 dark:text-white">
@@ -195,7 +185,7 @@
         <span class="text-5xl font-semibold tracking-tight">$15</span>
       </div>
       <h5 class="m-4 text-gray-900 dark:text-gray-900 text-2xl lg:text-normal">Pay once, use forever</h5>
-      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-4xl lg:text-2xl m-4 text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-2xl inline-flex justify-center text-center">
+      <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-4xl lg:text-2xl m-4 text-white bg-blue-800 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-2xl inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
           Start now
         </a>
@@ -209,7 +199,7 @@
 </div>
 </div>
 
-<footer class="mt-20 bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+<footer class="mt-20 rounded-lg shadow m-4 dark:bg-gray-800">
   <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
     <span class="lg:text-sm text-2xl text-gray-500 sm:text-center dark:text-gray-400">© 2024 X Topics.
   </span>
@@ -223,5 +213,4 @@
   </ul>
   </div>
 </footer>
-
 {% endblock %}
