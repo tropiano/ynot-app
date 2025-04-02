@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     "allauth",  # new
     "allauth.account",  # new
     "allauth.socialaccount",  # new
+    "slippers",
     # social providers
     "allauth.socialaccount.providers.twitter",  # new
+    "allauth.socialaccount.providers.google",  # new
     "widget_tweaks",
     # for encryption of variables (user tokens for example)
     "encrypted_model_fields",
@@ -173,8 +175,8 @@ STATICFILES_DIRS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    # "allauth.account.auth_backends.AuthenticationBackend",
-    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+    # "django.contrib.auth.backends.ModelBackend",
 )
 
 SITE_ID = 1

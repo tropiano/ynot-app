@@ -4,7 +4,7 @@
 {% block body %}
 <nav class="border-gray-400 mx-4">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-16">
-    <a href="https://xtopics.co/" class="flex items-center rtl:space-x-reverse">
+    <a href="#" class="flex items-center rtl:space-x-reverse">
       <img class="w-20 h-20 m-4" src="{% static 'mainapp/logo_boiler.png' %}">
       <span class="self-center text-gray-100 text-4xl font-kanit font-extrabold whitespace-nowrap 
       dark:text-white uppercase">
@@ -39,6 +39,14 @@
       </ul>
     </div>
   </div>
+  <!-- Authentication modal -->
+  <div id="authentication-modal" tabindex="-1" aria-hidden="true" hx-target="this"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center 
+  items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" >
+      <div class="relative p-4 w-full max-w-md max-h-full">
+          <!-- Modal content -->
+      </div>
+  </div>
 </nav>
 <div class="grid cols-1 gap-4 lg:grid-cols-2 mx-auto">
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-32 lg:mr-4 font-kanit">
@@ -50,22 +58,20 @@
     </p>
     {% if user.is_anonymous %}
     <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
-      <form method="post">
-        {% csrf_token %}
-        <div class="mb-2 mt-16 px-10 lg:px-0">
-          <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 
-          lg:text-xl text-6xl rounded-2xl lg:w-auto w-full" placeholder="Your Email here" required />
-        </div> 
-        <button type="button" class="text-gray-800 bg-white hover:bg-grey-100/70 focus:ring-4 
+      <!-- Trigger Button -->
+      <a href="#" data-modal-closable=true data-modal-placement="center-center" 
+      data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" 
+      hx-get="{% url 'account_signup' %}" hx-target="#authentication-modal" hx-swap="innerHTML">
+        <button type="button" class="text-gray-900 bg-white hover:bg-grey-100/70 focus:ring-4 
         focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
         inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black">
           <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
           fill="currentColor" viewBox="0 0 18 19">
           <path fill-rule="evenodd" d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z" clip-rule="evenodd"/>
           </svg>
-          Sign up with Google
-          </button>
-      </form>
+          Sign up
+        </button>
+      </a> 
     </div>
     {% elif user.is_authenticated %}
       {% if user.threads_username %}
@@ -159,7 +165,7 @@
 </div>
 <div class="text-center mx-20 my-20">
   <div class="flex -space-x-12 font-kanit rtl:space-x-reverse text-center items-center justify-center mt-48 lg:mt-4" id="pricing">
-    <div class="w-full max-w-sm p-8 bg-white rounded-2xl shadow">
+    <div class="w-full max-w-sm p-8 bg-gray-300 rounded-2xl shadow">
       <h5 class="m-4 text-4xl text-gray-700 ">1 year deal</h5>
       <div class="text-center text-gray-700">
         <span class="text-2xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$20</span>
@@ -177,7 +183,7 @@
         Only 6 spots left at this price 
       </div>
     </div>
-    <div class="w-full max-w-sm p-12 bg-white bg-emerald-200/10 rounded-2xl shadow-2xl
+    <div class="w-full max-w-sm p-12 bg-gray-200  bg-emerald-200/10 rounded-2xl shadow-4xl
     shadow-2xl dark:bg-gray-800 dark:border-gray-700">
       <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime deal</h5>
       <div class="text-center text-gray-800 dark:text-white">
