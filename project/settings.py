@@ -17,6 +17,10 @@ FIELD_ENCRYPTION_KEY = env("FIELD_ENCRYPTION_KEY", default="change_me")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="")
 STRIPE_ENDPOINT_SECRET = env("STRIPE_ENDPOINT_SECRET", default="")
 
+# mailgun setup
+MAILGUN_API_KEY = env("MAILGUN_API_KEY", default="")
+MAILGUN_SENDER_DOMAIN = env("MAILGUN_SENDER_DOMAIN", default="")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 
 DEBUG = env("DEBUG", default=False)
 
@@ -48,8 +52,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount",  # new
     "slippers",
     # social providers
-    "allauth.socialaccount.providers.twitter",  # new
     "allauth.socialaccount.providers.google",  # new
+    "allauth.socialaccount.providers.twitter_oauth2",
     "widget_tweaks",
     # for encryption of variables (user tokens for example)
     "encrypted_model_fields",
@@ -57,6 +61,8 @@ INSTALLED_APPS = [
     "sslserver",
     # humanize numbers
     "django.contrib.humanize",
+    # for sending emails
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -179,7 +185,31 @@ AUTHENTICATION_BACKENDS = (
     # "django.contrib.auth.backends.ModelBackend",
 )
 
+# authentication related
 SITE_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_REDIRECT_URL = "redirect"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_METHODS = {'email'}
+LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
+SOCIALACCOUNT_AUTO_SIGNUP = True  # Automatically create accounts without confirmation
+SOCIALACCOUNT_LOGIN_ON_GET = True # login on get request
+
+
+# uncomment for mailgun email backend  (might not be needed)
+# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# uncomment to test locally (no mail server) 
+# EMAIL_BACKEND = 'django.core.mail.console.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = int(env('EMAIL_PORT', default=587))
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_CONFIRMATION_SIGNUP = True
+EMAIL_USE_TLS = False
+
+ANYMAIL = {
+    "MAILGUN_API_KEY": MAILGUN_API_KEY,  # Replace with your Mailgun API key
+    "MAILGUN_SENDER_DOMAIN": MAILGUN_SENDER_DOMAIN,  # Replace with your Mailgun domain
+    "MAILGUN_API_URL": "https://api.eu.mailgun.net/v3",
+}

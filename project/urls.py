@@ -40,22 +40,6 @@ urlpatterns = [
     ),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # accounts management
-    # only allow twitter social login/signup
-    path(
-        "accounts/login/",
-        RedirectView.as_view(url="/accounts/twitter/login/"),
-        name="login",
-    ),
-    path(
-        "accounts/signup/",
-        RedirectView.as_view(url="/accounts/twitter/signup/"),
-        name="signup",
-    ),
-    path(
-        "accounts/logout/",
-        RedirectView.as_view(url="/accounts/twitter/logout/"),
-        name="logout",
-    ),
     path("upload/", upload.model_form_upload, name="upload"),  # upload form
     path("success/", upload.success, name="success"),  # upload form success
     path(
