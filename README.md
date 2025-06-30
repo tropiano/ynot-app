@@ -16,7 +16,9 @@ python manage.py runsslserver
 
 ### Tailwind
 
-To use Tailwind in development
+To use Tailwind, first follow the instructions [here](https://tailwindcss.com/blog/standalone-cli) to download the standalone CLI.
+
+Then you can run it in the development version like this.
 
 ```
 npm run watch:css
