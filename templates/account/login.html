@@ -9,7 +9,7 @@
     <!-- Modal body -->
     <div class="p-4 md:p-5">
         <form class="space-y-4"  method="POST"
-        hx-target="#authentication-modal" hx-post="{% url 'account_signup' %}">
+        hx-target="#authentication-modal" hx-post="{% url 'account_login' %}">
         {% csrf_token %}
         {% if form.errors %}
             <div class="text-red-500">
@@ -25,13 +25,6 @@
                             </li>
                         {% endfor %}
                     {% endfor %}
-                    
-                    <!-- Display non-field errors -->
-                    {% if form.non_field_errors %}
-                        {% for error in form.non_field_errors %}
-                        <i class="bi bi-exclamation-circle"></i><li>{{ error }}</li>
-                        {% endfor %}
-                    {% endif %}
                 </ul>
             </div>
         {% endif %}

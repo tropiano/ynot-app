@@ -194,7 +194,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 SOCIALACCOUNT_AUTO_SIGNUP = True  # Automatically create accounts without confirmation
 SOCIALACCOUNT_LOGIN_ON_GET = True # login on get request
-
+ACCOUNT_SIGNUP_REDIRECT_URL = "/"
 
 # uncomment for mailgun email backend  (might not be needed)
 # EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
