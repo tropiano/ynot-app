@@ -1,7 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
 {% load socialaccount %}
 {% get_providers as socialaccount_providers %}
 <!-- account/signup.html -->
-<div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700 lg:w-1/3 font-kanit">
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-tr from-blue-800 to-gray-900">
+<div class="bg-white rounded-lg shadow-sm dark:bg-gray-700 lg:w-1/3 font-kanit">
     <!-- Modal header -->
     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -10,8 +13,7 @@
     </div>
     <!-- Modal body -->
     <div class="p-4 md:p-5">
-    <form class="space-y-4"  method="POST"
-        hx-target="#authentication-modal" hx-post="{% url 'account_signup' %}">
+    <form class="space-y-4"  method="POST" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {% if form.errors %}
             <div class="text-red-500">
@@ -50,12 +52,13 @@
                 placeholder="" required/>
             </div>
         {% endfor %}
-            <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="submit" 
+            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Sign up
             </button>
             <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                 Already registered? 
-                <a href="" hx-get={% url 'account_login' %} hx-target="#authentication-modal" 
+                <a href="{% url 'account_login' %}" 
                 class="text-blue-700 hover:underline dark:text-blue-500">Sign in</a>
             </div>
         </form>
@@ -84,3 +87,5 @@
         {% endfor %}
     </div>
 </div>
+</div>
+{% endblock %}

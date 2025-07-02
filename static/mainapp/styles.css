@@ -576,17 +576,8 @@ body {
   .sticky {
     position: sticky;
   }
-  .top-0 {
-    top: calc(var(--spacing) * 0);
-  }
-  .right-0 {
-    right: calc(var(--spacing) * 0);
-  }
   .right-2 {
     right: calc(var(--spacing) * 2);
-  }
-  .left-0 {
-    left: calc(var(--spacing) * 0);
   }
   .isolate {
     isolation: isolate;
@@ -943,9 +934,6 @@ body {
   .h-36 {
     height: calc(var(--spacing) * 36);
   }
-  .h-\[calc\(100\%-1rem\)\] {
-    height: calc(100% - 1rem);
-  }
   .h-\[var\(--radix-select-trigger-height\)\] {
     height: var(--radix-select-trigger-height);
   }
@@ -966,9 +954,6 @@ body {
   }
   .max-h-96 {
     max-height: calc(var(--spacing) * 96);
-  }
-  .max-h-full {
-    max-height: 100%;
   }
   .max-h-lh {
     max-height: 1lh;
@@ -1047,9 +1032,6 @@ body {
   }
   .max-w-lg {
     max-width: var(--container-lg);
-  }
-  .max-w-md {
-    max-width: var(--container-md);
   }
   .max-w-none {
     max-width: none;
@@ -1677,12 +1659,6 @@ body {
   }
   .overflow-x-auto {
     overflow-x: auto;
-  }
-  .overflow-x-hidden {
-    overflow-x: hidden;
-  }
-  .overflow-y-auto {
-    overflow-y: auto;
   }
   .scroll-auto {
     scroll-behavior: auto;
@@ -3529,11 +3505,6 @@ body {
   .sm\:text-center {
     @media (width >= 40rem) {
       text-align: center;
-    }
-  }
-  .md\:inset-0 {
-    @media (width >= 48rem) {
-      inset: calc(var(--spacing) * 0);
     }
   }
   .md\:mt-0 {

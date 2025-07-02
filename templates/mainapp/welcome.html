@@ -2,7 +2,7 @@
 {% load static %}
 {% load socialaccount %}
 {% block body %}
-<nav class="border-gray-400 mx-4">
+<nav class="border-gray-400 mx-4  ">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-16">
     <a href="#" class="flex items-center rtl:space-x-reverse">
       <img class="w-20 h-20 m-4" src="{% static 'mainapp/logo_boiler.png' %}">
@@ -32,23 +32,15 @@
         </li>
         {% endif %}
         <li>
-          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk about X Topics!" 
+          <a href="mailto:antoniotropiano@gmail.com?subject=I wanna talk!" 
           class="text-4xl lg:text-2xl block py-2 px-3 text-white rounded hover:bg-gray-100 
           md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
         </li>
       </ul>
     </div>
   </div>
-  <!-- Authentication modal -->
-  <div id="authentication-modal" tabindex="-1" aria-hidden="true" hx-target="this"
-  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center 
-  items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" >
-      <div class="relative p-4 w-full max-w-md max-h-full">
-          <!-- Modal content -->
-      </div>
-  </div>
 </nav>
-<div class="grid cols-1 gap-4 lg:grid-cols-2 mx-auto">
+<div class="grid cols-1 gap-4 lg:grid-cols-2 mx-auto" id="hero">
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-32 lg:mr-4 font-kanit">
     <p class="lg:m-1 text-8xl lg:text-6xl text-gray-100 font-bold p-3 uppercase leading-none">
       Django Boi
@@ -59,13 +51,10 @@
     {% if user.is_anonymous %}
     <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
       <!-- Trigger Button -->
-      <a href="#" data-modal-closable=true data-modal-placement="center-center" 
-      data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" 
-      hx-get="{% url 'account_signup' %}" hx-target="#authentication-modal" hx-swap="innerHTML">
+      <a href="{% url 'account_signup' %}">
         <button type="button" class="text-gray-900 bg-white hover:bg-grey-100/70 focus:ring-4 
         focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
         inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black">
-          
           Sign up
         </button>
       </a> 
@@ -85,8 +74,8 @@
     <!-- Twitter button ends here -->
     {% endif %}
   </div>
-  <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:mr-32 lg:ml-4 font-kanit">
-    <img class="w-128 h-auto" src="{% static 'mainapp/logo_boiler.png' %}" alt="Hero banner">
+  <div class="flex items-center justify-center text-center lg:text-left my-20 mx-20 lg:mr-32 lg:ml-4 font-kanit">
+    <img class="w-128 h-auto items-center" src="{% static 'mainapp/logo_boiler.png' %}" alt="Hero banner">
   </div>
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-32 lg:mr-4 font-kanit">
       <p class="my-5 text-7xl lg:text-5xl text-gray-100 font-bold p-3">
