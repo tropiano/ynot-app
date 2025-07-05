@@ -5,7 +5,6 @@ from .dashboard import DashboardViewTest
 from .payment_confirm import PaymentConfirmView
 from .privacy_policy import PrivacyPolicyView
 from .payment import stripe_webhook
-from .authentication import custom_signup_view, custom_login_view
 
 __all__ = [
     "WelcomeToSpeedPyView",
@@ -14,6 +13,4 @@ __all__ = [
     "DashboardViewTest",
     "PaymentConfirmView",
     "PrivacyPolicyView",
-    "custom_signup_view",
-    "custom_login_view"
 ]

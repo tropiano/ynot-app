@@ -41,7 +41,7 @@
                     {% if field.field.widget.input_type != 'checkbox' %}
                         <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" 
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500" 
+                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-500" 
                         placeholder="" required/>
                     {% else %}
                         {{ field }}
