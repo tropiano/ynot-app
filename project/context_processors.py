@@ -9,4 +9,9 @@ def export_vars(request):
     data["THREADS_REDIRECT_URI"] = os.environ.get("THREADS_REDIRECT_URI", "")
     data["THREADS_SCOPE"] = os.environ.get("THREADS_SCOPE", "")
 
+    # define app related vsars like appname, logo, etc.
+    data["APP_NAME"] = os.environ.get("APP_NAME", "Django Boi")
+    data["APP_LOGO"] = os.environ.get("APP_LOGO", "mainapp/logo_boiler.png")
+    
+
     return data

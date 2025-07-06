@@ -29,7 +29,7 @@
       items-center lg:m-4 mt-24 px-32 py-8">
         <svg class="lg:w-9 lg:h-9 lg:me-2 w-12 h-12 me-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
-          <a href="{% url 'dashboard_threads' user.threads_username %}" class="btn btn-danger">
+          <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
             Go to the Dashboard
           </a>
         </button>
@@ -92,11 +92,11 @@
         </div>
       {% elif user.is_authenticated %}
         {% if user.username %}
-        <button type="button" class="text-gray-100 lg:text-xl text-4xl bg-emerald-800 hover:bg-emerald-600 focus:ring-4 
+        <button type="button" class="text-gray-100 lg:text-xl text-4xl bg-gray-900 hover:bg-gray-800 focus:ring-4 
         focus:outline-none focus:ring-blue-300 font-medium rounded-lg lg:px-5 lg:py-2.5 px-32 py-8 
         text-center inline-flex items-center me-2 ml-4">
           <svg class="lg:w-5 lg:h-5 lg:me-2 w-12 h-12 me-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H13V19H15C15.5523 19 16 19.4477 16 20C16 20.5523 15.5523 21 15 21H9C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19H11V18H5C3.34315 18 2 16.6569 2 15V6ZM5 5C4.44772 5 4 5.44772 4 6V15C4 15.5523 4.44772 16 5 16H19C19.5523 16 20 15.5523 20 15V6C20 5.44772 19.5523 5 19 5H5Z" fill="#ffffff"></path> </g></svg>
-            <a href="{% url 'dashboard_threads' user.username %}" class="btn btn-danger">
+            <a href="{% url 'dashboard' user.username %}" class="btn btn-danger">
               Go to the Dashboard
             </a>
           </button>
@@ -128,18 +128,18 @@
           Start now
         </a>
       </button>
-      <div class="text-center text-gray-500 dark:text-white">
+      <div class="text-center text-gray-500 dark:text-gray-900">
         Only 6 spots left at this price 
       </div>
     </div>
     <div class="w-full max-w-sm p-12 bg-gray-200  bg-emerald-200/10 rounded-2xl shadow-4xl
-    shadow-2xl dark:bg-gray-800 dark:border-gray-700">
-      <h5 class="m-4 text-5xl text-gray-800 dark:text-gray-900">Lifetime deal</h5>
-      <div class="text-center text-gray-800 dark:text-white">
-        <span class="text-3xl font-normal tracking-tight text-gray-500 decoration-2 line-through">$40</span>
+    shadow-2xl dark:bg-gray-800 border-4 border-orange-400">
+      <h5 class="m-4 text-5xl text-gray-200 dark:text-gray-200">Lifetime deal</h5>
+      <div class="text-center text-gray-200 dark:text-white">
+        <span class="text-3xl font-normal tracking-tight text-gray-300 decoration-2 line-through">$40</span>
         <span class="text-5xl font-semibold tracking-tight">$15</span>
       </div>
-      <h5 class="m-4 text-gray-900 dark:text-gray-900 text-2xl lg:text-normal">Pay once, use forever</h5>
+      <h5 class="m-4 text-gray-900 dark:text-gray-300 text-2xl lg:text-normal">Pay once, use forever</h5>
       <button type="button" class="px-8 py-2 lg:px-10 lg:py-2 text-4xl lg:text-2xl m-4 text-white bg-blue-800 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-2xl inline-flex justify-center text-center">
         <a href="{{ STRIPE_URL_LIFE }}" target="_blank" rel="noopener noreferrer">
           Start now

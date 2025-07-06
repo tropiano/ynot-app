@@ -14,83 +14,19 @@ import os
 from django.db.models import Sum
 from django.db.models import Avg, Count
 from django.db.models.functions import TruncDate
+from datetime import datetime, timedelta
+import random
+import lorem
 
 
 class DashboardView(LoginRequiredMixin, ListView):
-    model = Tweet
+    # change the model here to the model you want to display
+    model = Thread
     template_name = "mainapp/dashboard.html"
 
     def get_queryset(self):
         # filter by the user first
         username = self.request.user.username
-        # print(username)
-        user_dashboard = self.kwargs["user"]
-
-        # check that the logged in user is seeing the right dashboard
-        if user_dashboard != username and not self.request.user.is_superuser:
-            raise PermissionDenied()
-
-        # get the dashboard user tweets
-        user_queryset = Tweet.objects.filter(username=user_dashboard)
-        comments = self.request.GET.get("comments")
-
-        if comments is None or comments == "yes":
-            queryset = user_queryset
-        # queryset = branch.objects.none()
-        elif comments == "no":
-            queryset = user_queryset.exclude(text__startswith="@")
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-
-        # filter by the user first
-        username = self.request.user.username
-        # print(username)
-        user_dashboard = self.kwargs["user"]
-
-        # check that the logged in user is seeing the right dashboard
-        if user_dashboard != username and not self.request.user.is_superuser:
-            raise PermissionDenied()
-
-        # get the data to enrich
-        data = super().get_context_data(**kwargs)
-
-        # get the dashboard user tweets
-        user_queryset = Tweet.objects.filter(username=user_dashboard)
-
-        stats_score = user_queryset.filter(score__gt=0).aggregate(
-            Avg("score"), Min("score"), Max("score")
-        )
-        stats_normscore = user_queryset.aggregate(
-            Avg("score"), Min("score"), Max("score")
-        )
-        stats_dates = user_queryset.aggregate(Min("time"), Max("time"))
-
-        data["stats_score"] = stats_score
-        data["stats_normscore"] = stats_normscore
-        data["stats_dates"] = stats_dates
-
-        # print(data["stats_dates"])
-        # print(data["stats_score"])
-
-        # get the dashboard user keywords
-        user_queryset_kws = Keywords.objects.filter(username=user_dashboard)
-        # get also the data about the keyword
-        keywords = user_queryset_kws.order_by("-score")
-        data["keywords"] = keywords
-
-        return data
-
-
-class DashboardViewThreads(LoginRequiredMixin, ListView):
-    model = Thread
-    template_name = "mainapp/dashboard_threads.html"
-
-    def get_queryset(self):
-        # filter by the user first
-        username = self.request.user.threads_username
-        # print(username)
         user_dashboard = self.kwargs["user"]
 
         # check that the logged in user is seeing the right dashboard
@@ -101,151 +37,62 @@ class DashboardViewThreads(LoginRequiredMixin, ListView):
         user_queryset = Thread.objects.filter(username=user_dashboard)
         comments = self.request.GET.get("comments")
 
-        if comments is None or comments == "yes":
-            queryset = user_queryset
-        # queryset = branch.objects.none()
-        elif comments == "no":
-            queryset = user_queryset.exclude(text__startswith="@")
-
-        # print(queryset)
-
-        return queryset
+        return user_queryset
 
     def get_context_data(self, **kwargs):
 
+        model = ThreadsProfile
+
         # filter by the user first
         # get the threads username
-        threads_username = self.request.user.threads_username
+        username = self.request.user.username
         user_dashboard = self.kwargs["user"]
 
         # check that the logged in user is seeing the right dashboard
-        if user_dashboard != threads_username and not self.request.user.is_superuser:
+        if user_dashboard != username and not self.request.user.is_superuser:
             raise PermissionDenied()
 
         # get the data to enrich
         data = super().get_context_data(**kwargs)
 
-        # get the user threads profile
-        user_queryset = ThreadsProfile.objects.filter(username=user_dashboard)
-
-        followers = user_queryset.first().followers
-        bio = user_queryset.first().biography
-        likes = user_queryset.first().likes
-        replies = user_queryset.first().replies
-        reposts = user_queryset.first().reposts
-        quotes = user_queryset.first().quotes
-        name = user_queryset.first().name
-
-        # last_update = user_queryset.first().profile_last_update
-
-        data["followers"] = followers
-        data["name"] = name
-        data["bio"] = bio
-        data["likes"] = likes
-        data["replies"] = replies
-        data["reposts_quotes"] = reposts + quotes
-
-        # get the dashboard user keywords
-        user_queryset_kws = KeywordsThreads.objects.filter(username=user_dashboard)
-        # get also the data about the keyword
-        keywords = user_queryset_kws.order_by("-score")
-        data["keywords"] = keywords
-
-        if User.objects.filter(threads_username=user_dashboard).first().is_free_trial:
-            data["trial_expired"] = False
-        else:
-            data["trial_expired"] = True
-
-        data["trial_exp_date"] = (
-            User.objects.filter(threads_username=user_dashboard).first().date_joined
-        ) + timedelta(days=int(os.environ["FREE_TRIAL_DAYS"]))
-
-        # get the user last update
-        data["profile_last_update"] = (
-            User.objects.filter(threads_username=user_dashboard)
-            .first()
-            .profile_last_update
-        )
-
-        threads_update_date = (
-            User.objects.filter(threads_username=user_dashboard)
-            .first()
-            .threads_last_update
-        )
-
-        if timezone.now() > threads_update_date + timedelta(days=1):
-            data["old_update"] = True
-
-        data["threads_last_update"] = threads_update_date
-
-        # calculate the total views
-        total_views = Thread.objects.filter(username=user_dashboard).aggregate(
-            total=Sum("views")
-        )["total"]
-        data["total_views"] = total_views
-
-        # calculate average views per day of posting
-        daily_counts = (
-            Thread.objects.filter(username=user_dashboard)
-            .annotate(day=TruncDate("time"))
-            .values("day")
-            .annotate(sum=Sum("views"))
-            .aggregate(average=Avg("sum"))
-        )
-
-        average_count = daily_counts["average"]
-        data["avg_views"] = int(average_count)
-
-        # get the user name
-        data["profile_last_update"] = (
-            User.objects.filter(threads_username=user_dashboard)
-            .first()
-            .profile_last_update
-        )
+        # get all data here and add it to data like
+        # data['followers'] = followers
+        # data['bio'] = bio
+        # data['likes'] = likes
+        # get the data from the model``
+        user_queryset = model.objects.filter(username=user_dashboard)
+        
+        if not user_queryset.exists():
+            # add random data
+            data['data'] = self.create_random_data()
 
         return data
 
 
-class DashboardViewTest(ListView):
-    model = Tweet
-    template_name = "mainapp/example_dashboard.html"
-    username = "tropianhs"
+    def create_random_data(self):
+        # This function is just a placeholder to show how you might create random data
+        # In a real application, you would replace this with actual data fetching logic
 
-    def get_queryset(self):
-        # get the dashboard user tweets
-        user_queryset = Tweet.objects.filter(username=self.username)
-        comments = self.request.GET.get("comments")
-        # print(self.username)
-        if comments is None or comments == "yes":
-            queryset = user_queryset
-        # queryset = branch.objects.none()
-        elif comments == "no":
-            queryset = user_queryset.exclude(text__startswith="@")
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-
-        # get the dashboard user tweets
-        user_queryset = Tweet.objects.filter(username=self.username)
-        # get the dashboard user keywords
-        user_queryset_kws = Keywords.objects.filter(username=self.username)
-
-        data = super().get_context_data(**kwargs)
-        stats_score = user_queryset.filter(score__gt=0).aggregate(
-            Avg("score"), Min("score"), Max("score")
-        )
-        stats_normscore = user_queryset.aggregate(
-            Avg("score"), Min("score"), Max("score")
-        )
-        stats_dates = user_queryset.aggregate(Min("time"), Max("time"))
-
-        data["stats_score"] = stats_score
-        data["stats_normscore"] = stats_normscore
-        data["stats_dates"] = stats_dates
-
-        # get also the data about the keyword
-        keywords = user_queryset_kws.order_by("-score")
-        data["keywords"] = keywords
+        # create a random time series
+        start_date = datetime.now() - timedelta(days=30)
+        data = []
+        for i in range(30):
+            date = start_date + timedelta(days=i)
+            likes = random.randint(1, 1000)
+            comments = random.randint(1, 100)
+            reposts = random.randint(1, 100)
+            views = random.randint(1, 100000)
+            post = lorem.sentence()
+            new_follow = random.randint(1, 50)
+            # populate the data 
+            data.append({"date": date, 
+                        "likes": likes, 
+                        "comments": comments,
+                        "reposts": reposts,
+                        "views": views,
+                        "avg_normscore": (likes + comments + reposts) / views,
+                        "post": post,
+                        "new_followers": new_follow})
+        
 
         return data

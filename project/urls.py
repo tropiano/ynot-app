@@ -30,14 +30,6 @@ urlpatterns = [
     path("", views.WelcomeToSpeedPyView.as_view(), name="home"),
     path("privacy_policy", views.PrivacyPolicyView.as_view(), name="privacy_policy"),
     path("dashboard/<str:user>", views.DashboardView.as_view(), name="dashboard"),
-    path(
-        "dashboard_threads/<str:user>",
-        views.DashboardViewThreads.as_view(),
-        name="dashboard_threads",
-    ),
-    path(
-        "example_dashboard", views.DashboardViewTest.as_view(), name="example_dashboard"
-    ),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # accounts management
     path("upload/", upload.model_form_upload, name="upload"),  # upload form
