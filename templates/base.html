@@ -35,11 +35,11 @@
         <script src="{% static "mainapp/lib/d3/d3.layout.cloud.js" %}"></script>
         <script src="{% static "mainapp/lib/d3.wordcloud.js" %}"></script>
         <script src="{% static "mainapp/index.js" %}"></script>
+        <script src="{% static "mainapp/lib/map.js" %}"></script>
 </head>
 <body class="bg-gradient-to-tr to-gray-900 from-blue-800">
 {% block body %}
 {% endblock body %}
-
 {% block extra_body %}
 {% endblock %}
 <!-- base.html -->
@@ -47,6 +47,8 @@
 <script src="https://unpkg.com/htmx.org@2.0.4" 
 integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous">
 </script>
+<!-- geomap -->
+ <script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
 <!-- datatables -->
 <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/plug-ins/2.0.2/dataRender/ellipsis.js"></script>
