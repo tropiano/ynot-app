@@ -167,11 +167,12 @@
       {% endfor %}    
     {% endfor %}
 
-    console.log(all_words);
+    //console.log(all_words);
     // add a color scale of 2 colors 
     var greys = ["#ffffff", "#cccccc", "#999999", "#666666", "#333333", "#000000"];
     var blues = ["#154360", "#1f618d", "#2980b9", "#7fb3d5"];
     var colorScale = d3.scale.ordinal().range(blues);
+
     d3.wordcloud()
     .size([document.getElementById('wordcloud').clientWidth, 600])
     .selector('#wordcloud')
@@ -180,6 +181,21 @@
     .font('Kanit')
     .spiral('rectangular')
     .start();
+
+    // draw the map with fake data
+    dataFeatures = [
+    {'name': 'Italy', 'id': 'IT', 'value': 100}, 
+    {'name': 'France', 'id': 'FR', 'value': 200},
+    {'name': 'Germany', 'id': 'DE', 'value': 150},
+    {'name': 'Spain', 'id': 'ES', 'value': 120},
+    {'name': 'United Kingdom', 'id': 'GB', 'value': 180},
+    {'name': 'Netherlands', 'id': 'NL', 'value': 90},
+    {'name': 'Belgium', 'id': 'BE', 'value': 110},
+    {'name': 'Sweden', 'id': 'SE', 'value': 130},
+    {'name': 'Norway', 'id': 'NO', 'value': 80}
+    ];
+
+    drawMap(dataFeatures);
 
 });
 
