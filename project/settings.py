@@ -24,7 +24,7 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 
 DEBUG = env("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "ynotappdemo.applikuapp.com"]
 
 # Application definition
 
