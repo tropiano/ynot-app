@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
-body {
-    font-family: 'Kanit', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import "tailwindcss";
+
+@theme {  
+    --font-josefine: Josefin Sans, sans-serif;
+
+    --color-yn-blue: #01438f;
+    --color-yn-gray: #eeeeee;
+    --color-yn-violet: #b21f85;
+    --color-yn-pink: #e8aeb8;
+    --color-yn-black: #000000;
+    --color-yn-violetdark: #881264;
+    --color-yn-brown: #331628;
+    --color-yn-white: #fff8f5;
+}

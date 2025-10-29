@@ -24,14 +24,7 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 
 DEBUG = env("DEBUG", default=False)
 
-ALLOWED_HOSTS = [
-    "xtopics.co",
-    "www.xtopics.co",
-    "localhost",
-    "0.0.0.0",
-    "127.0.0.1",
-    "twitteroptimizer.applikuapp.com",
-]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 # Application definition
 
@@ -45,7 +38,6 @@ INSTALLED_APPS = [
     "django_extensions",
     "usermodel.apps.UsermodelConfig",
     "mainapp.apps.MainappConfig",
-    "allauth_ui",
     # 3rd party
     "allauth",  # new
     "allauth.account",  # new
@@ -54,11 +46,11 @@ INSTALLED_APPS = [
     # social providers
     "allauth.socialaccount.providers.google",  # new
     "allauth.socialaccount.providers.twitter_oauth2",
-    "widget_tweaks",
+    # "widget_tweaks",
     # for encryption of variables (user tokens for example)
-    "encrypted_model_fields",
+    # "encrypted_model_fields",
     # for local https
-    "sslserver",
+    # "sslserver",
     # humanize numbers
     "django.contrib.humanize",
     # for sending emails
@@ -108,8 +100,8 @@ DATABASES = {
     # ImproperlyConfigured exception if not found
     #
     # The db() method is an alias for db_url().
-    # "default": env.db(default="sqlite:///db.sqlite3"),
-    "default": env.db("DATABASE_URL")
+    "default": env.db(default="sqlite:///db.sqlite3"),
+    # "default": env.db("DATABASE_URL")
 }
 
 if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
@@ -188,23 +180,25 @@ AUTHENTICATION_BACKENDS = (
 # authentication related
 SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_LOGIN_METHODS = {'email'}
-LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGIN_METHODS = {"email"}
+# LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
+ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*"]
 SOCIALACCOUNT_AUTO_SIGNUP = True  # Automatically create accounts without confirmation
-SOCIALACCOUNT_LOGIN_ON_GET = True # login on get request
+SOCIALACCOUNT_LOGIN_ON_GET = True  # login on get request
 ACCOUNT_SIGNUP_REDIRECT_URL = "/"
+
+ACCOUNT_ADAPTER = "mainapp.adapters.login_redirect.LoginRedirectAdapter"
 
 # uncomment for mailgun email backend  (might not be needed)
 # EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-# uncomment to test locally (no mail server) 
+# uncomment to test locally (no mail server)
 # EMAIL_BACKEND = 'django.core.mail.console.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_PORT = int(env('EMAIL_PORT', default=587))
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = int(env("EMAIL_PORT", default=587))
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_CONFIRMATION_SIGNUP = True
 EMAIL_USE_TLS = False
 

@@ -1,17 +1,19 @@
 {% load static %}
-<html class="bg-gradient-to-tr to-gray-900 from-blue-800">
+<!DOCTYPE html>
 <head>
     <title>{% block title %}{% endblock %}</title>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HW0SW4SW7P"></script>
+    <!-- Google tag (gtag.js)
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-xxxxxxxxx"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-HW0SW4SW7P');
+    
+    gtag('config', 'G-xxxxxxxxx');
     </script>
+    -->
 
     {% block extra_head %}{% endblock %}
         <link rel="stylesheet" href="{% static "mainapp/styles.css" %}"/>
@@ -37,7 +39,7 @@
         <script src="{% static "mainapp/index.js" %}"></script>
         <script src="{% static "mainapp/lib/map.js" %}"></script>
 </head>
-<body class="bg-gradient-to-tr to-gray-900 from-blue-800">
+<body class="bg-yn-brown font-josefine">
 {% block body %}
 {% endblock body %}
 {% block extra_body %}

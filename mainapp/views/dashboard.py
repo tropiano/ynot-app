@@ -1,9 +1,4 @@
 from django.views.generic import ListView
-from mainapp.models.tweet import Tweet
-from mainapp.models.threads_profile import ThreadsProfile
-from mainapp.models.thread import Thread
-from mainapp.models.keywords import Keywords
-from mainapp.models.keywords_threads import KeywordsThreads
 from usermodel.models import User
 from django.db.models import Avg, Min, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,7 +16,6 @@ import lorem
 
 class DashboardView(LoginRequiredMixin, ListView):
     # change the model here to the model you want to display
-    model = Thread
     template_name = "mainapp/dashboard.html"
 
     def get_queryset(self):
@@ -33,15 +27,9 @@ class DashboardView(LoginRequiredMixin, ListView):
         if user_dashboard != username and not self.request.user.is_superuser:
             raise PermissionDenied()
 
-        # get the dashboard user posts
-        user_queryset = Thread.objects.filter(username=user_dashboard)
-        comments = self.request.GET.get("comments")
-
-        return user_queryset
+        return User.objects.filter(username=user_dashboard)
 
     def get_context_data(self, **kwargs):
-
-        model = ThreadsProfile
 
         # filter by the user first
         # get the threads username
@@ -55,19 +43,10 @@ class DashboardView(LoginRequiredMixin, ListView):
         # get the data to enrich
         data = super().get_context_data(**kwargs)
 
-        # get all data here and add it to data like
-        # data['followers'] = followers
-        # data['bio'] = bio
-        # data['likes'] = likes
-        # get the data from the model``
-        user_queryset = model.objects.filter(username=user_dashboard)
-        
-        if not user_queryset.exists():
-            # add random data
-            data['data'] = self.create_random_data()
+        # add random data
+        data["data"] = self.create_random_data()
 
         return data
-
 
     def create_random_data(self):
         # This function is just a placeholder to show how you might create random data
@@ -84,15 +63,18 @@ class DashboardView(LoginRequiredMixin, ListView):
             views = random.randint(1, 100000)
             post = lorem.sentence()
             new_follow = random.randint(1, 50)
-            # populate the data 
-            data.append({"date": date, 
-                        "likes": likes, 
-                        "comments": comments,
-                        "reposts": reposts,
-                        "views": views,
-                        "avg_normscore": (likes + comments + reposts) / views,
-                        "post": post,
-                        "new_followers": new_follow})
-        
+            # populate the data
+            data.append(
+                {
+                    "date": date,
+                    "likes": likes,
+                    "comments": comments,
+                    "reposts": reposts,
+                    "views": views,
+                    "avg_normscore": (likes + comments + reposts) / views,
+                    "post": post,
+                    "new_followers": new_follow,
+                }
+            )
 
         return data

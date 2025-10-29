@@ -17,7 +17,6 @@ class UserAdmin(DefaultUserAdmin):
                     "is_staff",
                     "is_superuser",
                     "is_paid",
-                    "is_processed",
                     "is_free_trial",
                     "groups",
                     "user_permissions",
@@ -46,13 +45,11 @@ class UserAdmin(DefaultUserAdmin):
     )
     list_display = (
         "email",
-        "threads_username",
         "username",
         "first_name",
         "last_name",
         "is_staff",
         "is_paid",
-        "is_processed",
         "is_free_trial",
     )
     search_fields = ("first_name", "last_name", "email")

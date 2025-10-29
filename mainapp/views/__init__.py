@@ -1,12 +1,7 @@
-from .welcome import WelcomeToSpeedPyView
+from .home import HomeView
 from .dashboard import DashboardView
-from .payment_confirm import PaymentConfirmView
-from .privacy_policy import PrivacyPolicyView
-from .payment import stripe_webhook
 
 __all__ = [
-    "WelcomeToSpeedPyView",
+    "HomeView",
     "DashboardView",
-    "PaymentConfirmView",
-    "PrivacyPolicyView",
 ]

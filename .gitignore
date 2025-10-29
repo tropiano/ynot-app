@@ -1,0 +1,14 @@
+.env
+db.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.DS_Store
+.vscode/
+.idea/
+node_modules/
+tailwind.config.js
+tailwindcss
+package-lock.json

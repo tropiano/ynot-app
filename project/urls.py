@@ -17,38 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from mainapp import views
-from mainapp.views import upload
-from mainapp.views import redirect
-from mainapp.views import threads_auth
-from mainapp.views import payment
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
 
 urlpatterns = [
-    path("", views.WelcomeToSpeedPyView.as_view(), name="home"),
-    path("privacy_policy", views.PrivacyPolicyView.as_view(), name="privacy_policy"),
+    path("", views.HomeView.as_view(), name="home"),
     path("dashboard/<str:user>", views.DashboardView.as_view(), name="dashboard"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # accounts management
-    path("upload/", upload.model_form_upload, name="upload"),  # upload form
-    path("success/", upload.success, name="success"),  # upload form success
-    path(
-        "start_oauth_flow/threads/",
-        threads_auth.start_oauth_flow,
-        name="threads_start_oauth_flow",
-    ),  # authentication threads oauth start
-    path(
-        "authorize/threads/", threads_auth.authorize, name="threads_auth"
-    ),  # authentication threads success
-    path(
-        "payment_confirm/", views.PaymentConfirmView.as_view(), name="confirm"
-    ),  # upload form success
-    path(
-        "redirect/", redirect.CurrentUserProfileRedirectView.as_view(), name="redirect"
-    ),  # redirect after login
-    path("webhook/", payment.stripe_webhook, name="stripe-webhook"),
 ]
 
 if settings.DEBUG:

@@ -8,9 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
 from usermodel.managers import UserManager
-from encrypted_model_fields.fields import EncryptedCharField
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -22,8 +20,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     first_name = models.CharField(_("First Name"), max_length=50, blank=True)
-    username = models.CharField(_("Username"), max_length=50)
     last_name = models.CharField(_("Last Name"), max_length=50, blank=True)
+    username = models.CharField(_("Username"), max_length=50)
     is_staff = models.BooleanField(
         _("Staff Status"),
         default=False,
@@ -39,36 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         help_text=_("Designates whether the user has paid his subscription"),
     )
-    is_processed = models.BooleanField(
-        _("Topics Processed"),
-        default=False,
-        help_text=_("Designates whether the topics for this user have been analyzed"),
-    )
-    has_threads = models.BooleanField(
-        _("Threads Connected"),
-        default=False,
-        help_text=_("Connected to Threads profile"),
-    )
-    threads_token = EncryptedCharField(
-        max_length=128,
-        default="",
-    )
-    threads_username = models.CharField(
-        _("Threads Username"),
-        max_length=50,
-        default="",
-    )
-    threads_last_update = models.DateTimeField(
-        _("Last updated Threads Topics analysis"),
-        default=datetime.now() - relativedelta(years=1),
-    )
-    profile_last_update = models.DateTimeField(
-        _("Last updated Threads Profile stats"),
-        default=datetime.now() - relativedelta(years=1),
-    )
-
     is_free_trial = models.BooleanField(_("Free Trial"), default=True)
-
     is_email_confirmed = models.BooleanField(_("Email Confirmed"), default=False)
     date_joined = models.DateTimeField(_("Date Joined"), default=timezone.now)
 
