@@ -100,8 +100,8 @@ DATABASES = {
     # ImproperlyConfigured exception if not found
     #
     # The db() method is an alias for db_url().
-    "default": env.db(default="sqlite:///db.sqlite3"),
-    # "default": env.db("DATABASE_URL")
+    # "default": env.db(default="sqlite:///db.sqlite3"),
+    "default": env.db("DATABASE_URL")
 }
 
 if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
