@@ -13,8 +13,6 @@
   </p> 
   <div class="grid grid-cols-1 text-center">    
   </div>
-
-
     
   <div class="grid grid-cols-1 lg:grid-cols-2 mt-4 rounded-lg gap-2" id="pics">
     <div class="mb-10 text-center lg:text-left shadow-large rounded-xl">
@@ -24,7 +22,7 @@
         Add  Pictures
       </p>
       <form method="post" enctype="multipart/form-data" class="m-4 p-4" novalidate>
-        <div id="image-preview" class="grid grid-cols-3 gap-2 mb-4">
+        <div id="image-preview" class="grid grid-cols-1 gap-2 mb-4">
         </div>
 
         <script>
@@ -41,14 +39,7 @@
                   if (child.id !== 'no-images') preview.removeChild(child);
                 }
               });
-              // ensure placeholder exists
-              if (!document.getElementById('no-images')) {
-                const placeholder = document.createElement('div');
-                placeholder.id = 'no-images';
-                placeholder.className = 'col-span-3 text-sm text-gray-400';
-                placeholder.textContent = 'No images selected';
-                preview.appendChild(placeholder);
-              }
+
             }
 
             function handleFiles(files) {
@@ -64,13 +55,13 @@
                 const url = URL.createObjectURL(file);
 
                 const container = document.createElement('div');
-                container.className = 'preview-item w-full h-32 overflow-hidden rounded-md bg-white flex items-center justify-center shadow-sm';
+                container.className = 'preview-item w-full overflow-hidden rounded-md bg-white flex items-center justify-center shadow-sm';
 
                 const img = document.createElement('img');
                 img.src = url;
                 img.alt = file.name;
                 img.dataset.objectUrl = url;
-                img.className = 'object-cover w-full h-32 rounded-md';
+                img.className = 'object-cover w-full  rounded-md';
 
                 container.appendChild(img);
                 preview.appendChild(container);
@@ -107,14 +98,45 @@
               </label>
               <input id="images" name="images" type="file" accept="image/*" multiple class="hidden">
             </div>
-
-            <button type="submit" name="resize" value="1"
-                    class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
-                    hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              Resize
+            <button id="resize-btn" type="submit" name="resize" value="1"
+                class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
+                hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <svg id="resize-spinner" class="hidden animate-spin -ml-1 mr-2 h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+              <span id="resize-text">Resize</span>
             </button>
-          </div>
 
+            <script>
+              (function(){
+              const btn = document.getElementById('resize-btn');
+              if (!btn) return;
+              const spinner = document.getElementById('resize-spinner');
+              const text = document.getElementById('resize-text');
+              const form = btn.closest('form');
+
+              function showSpinner() {
+                if (btn.disabled) return;
+                // delay disabling to avoid cancelling the submit in some browsers
+                setTimeout(() => {
+                  if (btn.disabled) return;
+                  btn.disabled = true;
+                  if (spinner) spinner.classList.remove('hidden');
+                  if (text) text.textContent = 'Resizing...';
+                }, 10);
+              }
+
+              // attach to form submit if possible (prevents disabling from cancelling submit),
+              // otherwise fall back to click
+              if (form) {
+                form.addEventListener('submit', showSpinner);
+              } else {
+                btn.addEventListener('click', showSpinner);
+              }
+              })();
+            </script>
+          </div>
           <p class="mt-1 text-xs text-gray-400">
             Max 10MB per file.
           </p>
