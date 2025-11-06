@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     # for sending emails
     "anymail",
+    # "admin_soft"
 ]
 
 MIDDLEWARE = [
