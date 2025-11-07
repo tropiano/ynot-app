@@ -23,6 +23,14 @@
       </p>
       <form method="post" enctype="multipart/form-data" class="m-4 p-4" novalidate>
         <div id="image-preview" class="grid grid-cols-1 gap-2 mb-4">
+          {% if upload_limit_reached %}
+            <div id="no-images" class="col-span-1 text-center border rounded-md text-xl text-yn-white p-4 bg-yn-black mx-12 mt-4 mb-4">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              Usage limit reached for today
+            </div>
+          {% else %}
+            <div id="no-images" class="col-span-1 text-sm text-gray-400 p-4">No images selected</div>
+          {% endif %}
         </div>
 
         <script>
@@ -93,14 +101,15 @@
             <div class="flex items-center space-x-4">
               <label for="images"
                      class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
-                     hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer">
+                     hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer ">
                 Choose image
               </label>
               <input id="images" name="images" type="file" accept="image/*" multiple class="hidden">
             </div>
             <button id="resize-btn" type="submit" name="resize" value="1"
-                class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
-                hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
+              hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+              {% if upload_limit_reached %} opacity-50 cursor-not-allowed {% endif %}" {% if upload_limit_reached %} aria-disabled="true" {% endif %}>
               <svg id="resize-spinner" class="hidden animate-spin -ml-1 mr-2 h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
@@ -110,30 +119,34 @@
 
             <script>
               (function(){
-              const btn = document.getElementById('resize-btn');
-              if (!btn) return;
-              const spinner = document.getElementById('resize-spinner');
-              const text = document.getElementById('resize-text');
-              const form = btn.closest('form');
+                const btn = document.getElementById('resize-btn');
+                if (!btn) return;
+                const spinner = document.getElementById('resize-spinner');
+                const text = document.getElementById('resize-text');
+                const form = btn.closest('form');
 
-              function showSpinner() {
-                if (btn.disabled) return;
-                // delay disabling to avoid cancelling the submit in some browsers
-                setTimeout(() => {
-                  if (btn.disabled) return;
-                  btn.disabled = true;
-                  if (spinner) spinner.classList.remove('hidden');
-                  if (text) text.textContent = 'Resizing...';
-                }, 10);
-              }
+                function isDisabled() {
+                  return btn.disabled || btn.getAttribute('aria-disabled') === 'true' || btn.classList.contains('opacity-50');
+                }
 
-              // attach to form submit if possible (prevents disabling from cancelling submit),
-              // otherwise fall back to click
-              if (form) {
-                form.addEventListener('submit', showSpinner);
-              } else {
-                btn.addEventListener('click', showSpinner);
-              }
+                function showSpinner() {
+                  if (isDisabled()) return;
+                  // delay disabling to avoid cancelling the submit in some browsers
+                  setTimeout(() => {
+                    if (isDisabled()) return;
+                    //btn.disabled = true;
+                    if (spinner) spinner.classList.remove('hidden');
+                    if (text) text.textContent = 'Resizing...';
+                  }, 10);
+                }
+
+                // attach to form submit if possible (prevents disabling from cancelling submit),
+                // otherwise fall back to click
+                if (form) {
+                  form.addEventListener('submit', showSpinner);
+                } else {
+                  btn.addEventListener('click', showSpinner);
+                }
               })();
             </script>
           </div>
