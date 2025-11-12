@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="p-4 font-kanit items-center justify-center">
+  <p class="flex font-semibold lg:text-6xl justify-center text-gray-100
+            text-8xl m-6 items-center text-center align-center" id="alltopics"> 
+    {{ APP_NAME }} Free Trial
+  </p> 
+    
+  <div class="grid grid-cols-1 lg:grid-cols-2 mt-4 rounded-lg gap-2" id="pics">
+    <div class="mb-10 text-center lg:text-left shadow-large rounded-xl border bg-yn-gray">
+      <p class="flex font-semibold lg:text-5xl 
+          lg:text-left lg:align-left lg:justify-left lg:items-left 
+          text-8xl m-4 p-4 items-center text-center align-center text-yn-black" id="alltopics">
+        Add  Pictures
+      </p>
+      <form method="post" enctype="multipart/form-data" class="m-4 p-4" novalidate>
+        {% if upload_limit_reached %}
+          <div id="no-images" class="col-span-1 text-center border rounded-md text-xl text-yn-white p-4 bg-yn-violet mx-12 mt-4 mb-4">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              Usage limit reached for today
+          </div>
+          <div class="flex justify-center">
+            <a href="{% url 'account_signup' %}">
+              <button type="button" class="text-gray-200 bg-yn-blue hover:bg-yn-blue/80 focus:ring-4 
+              focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
+              items-center justify-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black cursor-pointer">
+              Sign up for more!
+              </button>
+            </a>
+          </div>
+        {% else %}
+        <div id="image-preview" class="grid grid-cols-4 gap-2 mb-4">
+          <div id="no-images" class="col-span-1 text-sm text-gray-400 p-4">No images selected</div>
+        </div>
+        {% endif %}
+
+        <script>
+          (function(){
+            const preview = document.getElementById('image-preview');
+            const noImages = document.getElementById('no-images');
+
+            function clearPreviews() {
+              Array.from(preview.children).forEach(child => {
+                if (child.tagName === 'IMG' || child.classList.contains('preview-item') || child.id === 'no-images') {
+                  if (child.tagName === 'IMG' && child.dataset.objectUrl) {
+                    URL.revokeObjectURL(child.dataset.objectUrl);
+                  }
+                  if (child.id !== 'no-images') preview.removeChild(child);
+                }
+              });
+
+            }
+
+            function handleFiles(files) {
+              // remove placeholder
+              const placeholder = document.getElementById('no-images');
+              if (placeholder) placeholder.remove();
+
+              clearPreviews();
+              if (!files || files.length === 0) return;
+
+              Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                const url = URL.createObjectURL(file);
+
+                const container = document.createElement('div');
+                container.className = 'preview-item w-full overflow-hidden rounded-md bg-white flex items-center justify-center shadow-sm';
+
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = file.name;
+                img.dataset.objectUrl = url;
+                img.className = 'object-cover w-full  rounded-md';
+
+                container.appendChild(img);
+                preview.appendChild(container);
+              });
+            }
+
+            function attachListener() {
+              const input = document.getElementById('images');
+              if (!input) return false;
+              input.addEventListener('change', function(e){
+                handleFiles(e.target.files);
+              });
+              return true;
+            }
+
+            // try to attach immediately, otherwise wait for DOM changes (input is below in template)
+            if (!attachListener()) {
+              const obs = new MutationObserver(() => {
+                if (attachListener()) obs.disconnect();
+              });
+              obs.observe(document.body, { childList: true, subtree: true });
+            }
+          })();
+        </script>
+        {% csrf_token %}
+
+        <div class="mb-4">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+              <label for="images"
+                     class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
+                     hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer ">
+                Choose image
+              </label>
+              <input id="images" name="images" type="file" accept="image/*" multiple class="hidden">
+            </div>
+            <button id="resize-btn" type="submit" name="resize" value="1"
+              class="inline-flex items-center px-4 py-2 bg-yn-violet text-gray-200 text-sm font-medium rounded-md shadow-sm 
+              hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 
+              {% if upload_limit_reached %} opacity-50 cursor-not-allowed {% endif %}" {% if upload_limit_reached %} aria-disabled="true" {% endif %}>
+              <svg id="resize-spinner" class="hidden animate-spin -ml-1 mr-2 h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+              <span id="resize-text">Resize</span>
+            </button>
+
+            <script>
+              (function(){
+                const btn = document.getElementById('resize-btn');
+                if (!btn) return;
+                const spinner = document.getElementById('resize-spinner');
+                const text = document.getElementById('resize-text');
+                const form = btn.closest('form');
+
+                function isDisabled() {
+                  return btn.disabled || btn.getAttribute('aria-disabled') === 'true' || btn.classList.contains('opacity-50');
+                }
+
+                function showSpinner() {
+                  if (isDisabled()) return;
+                  // delay disabling to avoid cancelling the submit in some browsers
+                  setTimeout(() => {
+                    if (isDisabled()) return;
+                    //btn.disabled = true;
+                    if (spinner) spinner.classList.remove('hidden');
+                    if (text) text.textContent = 'Resizing...';
+                  }, 10);
+                }
+
+                // attach to form submit if possible (prevents disabling from cancelling submit),
+                // otherwise fall back to click
+                if (form) {
+                  form.addEventListener('submit', showSpinner);
+                } else {
+                  btn.addEventListener('click', showSpinner);
+                }
+              })();
+            </script>
+          </div>
+          <p class="mt-1 text-xs text-gray-400">
+            Max 10MB per file.
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="mb-10 text-center lg:text-left bg-gray-200 shadow-large rounded-xl">
+      <p class="flex font-semibold lg:text-5xl 
+          lg:text-left lg:align-left lg:justify-left lg:items-left 
+          text-8xl m-4 p-4 items-center text-center align-center">
+        Your Resized Pictures
+      </p>
+        <div class="p-4">
+          <div class="grid grid-cols-4 gap-4 m-4">
+            {% if resized_images %}
+              {% for img in resized_images %}
+                {% if img.url %}
+                  {% with src=img.url name=img.name %}
+                    <div class="bg-white rounded-md shadow-sm overflow-hidden">
+                      <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
+                        <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
+                      </a>
+                      <div class="p-2 text-xs text-gray-500">
+                          {{ img.saved_time }}
+                      </div>
+                      <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
+                        <div class="truncate">{{ name }}</div>
+                        <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
+                          <i class="bi bi-download"></i>
+                        </a>
+                      </div>
+                    </div>
+                  {% endwith %}
+                {% else %}
+                  {% with src=img name=img %}
+                    <div class="bg-white rounded-md shadow-sm overflow-hidden">
+                      <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
+                        <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
+                      </a>
+                      <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
+                        <div class="truncate">{{ name }}</div>
+                        <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
+                          <i class="bi bi-download"></i>
+                        </a>
+                      </div>
+                    </div>
+                  {% endwith %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <div class="col-span-3 text-sm text-gray-400 p-4">No resized images</div>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-4 md:p-5 text-center">
+    <svg class="mx-auto mb-4 text-red-600 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+    </svg>
+    <h3 class="mb-5 text-lg font-normal text-red-800 dark:text-gray-400">Free trial expired? Choose a paid plan below.</h3>
+</div>
+{% include 'mainapp/pricing.html' %}
+
+</div>
+{% endblock %}

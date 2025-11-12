@@ -31,6 +31,7 @@ urlpatterns = [
     path("", views.HomeView.as_view(), name="logout"),
     path("dashboard/<str:user>", views.DashboardView.as_view(), name="dashboard"),
     path("dashboard_advanced/<str:user>", views.DashboardViewAdvanced.as_view(), name="dashboard_advanced"),
+    path("resize", views.ResizerView.as_view(), name="resize"),
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # accounts management
     path('tables/', views.tables, name='tables')
