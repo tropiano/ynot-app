@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "allauth",  # new
     "allauth.account",  # new
     "allauth.socialaccount",  # new
-    "slippers",
+    # "slippers",
     # social providers
     "allauth.socialaccount.providers.google",  # new
     "allauth.socialaccount.providers.twitter_oauth2",
