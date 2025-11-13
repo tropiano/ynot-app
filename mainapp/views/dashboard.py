@@ -75,7 +75,7 @@ class DashboardView(LoginRequiredMixin, ListView):
 
         # For normal GET, include images in the template context
         context["resized_images"] = sorted(images, key=lambda x: x["saved_time"] or "", reverse=True)
-        print([x['saved_date'] for x in context["resized_images"]])
+        # print([x['saved_date'] for x in context["resized_images"]])
 
         return self.render_to_response(context)
     
