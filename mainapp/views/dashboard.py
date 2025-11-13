@@ -38,7 +38,7 @@ class DashboardView(LoginRequiredMixin, ListView):
         context = self.get_context_data()
         context["upload_limit_reached"] = False
 
-        # rate-limit uploads per IP: if >= 10 uploads in last 24 hours, add flag to context
+        # rate-limit uploads per IP: if >= X uploads in last 24 hours, add flag to context
         client_ip = self._get_client_ip(request) or "unknown"
         db_count = self._count_uploads_last_24h(client_ip)
         if db_count >= LIMIT:
@@ -75,6 +75,7 @@ class DashboardView(LoginRequiredMixin, ListView):
 
         # For normal GET, include images in the template context
         context["resized_images"] = sorted(images, key=lambda x: x["saved_time"] or "", reverse=True)
+        print([x['saved_date'] for x in context["resized_images"]])
 
         return self.render_to_response(context)
     
