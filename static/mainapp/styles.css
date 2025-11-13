@@ -378,6 +378,9 @@
   .col-span-1 {
     grid-column: span 1 / span 1;
   }
+  .col-span-2 {
+    grid-column: span 2 / span 2;
+  }
   .col-span-3 {
     grid-column: span 3 / span 3;
   }
@@ -579,6 +582,9 @@
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
@@ -650,6 +656,9 @@
   }
   .inline-flex {
     display: inline-flex;
+  }
+  .aspect-square {
+    aspect-ratio: 1 / 1;
   }
   .h-0\.5 {
     height: calc(var(--spacing) * 0.5);
@@ -997,6 +1006,13 @@
       margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+  .space-y-6 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
   .-space-x-12 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -1272,6 +1288,9 @@
   }
   .bg-yn-violet {
     background-color: var(--color-yn-violet);
+  }
+  .bg-yn-white {
+    background-color: var(--color-yn-white);
   }
   .bg-gradient-to-r {
     --tw-gradient-position: to right in oklab;
@@ -2530,6 +2549,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-fuchsia-500);
+      }
+    }
+  }
+  .hover\:text-indigo-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-indigo-600);
       }
     }
   }

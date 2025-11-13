@@ -19,7 +19,7 @@
       <p class="flex font-semibold lg:text-5xl 
           lg:text-left lg:align-left lg:justify-left lg:items-left 
           text-8xl m-4 p-4 items-center text-center align-center text-gray-200" id="alltopics">
-        Add  Pictures
+        Add Images
       </p>
       <form method="post" enctype="multipart/form-data" class="m-4 p-4" novalidate>
         <div id="image-preview" class="grid grid-cols-1 gap-2 mb-4">
@@ -161,47 +161,69 @@
       <p class="flex font-semibold lg:text-5xl 
           lg:text-left lg:align-left lg:justify-left lg:items-left 
           text-8xl m-4 p-4 items-center text-center align-center">
-        Your Resized Pictures
+        Your Resized Images
       </p>
         <div class="p-4">
-          <div class="grid grid-cols-2 gap-4 m-4">
+            <div class="space-y-6 m-4">
             {% if resized_images %}
-              {% for img in resized_images %}
-                {% if img.url %}
-                  {% with src=img.url name=img.name %}
-                    <div class="bg-white rounded-md shadow-sm overflow-hidden">
+              {% regroup resized_images by saved_date as images_by_date %}
+              <div class="grid grid-cols-2 gap-4">
+                {% for date_group in images_by_date %}
+                <div class="border border-gray-300 bg-yn-white rounded-none p-4">
+                    <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold text-gray-700">{{ date_group.grouper }}</h3>
+                    <button onclick="downloadAllImages(this)" data-date="{{ date_group.grouper }}" class="text-yn-violet hover:text-indigo-600 transition-colors cursor-pointer" title="Download all images from {{ date_group.grouper }}">
+                      <i class="bi bi-download text-xl"></i>
+                    </button>
+                    </div>
+                    <script>
+                    function downloadAllImages(btn) {
+                      const container = btn.closest('.border');
+                      const images = container.querySelectorAll('a[download]');
+                      images.forEach((link, index) => {
+                      setTimeout(() => {
+                        link.click();
+                      }, index * 200);
+                      });
+                    }
+                    </script>
+                  <div class="grid grid-cols-2 gap-4">
+                    {% for img in date_group.list|slice:":4" %}
+                    {% if img.url %}
+                    {% with src=img.url name=img.name %}
+                      <div class="bg-white rounded-md shadow-sm overflow-hidden">
+                      <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
+                      <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full aspect-square">
+                      </a>
+                      </div>
+                    {% endwith %}
+                    {% else %}
+                    {% with src=img name=img %}
+                      <div class="bg-white rounded-md shadow-sm overflow-hidden">
                       <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
                         <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
                       </a>
-                      <div class="p-2 text-xs text-gray-500">
-                          {{ img.saved_time }}
-                      </div>
                       <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
                         <div class="truncate">{{ name }}</div>
                         <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
-                          <i class="bi bi-download"></i>
+                        <i class="bi bi-download"></i>
                         </a>
                       </div>
-                    </div>
-                  {% endwith %}
-                {% else %}
-                  {% with src=img name=img %}
-                    <div class="bg-white rounded-md shadow-sm overflow-hidden">
-                      <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
-                        <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
-                      </a>
-                      <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
-                        <div class="truncate">{{ name }}</div>
-                        <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
-                          <i class="bi bi-download"></i>
-                        </a>
                       </div>
-                    </div>
-                  {% endwith %}
-                {% endif %}
-              {% endfor %}
+                    {% endwith %}
+                    {% endif %}
+                  {% endfor %}
+                  {% if date_group.list|length > 4 %}
+                      <div class="col-span-2 text-center text-sm text-gray-500 p-2">
+                      + {{ date_group.list|length|add:"-4" }} more
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
             {% else %}
-              <div class="col-span-3 text-sm text-gray-400 p-4">No resized images</div>
+              <div class="text-sm text-gray-400 p-4">No resized images</div>
             {% endif %}
           </div>
         </div>
