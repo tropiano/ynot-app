@@ -28,7 +28,7 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # Expose Gunicorn port
-EXPOSE 8000
+EXPOSE 80
 
-# Run Gunicorn WSGI server, binding to 0.0.0.0:8000
-CMD ["gunicorn", "project.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run Gunicorn WSGI server, binding to 0.0.0.0:80
+CMD ["gunicorn", "project.wsgi:application", "--bind", "0.0.0.0:80"]
