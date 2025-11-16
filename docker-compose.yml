@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app:
+    build: .
+    entrypoint: /home/app/entrypoint.sh
+    ports:
+      - "80:80"
+    environment:
+      - UPLOAD_LIMIT_PER_DAY=${UPLOAD_LIMIT_PER_DAY}
+      - APP_NAME=${APP_NAME}
+      - DATABASE_URL=${DATABASE_URL}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+    volumes:
+      - sqlite-data:/data/db
+volumes:
+  sqlite-data:

@@ -21,11 +21,15 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy entrypoint script
+COPY entrypoint.sh /home/app/entrypoint.sh 
+RUN chmod 777 /home/app/entrypoint.sh
+
 # Copy project files
 COPY . .
 
-# Apply database migrations
-RUN python manage.py migrate
+# Create database directory with appropriate permissions
+RUN mkdir -p /data/db && chmod 777 /data/db
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
