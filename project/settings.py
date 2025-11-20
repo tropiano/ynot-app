@@ -29,7 +29,8 @@ ALLOWED_HOSTS = ["localhost",
                  "127.0.0.1", 
                  "ynotappdemo.applikuapp.com", 
                  "188.166.150.197", 
-                 "*.ynotdesign.co"]
+                 ".ynotdesign.co"
+                 ]
 
 # Application definition
 
