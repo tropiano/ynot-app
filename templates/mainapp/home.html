@@ -8,9 +8,17 @@
     <p class="lg:m-1 text-8xl lg:text-6xl text-gray-100 font-bold p-3 uppercase leading-none">
       {{APP_NAME}}
     </p> 
-    <p class="lg:m-1 lg:text-2xl text-5xl text-gray-100 p-3">
-    Image resizing for your stores and websites, powered by AI.
+    <p class="lg:m-1 lg:text-4xl text-5xl text-gray-100 p-3">
+    Perfect product images. Instantly.
     </p>
+    
+    <p class="lg:m-1 lg:text-2xl text-5xl text-gray-100 p-3">
+    Auto-crop, resize and export square 1028x1028 images for marketplaces.<br>
+    No Photoshop, no guesswork. <br> 
+    5 images/day free.
+    </p>
+    
+
     {% if user.is_anonymous %}
     <div class="lg:text-left lg:content-left lg:justify-left m-3 mt-2">
       <!-- Trigger Button -->
@@ -18,9 +26,17 @@
         <button type="button" class="text-gray-900 bg-yn-gray hover:bg-yn-gray/80 focus:ring-4 
         focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
         inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black">
-          Try it for free
+          Try 5 free images
         </button>
+      </a>
+      <a href="#pricing">
+        <a href="#pricing" class="text-gray-200 hover:text-yn-gray font-semibold text-normal underline">
+          See Pricing
+        </a>
       </a> 
+      <p class="text-gray-400 text-sm mt-2">
+        Works with JPG/PNG. Preserve original axpect ratio when you want.<br>Smart centering with AI.
+      </p>
     </div>
     {% elif user.is_authenticated %}
       {% if user.threads_username %}
@@ -42,50 +58,33 @@
   </div>
   <div class="items-center justify-center text-center lg:text-left my-20 mx-20 lg:ml-32 lg:mr-4">
       <p class="my-5 text-7xl lg:text-5xl text-gray-100 font-bold p-3">
-        What you get
+        How it works (3 steps)
       </p>
       <ul class="max-w-auto space-y-1 text-gray-300 list-inside ml-3 lg:text-4xl text-5xl">
-          <li class="flex items-center lg:text-2xl">
-              <svg class="w-6 h-6 me-1 text-yn-pink flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-              </svg>
-              Unlimited picture uploads
+          <li class="flex items-center lg:text-2xl mb-4">
+              <i class="bi bi-1-circle-fill me-1 mb-8  text-yn-pink"></i>
+                Upload <br>
+                Drag & Drop: bulk upload or single files
           </li>
-          <li class="flex items-center lg:text-2xl">
-              <svg class="w-6 h-6 me-1 text-yn-pink flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-              </svg>
-              AI powered image resizing
+          <li class="flex items-center lg:text-2xl mb-4">
+              <i class="bi bi-2-circle-fill me-1 mb-16  text-yn-pink"></i>
+                Auto-fit <br>
+                AI detects the product, autofits the image and gives you ready for e-commerce image
           </li>
-          <li class="flex items-center lg:text-2xl">
-              <svg class="w-6 h-6 me-1 text-yn-pink flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-              </svg>
-              Detailed image reports
-          </li>
-          <li class="flex items-center lg:text-2xl">
-            <svg class="w-6 h-6 me-1 text-yn-pink flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            Fast processing times
-          </li>
-          <li class="flex items-center lg:text-2xl">
-            <svg class="w-6 h-6 me-1 text-yn-pink flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            No watermarks
-          </li>
-          <li class="flex items-center lg:text-2xl">
-            <svg class="w-6 h-6 me-1 text-yn-pink flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            10 days free trial
+          <li class="flex items-center lg:text-2xl mb-4">
+              <i class="bi bi-3-circle-fill me-1 mb-8  text-yn-pink"></i>
+                Export <br>
+                Download single images or ZIP batches
           </li>
       </ul>
-      <p class="text-3xl lg:text-xl p-3 text-gray-300 underline">
-        Privacy first. 
-        We don't store your personal information.
-      </p>
+      <a href="{% url 'resize' %}">
+        <button type="button" class="ml-10   mt-8 flex text-center items-center justify-center text-gray-900 bg-yn-gray hover:bg-yn-gray/80 focus:ring-4 
+        focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
+        inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black">
+        Try it now - 5 free images
+      </button>
+      </a>
+
     <br>
       {% if user.is_anonymous %}
         <div class="text-center m-4">
@@ -110,6 +109,60 @@
         <source src="{% static 'mainapp/demo.mp4' %}#t=1.5">
         Your browser does not support the video tag.
       </video>
+  </div>
+</div>
+<div class="bg-gray-900 py-20 my-20">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-xl text-center mb-16">
+      <h2 class="text-5xl lg:text-4xl font-bold tracking-tight text-gray-100 mb-4">
+        What our users say
+      </h2>
+      <p class="text-xl lg:text-lg text-gray-300">
+        Join our satisfied customers using {{APP_NAME}}
+      </p>
+    </div>
+    <div class="mx-auto grid max-w-2xl grid-cols-1 lg:grid-cols-2 gap-8 lg:max-w-none">
+    <!-- Testimonial 1 -->
+      <div class="bg-gray-800 rounded-xl p-8 shadow-lg">
+        <div class="flex items-center mb-4">
+          <div class="flex text-yn-pink">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+          </div>
+        </div>
+        <p class="text-gray-300 text-lg mb-6">
+          "Saved our listing team hours every week."
+        </p>
+        <div class="flex items-center">
+          <div>
+            <p class="text-sm text-gray-400">E-commerce manager</p>
+          </div>
+        </div>
+      </div>
+      <!-- Testimonial 2 -->
+      <div class="bg-gray-800 rounded-xl p-8 shadow-lg">
+        <div class="flex items-center mb-4">
+          <div class="flex text-yn-pink">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+          </div>
+        </div>
+        <p class="text-gray-300 text-lg mb-6">
+          "No more photoshop, our conversion rate is up after switching!"
+        </p>
+        <div class="flex items-center">
+          <div>
+            <p class="text-sm text-gray-400">Marketplace seller</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
