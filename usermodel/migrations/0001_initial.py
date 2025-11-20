@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
                 ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('email', models.EmailField(db_collation='NOCASE', error_messages={'unique': 'A user with such email already exists'}, max_length=255)),
+                ('email', models.EmailField(error_messages={'unique': 'A user with such email already exists'}, max_length=255)),
                 ('first_name', models.CharField(blank=True, max_length=50, verbose_name='First Name')),
                 ('last_name', models.CharField(blank=True, max_length=50, verbose_name='Last Name')),
                 ('username', models.CharField(max_length=50, verbose_name='Username')),

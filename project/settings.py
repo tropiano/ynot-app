@@ -24,7 +24,12 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 
 DEBUG = env("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "ynotappdemo.applikuapp.com", "188.166.150.197"]
+ALLOWED_HOSTS = ["localhost", 
+                 "0.0.0.0", 
+                 "127.0.0.1", 
+                 "ynotappdemo.applikuapp.com", 
+                 "188.166.150.197", 
+                 "*.ynotdesign.co"]
 
 # Application definition
 
@@ -102,7 +107,14 @@ DATABASES = {
     #
     # The db() method is an alias for db_url().
     # "default": env.db(default="sqlite:///db.sqlite3"),
-    "default": env.db("DATABASE_URL")
+    "default": {"DATABASE_URL": env.db("DATABASE_URL"),
+                "ENGINE": 'django.db.backends.postgresql',   # force postgres engine
+                'NAME': os.getenv('PG_DB', 'mydatabase'),
+                'USER': os.getenv('PG_USER', 'myuser'),
+                'PASSWORD': os.getenv('PG_PASSWORD', 'mypassword'),
+                'HOST': os.getenv('PG_HOST', 'db'),
+                'PORT': os.getenv('PG_PORT', '5432'),
+                }
 }
 
 if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":

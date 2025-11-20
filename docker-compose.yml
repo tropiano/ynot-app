@@ -1,10 +1,28 @@
 version: "3"
 services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${PG_DB}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   app:
     build: .
     entrypoint: /home/app/entrypoint.sh
     ports:
       - "80:80"
+    depends_on:
+      db:
+        condition: service_healthy
     environment:
       - UPLOAD_LIMIT_PER_DAY=${UPLOAD_LIMIT_PER_DAY}
       - APP_NAME=${APP_NAME}
@@ -14,6 +32,6 @@ services:
       - EMAIL_HOST_USER=${EMAIL_HOST_USER}
       - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
     volumes:
-      - sqlite-data:/data/db
+      - .:/code
 volumes:
-  sqlite-data:
+  postgres_data:

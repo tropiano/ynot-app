@@ -12,6 +12,7 @@ gunicorn==23.0.0
 idna==3.11
 lorem==0.1.1
 packaging==25.0
+psycopg2==2.9.11
 pycparser==2.23
 PyJWT==2.10.1
 requests==2.32.5
