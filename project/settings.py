@@ -223,10 +223,10 @@ ACCOUNT_ADAPTER = "mainapp.adapters.login_redirect.LoginRedirectAdapter"
 # uncomment to test locally (no mail server)
 # EMAIL_BACKEND = 'django.core.mail.console.smtp.EmailBackend'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_PORT = int(env("EMAIL_PORT", default=587))
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_CONFIRMATION_SIGNUP = True
 EMAIL_USE_TLS = False
 
