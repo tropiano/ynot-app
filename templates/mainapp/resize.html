@@ -164,47 +164,147 @@
       <p class="flex font-semibold lg:text-5xl 
           lg:text-left lg:align-left lg:justify-left lg:items-left 
           text-8xl m-4 p-4 items-center text-center align-center">
-        Your Resized Pictures
+        Your Resized Images
       </p>
         <div class="p-4">
-          <div class="grid grid-cols-4 gap-4 m-4">
+            <div class="space-y-6 m-4">
             {% if resized_images %}
-              {% for img in resized_images %}
-                {% if img.url %}
-                  {% with src=img.url name=img.name %}
-                    <div class="bg-white rounded-md shadow-sm overflow-hidden">
-                      <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
-                        <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
-                      </a>
-                      <div class="p-2 text-xs text-gray-500">
-                          {{ img.saved_time }}
-                      </div>
-                      <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
-                        <div class="truncate">{{ name }}</div>
-                        <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
-                          <i class="bi bi-download"></i>
-                        </a>
-                      </div>
+              {% regroup resized_images by saved_date as images_by_date %}
+              <div class="grid grid-cols-2 gap-4">
+                {% for date_group in images_by_date %}
+                <div class="border border-gray-300 bg-yn-white rounded-none p-4">
+                    <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold text-gray-700">{{ date_group.grouper }}</h3>
+                    <button onclick="downloadAllImages(this)" data-date="{{ date_group.grouper }}" class="text-yn-violet hover:text-indigo-600 transition-colors cursor-pointer" title="Download all images from {{ date_group.grouper }}">
+                      <i class="bi bi-download text-xl"></i>
+                    </button>
                     </div>
-                  {% endwith %}
-                {% else %}
-                  {% with src=img name=img %}
-                    <div class="bg-white rounded-md shadow-sm overflow-hidden">
-                      <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
-                        <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
-                      </a>
-                      <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
-                        <div class="truncate">{{ name }}</div>
-                        <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
-                          <i class="bi bi-download"></i>
+                    <script>
+                    function downloadAllImages(btn) {
+                      const container = btn.closest('.border');
+                      const images = container.querySelectorAll('a[download]');
+                      images.forEach((link, index) => {
+                      setTimeout(() => {
+                        link.click();
+                      }, index * 200);
+                      });
+                    }
+                    </script>
+                  <div class="grid grid-cols-2 gap-4">
+                    {% for img in date_group.list|slice:":4" %}
+                      {% if img.url %}
+                      {% with src=img.url name=img.name %}
+                        <div class="bg-white rounded-md shadow-sm overflow-hidden">
+                        <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
+                        <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full aspect-square">
                         </a>
-                      </div>
-                    </div>
-                  {% endwith %}
-                {% endif %}
-              {% endfor %}
+                        </div>
+                      {% endwith %}
+                      {% else %}
+                      {% with src=img name=img %}
+                        <div class="bg-white rounded-md shadow-sm overflow-hidden">
+                        <a href="{{ src }}" target="_blank" rel="noopener noreferrer" class="block">
+                          <img src="{{ src }}" alt="{{ name }}" class="object-cover w-full h-48">
+                        </a>
+                        <div class="p-2 text-sm text-gray-600 flex justify-between items-center">
+                          <div class="truncate">{{ name }}</div>
+                          <a href="{{ src }}" download class="ml-2 text-yn-violet text-xs inline-flex items-center space-x-1">
+                          <i class="bi bi-download"></i>
+                          </a>
+                        </div>
+                        </div>
+                      {% endwith %}
+                      {% endif %}
+                    {% endfor %}
+                    {% if date_group.list|length > 4 %}
+                        <div class="col-span-2 text-center text-sm text-gray-500 p-2 cursor-pointer hover:text-gray-700 hover:underline" 
+                        onclick="openImageModal('{{ date_group.grouper }}', {{ date_group.list }})">
+                        + {{ date_group.list|length|add:"-4" }} more
+                        </div>
+                        <script>
+                        function openImageModal(date, imageList) {
+                          // Create modal backdrop
+                          const backdrop = document.createElement('div');
+                          backdrop.className = 'fixed inset-0 bg-opacity-20 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+                          backdrop.onclick = (e) => {
+                          if (e.target === backdrop) backdrop.remove();
+                          };
+
+                          // Create modal content
+                          const modal = document.createElement('div');
+                          modal.className = 'bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col';
+
+                            // Modal header
+                            const header = document.createElement('div');
+                            header.className = 'flex justify-between items-center p-6 border-b border-gray-200';
+                            header.innerHTML = `
+                            <h3 class="text-2xl font-semibold text-gray-800">Images from ${date}</h3>
+                            <div class="flex items-center gap-3">
+                            <button onclick="downloadAllImagesModal(this)" class="text-yn-violet hover:text-indigo-600 transition-colors cursor-pointer flex items-center gap-2" title="Download all images">
+                            <i class="bi bi-download text-xl"></i>
+                            <span class="text-sm">Download All</span>
+                            </button>
+                            <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-gray-600 text-3xl leading-none">&times;</button>
+                            </div>
+                            `;
+
+                            // Function to download all images in modal
+                            function downloadAllImagesModal(btn) {
+                            const modal = btn.closest('.bg-white');
+                            const links = modal.querySelectorAll('a[download]');
+                            links.forEach((link, index) => {
+                              setTimeout(() => {
+                              link.click();
+                              }, index * 200);
+                            });
+                            }
+                            // Make function available globally for the button
+                            window.downloadAllImagesModal = downloadAllImagesModal;
+
+                          // Modal body with scrollable grid
+                          const body = document.createElement('div');
+                          body.className = 'overflow-y-auto p-6';
+                          
+                          const grid = document.createElement('div');
+                          grid.className = 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4';
+
+                          // Get all images for this date from the server-side data
+                          const allImages = imageList.map(img => ({
+                          src: img.url || img,
+                          alt: img.name || img
+                          }));
+
+                          allImages.forEach(img => {
+                          const imgContainer = document.createElement('div');
+                          imgContainer.className = 'bg-gray-100 rounded-md shadow-sm overflow-hidden';
+                          imgContainer.innerHTML = `
+                            <a href="${img.src}" target="_blank" rel="noopener noreferrer" class="block">
+                            <img src="${img.src}" alt="${img.alt}" class="object-cover w-full aspect-square hover:opacity-90 transition-opacity">
+                            </a>
+                            <div class="p-2 text-xs text-gray-600 flex justify-between items-center">
+                            <div class="truncate">${img.alt}</div>
+                            <a href="${img.src}" download class="ml-2 text-yn-violet inline-flex items-center">
+                              <i class="bi bi-download"></i>
+                            </a>
+                            </div>
+                          `;
+                          grid.appendChild(imgContainer);
+                          });
+
+                          body.appendChild(grid);
+                          modal.appendChild(header);
+                          modal.appendChild(body);
+                          backdrop.appendChild(modal);
+                          document.body.appendChild(backdrop);
+                        }
+                        </script>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
             {% else %}
-              <div class="col-span-3 text-sm text-gray-400 p-4">No resized images</div>
+              <div class="text-sm text-gray-400 p-4">No resized images</div>
             {% endif %}
           </div>
         </div>

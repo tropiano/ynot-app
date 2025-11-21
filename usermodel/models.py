@@ -32,6 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True,
         help_text=_("Designates whether this user should be treated as active."),
     )
+    credits = models.IntegerField(_("User credits"), default=0)
     is_paid = models.BooleanField(
         _("Paid User"),
         default=False,

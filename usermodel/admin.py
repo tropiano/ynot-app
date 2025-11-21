@@ -18,6 +18,7 @@ class UserAdmin(DefaultUserAdmin):
                     "is_superuser",
                     "is_paid",
                     "is_free_trial",
+                    "credits",  
                     "groups",
                     "user_permissions",
                 ),
@@ -46,11 +47,10 @@ class UserAdmin(DefaultUserAdmin):
     list_display = (
         "email",
         "username",
-        "first_name",
-        "last_name",
         "is_staff",
         "is_paid",
         "is_free_trial",
+        "credits",
     )
     search_fields = ("first_name", "last_name", "email")
     ordering = ("email",)

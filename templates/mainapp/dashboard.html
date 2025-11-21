@@ -24,10 +24,19 @@
       <form method="post" enctype="multipart/form-data" class="m-4 p-4" novalidate>
         <div id="image-preview" class="grid grid-cols-1 gap-2 mb-4">
           {% if upload_limit_reached %}
-            <div id="no-images" class="col-span-1 text-center border rounded-md text-xl text-yn-white p-4 bg-yn-black mx-12 mt-4 mb-4">
+            <div id="no-images" class="col-span-1 text-center border rounded-md text-xl text-yn-white p-4 bg-yn-violet mx-12 mt-4 mb-4">
               <i class="bi bi-exclamation-triangle-fill"></i>
               Usage limit reached for today
             </div>
+            <div class="flex justify-center">
+            <a href="{% url 'home' %}#pricing">
+              <button type="button" class="text-gray-200 bg-yn-blue hover:bg-yn-blue/80 focus:ring-4 
+              focus:outline-none focus:ring-[#4285F4]/50 font-semibold text-xl rounded-lg text-sm px-12 py-2.5 text-center 
+              items-center justify-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 border-2 border-black cursor-pointer">
+              Choose a plan to keep resizing!
+              </button>
+            </a>
+          </div>
           {% else %}
             <div id="no-images" class="col-span-1 text-sm text-gray-400 p-4">No images selected</div>
           {% endif %}

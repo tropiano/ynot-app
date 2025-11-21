@@ -9,7 +9,8 @@ env = environ.Env(
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+# environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+environ.Env.read_env(os.path.join(BASE_DIR, ".env.dev"))
 
 SECRET_KEY = env("SECRET_KEY", default="change_me")
 FIELD_ENCRYPTION_KEY = env("FIELD_ENCRYPTION_KEY", default="change_me")
@@ -102,21 +103,34 @@ WSGI_APPLICATION = "project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+if DEBUG:
+    DATABASES = {
     # read os.environ['DATABASE_URL'] and raises
     # ImproperlyConfigured exception if not found
     #
     # The db() method is an alias for db_url().
-    # "default": env.db(default="sqlite:///db.sqlite3"),
     "default": {"DATABASE_URL": env.db("DATABASE_URL"),
-                "ENGINE": 'django.db.backends.postgresql',   # force postgres engine
+                "ENGINE": 'django.db.backends.sqlite3',
                 'NAME': os.getenv('PG_DB', 'mydatabase'),
-                'USER': os.getenv('PG_USER', 'myuser'),
-                'PASSWORD': os.getenv('PG_PASSWORD', 'mypassword'),
-                'HOST': os.getenv('PG_HOST', 'db'),
-                'PORT': os.getenv('PG_PORT', '5432'),
                 }
-}
+    }
+
+else:
+    DATABASES = {
+        # read os.environ['DATABASE_URL'] and raises
+        # ImproperlyConfigured exception if not found
+        #
+        # The db() method is an alias for db_url().
+        # "default": env.db(default="sqlite:///db.sqlite3"),
+        "default": {"DATABASE_URL": env.db("DATABASE_URL"),
+                    "ENGINE": 'django.db.backends.postgresql',   # force postgres engine
+                    'NAME': os.getenv('PG_DB', 'mydatabase'),
+                    'USER': os.getenv('PG_USER', 'myuser'),
+                    'PASSWORD': os.getenv('PG_PASSWORD', 'mypassword'),
+                    'HOST': os.getenv('PG_HOST', 'db'),
+                    'PORT': os.getenv('PG_PORT', '5432'),
+                    }
+    }
 
 if DATABASES["default"]["ENGINE"] == "django.db.backends.postgresql":
     DATABASES["default"]["ATOMIC_REQUESTS"] = True

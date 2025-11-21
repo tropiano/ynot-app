@@ -59,12 +59,15 @@ class ResizerView(ListView):
                 mtime = default_storage.get_modified_time(rel_path)
                 try:
                     saved_time = datetime(mtime).isoformat()
+                    saved_date = datetime(mtime).date().isoformat()
                 except Exception:
                     saved_time = mtime.isoformat() if hasattr(mtime, "isoformat") else str(mtime)
+                    saved_date = mtime.date().isoformat() if hasattr(mtime, "date") else None
             except Exception:
                 saved_time = None
+                saved_date = None
 
-            images.append({"name": fname, "path": rel_path, "url": url, "saved_time": saved_time})
+            images.append({"name": fname, "path": rel_path, "url": url, "saved_time": saved_time, "saved_date": saved_date})
 
         if request.headers.get("x-requested-with") == "XMLHttpRequest":
             return JsonResponse({"images": images})
