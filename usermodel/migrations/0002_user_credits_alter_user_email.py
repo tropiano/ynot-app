@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='email',
-            field=models.EmailField(db_collation='NOCASE', error_messages={'unique': 'A user with such email already exists'}, max_length=255),
+            field=models.EmailField(error_messages={'unique': 'A user with such email already exists'}, max_length=255),
         ),
     ]
