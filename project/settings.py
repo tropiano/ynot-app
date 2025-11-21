@@ -122,7 +122,7 @@ else:
         #
         # The db() method is an alias for db_url().
         # "default": env.db(default="sqlite:///db.sqlite3"),
-        "default": {"DATABASE_URL": env.db("DATABASE_URL"),
+        "default": {"DATABASE_URL": os.getenv("DATABASE_URL", "postgres://myuser:mypassword@db:5432/mydatabase"),
                     "ENGINE": 'django.db.backends.postgresql',   # force postgres engine
                     'NAME': os.getenv('PG_DB', 'mydatabase'),
                     'USER': os.getenv('PG_USER', 'myuser'),
